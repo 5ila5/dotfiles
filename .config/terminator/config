@@ -1,0 +1,20 @@
+[global_config]
+  title_transmit_bg_color = "#241f31"
+  title_inactive_fg_color = "#3d3846"
+  title_inactive_bg_color = "#000000"
+  case_sensitive = False
+[keybindings]
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
+    font = Liberation Mono 12
+    scrollback_infinite = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
