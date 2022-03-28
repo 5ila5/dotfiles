@@ -1,1 +1,0 @@
-qtile start -b wayland -c ~/.config/qtile/testconfig.py

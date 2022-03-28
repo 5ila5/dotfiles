@@ -1,1 +1,0 @@
-playerctl/playerctl.py
