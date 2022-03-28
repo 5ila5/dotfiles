@@ -1,0 +1,33 @@
+mod4 + v
+        clipmenu -p
+
+mod4 + ctrl + {s, n} 
+	shutdown now
+
+mod4 + ctrl + {r, n}
+	reboot
+
+mod4 + alt + {s, n}
+	shutdown now
+
+mod4 + alt + {r, n}
+	reboot
+
+mod4 + b
+	firefox
+
+mod4 + l
+	libreoffice
+
+button9
+	terminator
+	#xdotool key 'Control+Tab'
+	#ydotool key 29:1 15:1 15:0 29:0
+
+button8
+	terminator
+	#ydotool key 42:1 29:1 15:1 15:0 29:0 42:0
+	#xdotool key 'Control+Shift+Tab'
+
+g
+	terminator
