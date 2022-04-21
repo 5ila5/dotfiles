@@ -24,3 +24,19 @@ button9
 
 button8
 	xdotool key 'Control+Shift+Tab'
+
+button20
+	#alacritty --hold --command echo button20
+	xdotool click 5
+
+button21
+	#alacritty --hold --command echo button21
+	xdotool key F21
+
+button22
+	#alacritty --hold --command echo button22
+	xdotool click 4
+
+button23
+	#alacritty --hold --command echo button23
+	xdotool key F23
