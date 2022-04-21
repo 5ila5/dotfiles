@@ -66,7 +66,7 @@ rollo = widget.GenPollText(
 
 def init_layouts()->list:
     layouts = [
-        layout.Columns(border_focus_stack=['#d75f5f', '#8f3d3d'], border_width=4),
+        layout.Columns(border_focus='#009926', border_focus_stack=['#009926', '#009926'],  border_width=2),
         layout.Max(),
         # Try more layouts by unleashing below layouts.
         # layout.Stack(num_stacks=2),
@@ -108,6 +108,7 @@ def bottomBar():
         ],
         24,
     )
+systray = widget.Systray()
 def init_widget_list(idx) -> list:
     to_return = [            
         widget.Spacer(10),
@@ -142,14 +143,18 @@ def init_widget_list(idx) -> list:
             )
         ])'''
 
+    if idx==2:
+        to_return.extend([systray]) 
     to_return.extend([
+        widget.StatusNotifier(),
+        #systray,
         vol,
         playerctl,
-        widget.LaunchBar([("thunderbird","thunderbird","halt Thunderbird"),("spotify","spotify","startet Spotify")]),
+        widget.LaunchBar(progs=[("thunderbird","thunderbird","halt Thunderbird"),("spotify","spotify","startet Spotify")]),
         #core_name_widget,
         widget.TextBox(core_name),
         #rollo_text_widget,
-        #widget.TextBox("rollo"),
+        widget.TextBox(str(idx)),
         #rollo,
     ])
     return to_return

@@ -80,7 +80,7 @@ widget_defaults = init_widget_defaults()
 extension_defaults = widget_defaults.copy()
 mouse = init_mouse()
 screens = init_screens()
-logger.error(str(screens))
+#logger.error(str(screens))
 if get_core_name() == "wayland":
     keys = wayland_specific_keys(keys)
     mouse = add_wayland_specific_mouse(mouse)
@@ -89,7 +89,7 @@ else:
     keys = X11_specific_keys(keys)
 
 
-logger.error(str(keys))
+#logger.error(str(keys))
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 follow_mouse_focus = False

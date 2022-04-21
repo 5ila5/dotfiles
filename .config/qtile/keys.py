@@ -7,7 +7,7 @@ currentDir =  os.path.dirname(os.path.realpath(__file__))+ "/"
 with open(currentDir+"modKey.conf","r") as f:
     mod = f.read().replace("\n","")
 
-terminal = "terminator"
+terminal = "alacritty"
 
 def init_keys() -> typing.List[Key]:
 
@@ -68,6 +68,10 @@ def init_keys() -> typing.List[Key]:
 
 def assigne_group_keys(keys : typing.List[Key],  groups: typing.List[Group]) -> typing.List[Key]:
     for i in groups:
+        if i.name == "key":
+            keys.append(Key([mod], "k", lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name))),
+            continue
+        
         keys.extend([
             # mod1 + letter of group = switch to group
             Key([mod], i.name, lazy.group[i.name].toscreen(),
