@@ -47,15 +47,17 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  done
  unset f
 fi
-
+export XDG_SESSION_TYPE=X11
 xrandr --output DP-0 --primary& #--left-of DVI-D-0 &
 #nvidia-settings --assign CurrentMetaMode="HDMI-0: nvidia-auto-select +0+300 {ForceCompositionPipeline=On},DP-0: nvidia-auto-select +1920+300 {ForceCompositionPipeline=On}, DVI-D-0: nvidia-auto-select +3840+0 {ForceCompositionPipeline=On,Rotation=left}"&
 setxkbmap de &
 clipmanager &
 sxhkd &
-#picom &
+picom &
 udiskie --tray &
 numlockx &
+nextcloud --background &
+fireshot & 
 #nitrogen --restore &
 #xidlehook --not-when-fullscreen\
 #       	--not-when-audio\
@@ -63,4 +65,7 @@ numlockx &
 #       	"export BRIGHTNESS1=\$(echo \$(xrandr --verbose |grep Brightness |grep -o '[0-9].*')| awk '{print \$2;}') && export BRIGHTNESS0=\$(echo \$(xrandr --verbose |grep Brightness |grep -o '[0-9].*')| awk '{print \$1;}')"\
 #	'xrandr --output DVI-D-0 --brightness $BRIGHTNESS0 && xrandr --output DP-0 --brightness $BRIGHTNESS1'\
 #	--timer 300 'systemctl suspend' '' &
+if [ -d /home/silas/.config/wacom/config.sh ] ; then
+	bash /home/silas/.config/wacom/config.sh &
+fi
 exec qtile start
