@@ -57,7 +57,7 @@ picom &
 udiskie --tray &
 numlockx &
 nextcloud --background &
-fireshot & 
+flameshot & 
 #nitrogen --restore &
 #xidlehook --not-when-fullscreen\
 #       	--not-when-audio\
