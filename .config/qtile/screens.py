@@ -1,4 +1,4 @@
-import rollo
+import rolloctl
 from libqtile import qtile
 import brightness_control
 from libqtile.config import Screen
@@ -57,12 +57,19 @@ mySep = widget.TextBox(
 
 rollo = widget.GenPollText(
     update_interval=1,
-    func=rollo.getRolloPos,
+    func=rolloctl.get_rollo_text,
     mouse_callbacks={
-        "Button4": rollo.increseRollo,
-        "Button5": rollo.decreseRollo,
-    },
+        "Button1": rolloctl.click,
+        "Button2": rolloctl.blendet,
+        "Button3": rolloctl.cancel,
+        "Button4": rolloctl.scroll_up,
+        "Button5": rolloctl.scroll_down,
+    }
 )
+
+
+
+
 
 def init_layouts()->list:
     layouts = [
@@ -155,7 +162,7 @@ def init_widget_list(idx) -> list:
         widget.TextBox(core_name),
         #rollo_text_widget,
         widget.TextBox(str(idx)),
-        #rollo,
+        rollo,
     ])
     return to_return
     
