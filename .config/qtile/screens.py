@@ -1,10 +1,9 @@
 import rolloctl
 from libqtile import qtile
-import brightness_control
+from brightnessctl import Brightnessctl 
 from libqtile.config import Screen
 from libqtile import bar, layout, widget
 import get_core
-from brightness_control import *
 import typing
 
 core_name = get_core.get_core_name()
@@ -56,7 +55,7 @@ mySep = widget.TextBox(
         )
 
 rollo = widget.GenPollText(
-    update_interval=1,
+    update_interval=.3,
     func=rolloctl.get_rollo_text,
     mouse_callbacks={
         "Button1": rolloctl.click,
@@ -116,6 +115,8 @@ def bottomBar():
         24,
     )
 systray = widget.Systray()
+brighnestlc = [Brightnessctl(id) for id in range(1,4)]
+
 def init_widget_list(idx) -> list:
     to_return = [            
         widget.Spacer(10),
@@ -131,6 +132,17 @@ def init_widget_list(idx) -> list:
         memmory,
         checkUpdates,
         clipboard,
+        widget.GenPollText(
+            update_interval=.5,
+            func=brighnestlc[idx].get_brighness_text,
+            mouse_callbacks={
+                "Button1": brighnestlc[idx].click,
+                "Button2": brighnestlc[idx].cancel,
+                "Button3": brighnestlc[idx].cancel,
+                "Button4": brighnestlc[idx].scroll_up,
+                "Button5": brighnestlc[idx].scroll_down,
+            },
+        ),
     ]
     if core_name == "wayland":
         to_return.extend([])
