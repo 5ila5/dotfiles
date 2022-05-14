@@ -98,7 +98,7 @@ def main():
             else:
                 print("position is not a digit")
         if ("-t" == opt[0] or "--tuer" in opt[0] or "--beide" in opt[0]) and opt[1].isdigit():
-            print(pos)
+            pos = int(opt[1])
             if pos <= 100 and pos >= 0:
                 print("setTuer("+str(pos)+")")
                 setTuer(pos)
