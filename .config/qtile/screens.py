@@ -41,7 +41,7 @@ clipboard=widget.Clipboard()
 #systray=widget.Systray() if core_name != "wayland" else widget.StatusNotifier()
 #mySystray, #if first else widget.TextBox(""), 
 #widget.StatusNotifier(),
-vol=widget.Volume(device="pulse")
+vol=widget.Volume()#device="pulse")
 corenamewidget = widget.TextBox(core_name),
 rollotextwidget = widget.TextBox("rollo"),
 
