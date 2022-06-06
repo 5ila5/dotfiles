@@ -40,7 +40,7 @@ function sw() {
 }
 
 alias lö=ls
-alias 'l=ls -lha'
+alias 'l=ls -lhag'
 alias 'c=clear'
 alias 's=sudo'
 alias sr='sudo $(history -p !!)'
@@ -102,7 +102,7 @@ alias sshServer='ssh root@eis.lan.home'
 alias pacmanLog='cat /var/log/pacman.log'
 alias ls='exa'
 alias v='vim'
-alias rg='grep'
+#alias rg='grep'
 alias find='fd'
 alias config='/usr/bin/git --git-dir=/home/silas/.cfg/ --work-tree=/home/silas'
 alias ..='cd ..'
