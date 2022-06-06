@@ -1,0 +1,6 @@
+[Unit]
+Description=calls downloads/movetoold.py to move everything that is older than 7 days to the old folder
+
+[Service]
+Type=oneshot
+ExecStart=/home/silas/Downloads/moveToOld.py
