@@ -7,7 +7,8 @@ def init_groups() -> list[Group]:
     Group("g",spawn="thunderbird"),
     Group("key",spawn=["keepassxc"],label="🔑"),
     ])
-    groups.extend([Group(i) for i in"12345"])
+    groups.extend([Group(i) for i in"1234"])
+    groups.extend([Group("5",spawn=["spotify"])])
 
     return groups
 
