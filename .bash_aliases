@@ -113,3 +113,7 @@ alias padMapScrenn2='xsetwacom set 14 MapToOutput HEAD-2'
 alias teams='teams-insiders --no-sandbox'
 alias eis='ssh root@eis.lan.home'
 alias testInternet='watch --interval .5 "ping -c 1 heise.de | grep \"64 Bytes\" && ping -c 1 192.168.168.254 | grep \"64 Bytes\" && ping -c 1 192.168.169.254 | grep \"64 Bytes\" && ping eis.lan.home -c 1| grep \"64 Bytes\" "'
+alias getIp='curl -s http://checkip.dyndns.org/ | sed "s/[a-zA-Z<>/ :]//g"'
+alias startWG='doas systemctl start wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
+alias stopWG='doas systemctl stop wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
+
