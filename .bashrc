@@ -51,5 +51,9 @@ export VDPAU_DRIVER=nvidia
 
 eval "$(starship init bash)"
 eval "$(thefuck --alias)"
+# acitvades auto correction for cd
+shopt -s cdspell
+shopt -s dirspell
+
 
 neofetch
