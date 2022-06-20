@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Icons to Use:
+export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
+
+
+
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
@@ -68,4 +73,6 @@ flameshot &
 if [ -d /home/silas/.config/wacom/config.sh ] ; then
 	bash /home/silas/.config/wacom/config.sh &
 fi
+
+glances -w --disable-webui
 exec qtile start
