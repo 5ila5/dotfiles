@@ -117,3 +117,5 @@ alias getIp='curl -s http://checkip.dyndns.org/ | sed "s/[a-zA-Z<>/ :]//g"'
 alias startWG='doas systemctl start wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
 alias stopWG='doas systemctl stop wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
 
+alias run='compgen -c | dmenu | bash'
+alias shutdownUpdate='paru -Syu && shutdown now'
