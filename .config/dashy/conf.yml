@@ -21,7 +21,7 @@ sections:
         id: 2_503_youtube
       - title: ZDF
         icon: si-zdf
-        url: zdf.de
+        url: https://zdf.de
         id: 3_503_zdf
       - title: WerStreamtEs
         icon: favicon
@@ -29,7 +29,7 @@ sections:
         id: 4_503_werstreamtes
       - title: Twitch
         icon: si-twitch
-        url: twitch.tv
+        url: https://twitch.tv
         id: 5_503_twitch
     displayData:
       sortBy: default
@@ -41,7 +41,7 @@ sections:
     items:
       - title: Amazon
         icon: si-amazon
-        url: amazon.de
+        url: https://amazon.de
         id: 0_2045_amazon
       - title: Heise
         icon: favicon
@@ -59,17 +59,16 @@ sections:
         icon: https://www.leo.org/img/favicons/leo-180.png
         url: https://leo.org
         id: 4_2045_leo
-      - subItems:
-          - title: Nabu-Seeheim
-            icon: favicon
-            url: https://nabu-seeheim.de
-            id: 4_2045_nabuseeheim
-          - title: Wühlmäuse
-            icon: >-
-              https://image.jimcdn.com/app/cms/image/transf/dimension=223x10000:format=png/path/sff69efef9b6153c2/image/i32263ba74cf8acf5/version/1596714073/image.png
-            url: http://naju-seeheim.de
-            id: 6_2045_whlmuse
-        id: 5_2045_unknown
+      - title: Nabu-Seeheim
+        icon: favicon
+        url: https://nabu-seeheim.de
+        id: 5_2045_nabuseeheim
+      - title: Wühlmäuse
+        icon: >-
+          https://image.jimcdn.com/app/cms/image/transf/dimension=223x10000:format=png/path/sff69efef9b6153c2/image/i32263ba74cf8acf5/version/1596714073/image.png
+        url: http://naju-seeheim.de
+        id: 6_2045_whlmuse
+
     displayData:
       sortBy: default
       rows: 1
@@ -127,12 +126,12 @@ sections:
           frameHeight: 315
         id: 2_727_iframe
 appConfig:
-  theme: default
+  theme: material-dark 
   language: de
   layout: auto
   iconSize: medium
   startingView: default
-  defaultOpeningMethod: newtab
+  defaultOpeningMethod: sametab
   statusCheck: false
   statusCheckInterval: 0
   faviconApi: besticon
