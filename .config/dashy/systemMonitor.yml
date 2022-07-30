@@ -69,7 +69,7 @@ sections:
         options:
           hostname: http://localhost:61208
 pages:
-  - name: Resourcen Monitor
-    path: systemMonitor.yml
+  #- name: Resourcen Monitor
+  #  path: systemMonitor.yml
   - name: start
     path: conf.yml
