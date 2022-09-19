@@ -5,6 +5,8 @@ from libqtile.config import Screen
 from libqtile import bar, layout, widget
 import get_core
 import typing
+import datetime
+import timer
 
 core_name = get_core.get_core_name()
 
@@ -45,6 +47,36 @@ vol=widget.Volume()#device="pulse")
 corenamewidget = widget.TextBox(core_name),
 rollotextwidget = widget.TextBox("rollo"),
 
+dateCountTo = datetime.datetime.now()#datetime(2022, 10, 17, 21, 29, 13, 621094)
+dateCountTo = dateCountTo + datetime.timedelta(minutes=1)
+
+    
+timerwidget = widget.GenPollText(
+    update_interval=1.0,
+    func=timer.poll,
+    name="timerwidget",
+    mouse_callbacks={
+        "Button1": timer.start_pause,
+        "Button2": timer.select_next,
+        "Button3": timer.cancel,
+        
+        "Button4": timer.timer_scroll_up,
+        "Button5": timer.timer_scroll_down,
+    }
+)
+
+
+"""timerwidget = widget.Countdown(date=dateCountTo, mouse_callbacks={
+        "Button4": timer_scroll_up,
+        "Button1": timer_scroll_up,
+        "Button2": timer_scroll_up,
+        "Button3": timer_scroll_up,
+        
+        "Button5": timer_scroll_down,
+    })"""
+
+
+
 mySep = widget.TextBox(
         text = '◀',
         font = "Ubuntu Mono",
@@ -55,6 +87,7 @@ mySep = widget.TextBox(
         )
 
 rollo = widget.GenPollText(
+    name="rolloctl",
     update_interval=.3,
     func=rolloctl.get_rollo_text,
     mouse_callbacks={
@@ -133,7 +166,8 @@ def init_widget_list(idx) -> list:
         checkUpdates,
         clipboard,
         widget.GenPollText(
-            update_interval=.5,
+            update_interval=30,
+            name="brightnessctl"+str(brighnestlc[idx].display_id),
             func=brighnestlc[idx].get_brighness_text,
             mouse_callbacks={
                 "Button1": brighnestlc[idx].click,
@@ -168,6 +202,7 @@ def init_widget_list(idx) -> list:
         widget.StatusNotifier(),
         #systray,
         vol,
+        timerwidget,
         playerctl,
         widget.LaunchBar(progs=[("thunderbird","thunderbird","halt Thunderbird"),("spotify","spotify","startet Spotify")]),
         #core_name_widget,

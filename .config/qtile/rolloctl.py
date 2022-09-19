@@ -2,6 +2,7 @@ import subprocess
 import os
 import json
 from libqtile.log_utils import logger
+from libqtile import qtile
 
 
 rollo_py_path = "~/.config/HomeassistantAPI_ctl/rollo.py"
@@ -52,20 +53,25 @@ def scroll_up():
     direction = 1
     if clicked:
         change_rollo_val(direction)
+        update()
         return
     change_rollo_state(direction)
+    update()
 
 def scroll_down():
     direction = -1
     if clicked:
         change_rollo_val(direction)
+        update()
         return
     change_rollo_state(direction)
+    update()
 
 def click():
     global clicked, changed, changed_to, rollo_to_change
     if not clicked:
         clicked = True
+        update()
         return
     
     if changed:
@@ -75,11 +81,13 @@ def click():
         subprocess.check_output(["python3", rollo_py_path,["--fenster","--tuer","--beide"][rollo_to_change],str(changed_to)])
     clicked = False
     changed = False
+    update()
     
 def cancel():
     global clicked, changed
     clicked = False
     changed = False
+    update()
 
 def debug():
     print(get_rollo_text())
@@ -101,7 +109,9 @@ def debug():
 def blendet():
     subprocess.check_output(["python3", rollo_py_path])
 
-
+def update():
+    w = qtile.widgets_map["rolloctl"]
+    w.update(w.poll())
     
 
 
