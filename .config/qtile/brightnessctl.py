@@ -36,6 +36,7 @@ class Brightnessctl:
             self.last_brightness = self.new_val
             change_brightness(self.display_id, self.new_val, self.cap)
             self.changed = False
+            self.update()
             return
         
         self.changed = False
