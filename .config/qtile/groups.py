@@ -3,7 +3,7 @@ from libqtile.config import Group, Key
 
 def init_groups() -> list[Group]:
     groups = [Group(i) for i in "asd"]
-    groups.extend([Group("f",spawn=["signal-desktop","whatsdesk","discord --use-gl=desktop"]),
+    groups.extend([Group("f",spawn=["signal-desktop","whatsdesk","discord --use-gl=desktop"],layout="verticaltile"),
     Group("g",spawn="thunderbird"),
     Group("key",spawn=["keepassxc"],label="🔑"),
     ])
