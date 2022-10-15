@@ -60,6 +60,8 @@ def init_keys() -> typing.List[Key]:
         #Key([mod, "control"], "i", qtile.cmd_reconfigure_screens(), desc="reconfigure screen"),
         Key([mod], "r", lazy.spawn("sh /home/silas/.config/qtile/spawn.sh"),
             desc="Spawn a command using a prompt widget"),
+        Key([mod], "e", lazy.spawn("nemo"),
+            desc="Spawn a command using a prompt widget"),
         
         Key([mod, "shift"], "r", lazy.spawncmd(),
             desc="Spawn a command using a prompt widget"),

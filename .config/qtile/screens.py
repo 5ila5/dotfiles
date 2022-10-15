@@ -116,7 +116,7 @@ def init_layouts()->list:
         # layout.RatioTile(),
         # layout.Tile(),
         # layout.TreeTab(),
-        # layout.VerticalTile(),
+        layout.VerticalTile(),
         # layout.Zoomy(),
     ]
     return layouts
