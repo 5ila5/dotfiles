@@ -1,6 +1,5 @@
 pageInfo:
   title: Home Lab
-
 sections:
   - name: Video
     icon: far fa-rocket
@@ -52,7 +51,8 @@ sections:
         url: https://maps.google.de
         id: 2_2045_googlemaps
       - title: lesbar
-        icon: https://www.lesbar-die-buchhandlung.de/sites/294390.umbreitshopsolution.de/files/logo_0.png
+        icon: >-
+          https://www.lesbar-die-buchhandlung.de/sites/294390.umbreitshopsolution.de/files/logo_0.png
         url: https://www.lesbar-die-buchhandlung.de/
         id: 3_2045_lesbar
       - title: LEO
@@ -68,7 +68,6 @@ sections:
           https://image.jimcdn.com/app/cms/image/transf/dimension=223x10000:format=png/path/sff69efef9b6153c2/image/i32263ba74cf8acf5/version/1596714073/image.png
         url: http://naju-seeheim.de
         id: 6_2045_whlmuse
-
     displayData:
       sortBy: default
       rows: 1
@@ -103,6 +102,19 @@ sections:
         statusCheck: true
         statusCheckAllowInsecure: true
         id: 2_858_routerauen
+      - title: Portainer
+        icon: si-portainer
+        url: http:.//localhost:9443
+        target: newtab
+        statusCheck: true
+        id: 3_858_portainer
+      - title: Traefik
+        icon: si-traefikproxy
+        url: http://localhost:8080/dashboard/
+        target: newtab
+        statusCheck: true
+        statusCheckAllowInsecure: true
+        id: 4_858_traefik
   - name: Widgets
     displayData:
       sortBy: default
@@ -125,13 +137,37 @@ sections:
           url: http://eis.lan.home:8123/lovelace/nurrollos
           frameHeight: 315
         id: 2_727_iframe
+  - name: Tu-Darmstadt
+    displayData:
+      sortBy: default
+      rows: 2
+      cols: 2
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: moodle Informatik
+        icon: >-
+          https://moodle.tu-darmstadt.de/theme/image.php/boost_campus_tu/theme/1663825739/favicon
+        url: https://moodle.informatik.tu-darmstadt.de
+        id: 0_1178_moodleinformatik
+      - title: TUCAN
+        icon: https://www.tucan.tu-darmstadt.de/gfx/tuda/icons/favicon.ico
+        url: https://www.tucan.tu-darmstadt.de
+        id: 1_1178_tucan
+      - title: IDM
+        icon: https://www.tucan.tu-darmstadt.de/gfx/tuda/icons/favicon.ico
+        url: https://idm.tu-darmstadt.de
+        id: 2_1178_idm
+      - title: RGB/ISP
+        url: https://support.rbg.informatik.tu-darmstadt.de/service
+        id: 3_1178_rgbisp
 appConfig:
-  theme: material-dark 
+  theme: default
   language: de
   layout: auto
   iconSize: medium
   startingView: default
-  defaultOpeningMethod: sametab
+  defaultOpeningMethod: newtab
   statusCheck: false
   statusCheckInterval: 0
   faviconApi: besticon
@@ -154,8 +190,9 @@ appConfig:
   auth:
     enableGuestAccess: false
     users:
-    - user: silas
-      type: admin
+      - user: silas
+        hash: 369CD95E3DE07CFD4D25A2C7F2B1C21A9F60B543218FFEC482154C4EE4879C7B
+        type: admin
     enableKeycloak: false
   showSplashScreen: false
   preventWriteToDisk: false
