@@ -7,6 +7,7 @@ import get_core
 import typing
 import datetime
 import timer
+from pc_type import laptop
 
 core_name = get_core.get_core_name()
 
