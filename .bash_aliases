@@ -119,3 +119,4 @@ alias stopWG='doas systemctl stop wg-quick@wg0 && sleep 1 && echo "your new IP a
 
 alias run='compgen -c | dmenu -i | bash'
 alias shutdownUpdate='paru -Syu && shutdown now'
+alias sshTu='ssh -Y sk76lufi@clientssh5.rbg.informatik.tu-darmstadt.de'
