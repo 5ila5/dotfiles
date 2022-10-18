@@ -204,14 +204,27 @@ def init_widget_list(idx) -> list:
         vol,
         timerwidget,
         playerctl,
-        widget.LaunchBar(progs=[("thunderbird","thunderbird","halt Thunderbird"),("spotify","spotify","startet Spotify")]),
+        #widget.LaunchBar(progs=[("thunderbird","thunderbird","halt Thunderbird"),("spotify","spotify","startet Spotify")]),
         #core_name_widget,
-        widget.TextBox(core_name),
+        #widget.TextBox(core_name),
         #rollo_text_widget,
-        widget.TextBox(str(idx)),
+        #widget.TextBox(str(idx)),
         rollo,
     ])
     return to_return
+
+def topBarLaptop():
+    to_return = [  
+        widget.Spacer(10),
+        cpu,
+        cpuGraph,
+        memmory,
+        widget.Backlight(),
+        systray,
+        vol,
+        timerwidget,
+        playerctl,
+    ]
     
 
 
@@ -224,26 +237,37 @@ def topBar(idx)-> bar.Bar:
 
 def init_screens() -> typing.List[Screen]:
     #screens = 
-    return [
-        Screen(
-            wallpaper="/usr/share/backgrounds/archlinux/split.png",
-            wallpaper_mode="fill",
-            bottom=bottomBar(),
-            top=topBar(2),
-        ),
-        Screen(
-            wallpaper="/usr/share/backgrounds/archlinux/archwave_High.png",
-            wallpaper_mode="fill",
-            bottom=bottomBar(),
-            top=topBar(0)
-        ),
-        Screen(
-            wallpaper_mode="fill",
-            wallpaper="/usr/share/backgrounds/archlinux/wave.png",
-            bottom=bottomBar(),
-            top=topBar(1),
-        ),
-        
-    ]
+    if not laptop:
+        return [
+            Screen(
+                wallpaper="/usr/share/backgrounds/archlinux/split.png",
+                wallpaper_mode="fill",
+                bottom=bottomBar(),
+                top=topBar(2),
+            ),
+            Screen(
+                wallpaper="/usr/share/backgrounds/archlinux/archwave_High.png",
+                wallpaper_mode="fill",
+                bottom=bottomBar(),
+                top=topBar(0)
+            ),
+            Screen(
+                wallpaper_mode="fill",
+                wallpaper="/usr/share/backgrounds/archlinux/wave.png",
+                bottom=bottomBar(),
+                top=topBar(1),
+            ),
+            
+        ]
+    else:
+        return [
+            Screen(
+                wallpaper="/usr/share/backgrounds/archlinux/split.png",
+                wallpaper_mode="fill",
+                bottom=bottomBar(),
+                top=topBarLaptop(),
+            ),
+        ]
+    
     #return screens
 
