@@ -214,18 +214,22 @@ def init_widget_list(idx) -> list:
     ])
     return to_return
 
-def topBarLaptop():
-    to_return = [  
+def topBarLaptop()-> bar.Bar:
+    return bar.Bar(
+        [  
         widget.Spacer(10),
         cpu,
         cpuGraph,
         memmory,
         widget.Backlight(),
+        widget.Battery(),
         systray,
         vol,
         timerwidget,
         playerctl,
-    ]
+        ],
+        30
+    )
     
 
 
