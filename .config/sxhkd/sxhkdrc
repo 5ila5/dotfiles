@@ -1,42 +1,87 @@
-mod4 + v
-        clipmenu -p
+#mod4 + v
+#        clipmenu -p
+#
+#mod4 + ctrl + s + n 
+#	shutdown now
+#
+#mod4 + ctrl + r + n
+#	reboot
+#
+#mod4 + alt + s + n
+#	shutdown now
+#
+#mod4 + alt + r + n
+#	reboot
+#
+#mod4 + b
+#	firefox
+#
+#mod4 + l
+#	libreoffice
+#
+#button9
+#	xdotool key 'Control+Tab'
+#
+#button8
+#	xdotool key 'Control+Shift+Tab'
+#
+#button20
+#	#alacritty --hold --command echo button20
+#	xdotool click 5
+#
+#button21
+#	#alacritty --hold --command echo button21
+#	xdotool key F21
+#
+#button22
+#	#alacritty --hold --command echo button22
+#	xdotool click 4
+#
+#button23
+#	#alacritty --hold --command echo button23
+#	xdotool key F23
 
-mod4 + ctrl + s + n 
-	shutdown now
 
-mod4 + ctrl + r + n
-	reboot
+#f1
+XF86AudioMute 
+	amixer -q sset Master toggle 
 
-mod4 + alt + s + n
-	shutdown now
+#f2
+XF86AudioLowerVolume 
+	amixer -q sset Master 10%-
 
-mod4 + alt + r + n
-	reboot
+#f3
+XF86AudioRaiseVolume 
+	amixer -q sset Master 10%+
 
-mod4 + b
-	firefox
+#f4
+XF86AudioPrev 
+	playerctl previous
 
-mod4 + l
-	libreoffice
+#f5
+XF86AudioPlay 
+	playerctl play-pause
 
-button9
-	xdotool key 'Control+Tab'
+#f6
+XF86AudioNext 
+	playerctl next
 
-button8
-	xdotool key 'Control+Shift+Tab'
+#f7
+XF86MonBrightnessDown 
+	light -Us sysfs/backlight/intel_backlight 5
 
-button20
-	#alacritty --hold --command echo button20
-	xdotool click 5
+#f8
+XF86MonBrightnessUp 
+	light -As sysfs/backlight/intel_backlight 5
 
-button21
-	#alacritty --hold --command echo button21
-	xdotool key F21
+#f9
+Super_L 
 
-button22
-	#alacritty --hold --command echo button22
-	xdotool click 4
+#f10
+XF86RFKill 
 
-button23
-	#alacritty --hold --command echo button23
-	xdotool key F23
+#f11
+Print 
+
+#f12
+XF86AudioMedia 
