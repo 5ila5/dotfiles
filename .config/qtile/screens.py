@@ -221,12 +221,12 @@ def topBarLaptop()-> bar.Bar:
         cpu,
         cpuGraph,
         memmory,
-        widget.Backlight(),
+        widget.Backlight(step=5,change_command="light -Ss sysfs/backlight/intel_backlight {0}", backlight_name="intel_backlight"),
         widget.Battery(),
         systray,
-        vol,
         timerwidget,
         playerctl,
+        vol,
         ],
         30
     )

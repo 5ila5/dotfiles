@@ -3,4 +3,4 @@
 #clipmanager &
 #sxhkd &
 #numlockx &
-
+nm-applet &
