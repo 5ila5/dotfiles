@@ -66,8 +66,6 @@ def init_keys() -> typing.List[Key]:
         Key([mod, "shift"], "r", lazy.spawncmd(),
             desc="Spawn a command using a prompt widget"),
         Key([mod], "x", lazy.simulate_keypress([],"a"), desc="testing stuff"),
-        Key([mod], "b", lazy.spawn("firefox"), desc="spawn firefox"),
-        Key([mod], "v", lazy.spawn("clipman pick -t wofi"), desc="clipboard Menu"),
     ]
 
 
@@ -96,7 +94,8 @@ def assigne_group_keys(keys : typing.List[Key],  groups: typing.List[Group]) -> 
 
 def wayland_specific_keys(keys : typing.List[Key]) -> typing.List[Key]:
     keys.extend([    
-
+        Key([mod], "b", lazy.spawn("firefox"), desc="spawn firefox"),
+        Key([mod], "v", lazy.spawn("clipman pick -t wofi"), desc="clipboard Menu"),
     ])
     return keys
 

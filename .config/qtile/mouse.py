@@ -31,6 +31,6 @@ def add_wayland_specific_mouse(mouse:list) -> list:
     return mouse
 def add_X11_specific_mouse(mouse:list) -> list:
     mouse.extend([
-        #Click([], "Button9", lazy.spawn("terminator")),
+        Click([], "Button9", lazy.spawn("terminator")),
     ])
     return mouse
