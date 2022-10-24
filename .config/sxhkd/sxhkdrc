@@ -66,11 +66,11 @@ XF86AudioNext
 
 #f7
 XF86MonBrightnessDown 
-	light -Us sysfs/backlight/intel_backlight 5
+	brillo -q -u 150000 -U 5
 
 #f8
 XF86MonBrightnessUp 
-	light -As sysfs/backlight/intel_backlight 5
+	brillo -q -u 150000 -A 3 
 
 #f9
 Super_L 

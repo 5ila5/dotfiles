@@ -3,6 +3,7 @@ from libqtile import qtile
 from brightnessctl import Brightnessctl 
 from libqtile.config import Screen
 from libqtile import bar, layout, widget
+from libqtile.lazy import lazy
 import get_core
 import typing
 import datetime
@@ -221,7 +222,14 @@ def topBarLaptop()-> bar.Bar:
         cpu,
         cpuGraph,
         memmory,
-        widget.Backlight(step=5,change_command="light -Ss sysfs/backlight/intel_backlight {0}", backlight_name="intel_backlight"),
+        widget.Backlight(
+            backlight_name="intel_backlight",
+            mouse_callbacks=
+            {
+                "Button4": lazy.spawn("brillo -q -u 150000 -A 2"),
+                "Button5": lazy.spawn("brillo -q -u 150000 -U 2"),
+            }
+            ),
         widget.Battery(),
         systray,
         timerwidget,
