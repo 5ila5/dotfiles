@@ -14,6 +14,9 @@ brightness() {
 	
 	xrandr --output $1 --brightness $var
 }
+md() {
+	mkdir $1 && cd $1
+}
 alias brightness1='brightness DVI-D-0'
 alias testqtile='export DISPLAY=:0 && Xephyr -br -ac -noreset -screen 800x600 :1 & export DISPLAY=:1&& qtile start -c ~/.config/qtile/WIP/config.py &'
 alias cls='clear'
@@ -120,3 +123,5 @@ alias stopWG='doas systemctl stop wg-quick@wg0 && sleep 1 && echo "your new IP a
 alias run='compgen -c | dmenu -i | bash'
 alias shutdownUpdate='paru -Syu && shutdown now'
 alias sshTu='ssh -Y sk76lufi@clientssh5.rbg.informatik.tu-darmstadt.de'
+
+alias sl='doas exa -lhag'
