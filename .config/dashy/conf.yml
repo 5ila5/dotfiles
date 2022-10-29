@@ -104,7 +104,7 @@ sections:
         id: 2_858_routerauen
       - title: Portainer
         icon: si-portainer
-        url: http:.//localhost:9443
+        url: https://localhost:9443
         target: newtab
         statusCheck: true
         id: 3_858_portainer
