@@ -3,6 +3,10 @@ import os
 from libqtile import hook
 import subprocess
 import get_core
+from pc_type import laptop
+
+
+
 
 currentDir =  os.path.dirname(os.path.realpath(__file__))+ "/"
 
@@ -19,4 +23,7 @@ def autostart():
         home = os.path.expanduser(currentDir+'autostart_X11.sh')
     subprocess.run([home])
     
-       
+    if laptop:
+        home = os.path.expanduser(currentDir+'autostart_laptop.sh')
+    subprocess.run([home])
+    
