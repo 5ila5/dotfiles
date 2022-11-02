@@ -125,4 +125,3 @@ alias shutdownUpdate='paru -Syu && shutdown now'
 alias sshTu='ssh -Y sk76lufi@clientssh5.rbg.informatik.tu-darmstadt.de'
 
 alias sl='doas exa -lhag'
-alias scp='doas cp'
