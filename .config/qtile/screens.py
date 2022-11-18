@@ -207,7 +207,7 @@ def init_widget_list(idx) -> list:
         timerwidget,
         playerctl,
         #widget.LaunchBar(progs=[("thunderbird","thunderbird","halt Thunderbird"),("spotify","spotify","startet Spotify")]),
-        widget.LaunchBar(progs=[("thunderbird","mupdf /home/silas/Nextcloud/uni/stundenplan.jpg","stundenplan")]),
+        widget.LaunchBar(progs=[("/home/silas/Nextcloud/uni/stundenplan.png", "mupdf /home/silas/Nextcloud/uni/stundenplan.jpg","stundenplan")]),
         #core_name_widget,
         #widget.TextBox(core_name),
         #rollo_text_widget,
