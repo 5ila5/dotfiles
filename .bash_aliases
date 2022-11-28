@@ -127,3 +127,4 @@ alias sshTu='ssh -Y sk76lufi@clientssh5.rbg.informatik.tu-darmstadt.de'
 
 alias sl='doas exa -lhag'
 alias x='/home/silas/.local/script/util/unarchive.sh'
+alias treesize='ncdu --exclude /proc'
