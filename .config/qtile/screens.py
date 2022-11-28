@@ -232,6 +232,7 @@ def topBarLaptop()-> bar.Bar:
             }
             ),
         widget.Battery(),
+        widget.BatteryIcon(),
         systray,
         timerwidget,
         playerctl,
