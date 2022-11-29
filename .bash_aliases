@@ -15,18 +15,12 @@ brightness() {
 	xrandr --output $1 --brightness $var
 }
 md() {
-	mkdir $1 && cd $1
+	mkdir -pv $1 && cd $1
 }
 alias brightness1='brightness DVI-D-0'
 alias testqtile='export DISPLAY=:0 && Xephyr -br -ac -noreset -screen 800x600 :1 & export DISPLAY=:1&& qtile start -c ~/.config/qtile/WIP/config.py &'
 alias cls='clear'
 function palias(){
-	$1
-
-	#if (($1>1));
-	#then
-	#	var=$1/100
-	#fi
 	echo "alias $1='$2'" >> ~/.bash_aliases && source ~/.bash_aliases;
 }
 
@@ -41,7 +35,12 @@ function sw() {
 	qtile start -b wayland
 
 }
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -v"
+alias mkdir="mkdir -pv"
 
+alias vim = 'nvim'
 alias lö=ls
 alias 'l=ls -lhag'
 alias 'c=clear'
@@ -49,7 +48,6 @@ alias 's=sudo'
 alias sr='sudo $(history -p !!)'
 alias 'srouch=source'
 alias 'sourch=source'
-alias 'p=paru'
 alias 'pu=paru -Syu'
 alias 'py=paru -Sy'
 alias 'sp=paru'
@@ -71,7 +69,7 @@ alias thissize='du -ah --max-depth 0'
 alias sourcea='source ~/.bash_aliases'
 alias valia='nvim ~/.bash_aliases && source ~/.bash_aliases'
 alias testecho='echo test'
-alias disksizes='idf -h'
+alias disksizes='df -h'
 alias spyu='sp -Syu'
 alias 'sx=startx'
 alias cd..='cd ..'
@@ -136,3 +134,4 @@ alias gpu='git pull'
 alias gpum='git pull --no-rebase --no-ff'
 alias gpufop='git pull public master --no-rebase --no-ff'
 alias ga='git add'
+alias gr = 'git remote'
