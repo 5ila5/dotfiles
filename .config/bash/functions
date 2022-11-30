@@ -1,0 +1,39 @@
+#!/bin/bash
+function brightness() {
+	var=$2
+
+	if (($(echo "$2>1" |bc -l) )); then	
+	
+		if (($(echo "$2<10" |bc -l) )); then	
+				
+			var=$(bc  <<< "scale=2;$var*10")
+		fi
+		var=$(bc  <<< "scale=2;$var/100")
+	
+	fi
+	
+	xrandr --output $1 --brightness $var
+}
+function md() {
+	mkdir -pv $1 && cd $1
+}
+
+function palias(){
+	echo "alias $1='$2'" >> ~/.config/bash/aliases && source ~/.config/bash/aliases;
+}
+
+function dot() {
+		config -C $HOME ls-tree -r master --name-only | fzf --preview "highlight -i $HOME/{1} --stdout --out-format=ansi -q --force"| sed "s@^@$HOME/@" | xargs -ro "$EDITOR"
+}
+
+function sw() {
+	kanshi
+	setxkbmap de &
+	clipmanager &
+	sxhkd &
+	udiskie --tray &
+	numlockx &
+	nitrogen --restore &
+	qtile start -b wayland
+
+}
