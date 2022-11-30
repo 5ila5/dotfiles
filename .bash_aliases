@@ -134,4 +134,5 @@ alias gpu='git pull'
 alias gpum='git pull --no-rebase --no-ff'
 alias gpufop='git pull public master --no-rebase --no-ff'
 alias ga='git add'
-alias gr = 'git remote'
+alias gr='git remote'
+alias n=nvim
