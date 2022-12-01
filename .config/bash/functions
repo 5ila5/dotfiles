@@ -37,3 +37,12 @@ function sw() {
 	qtile start -b wayland
 
 }
+
+function pi()
+{
+    paru -Sl | awk '{print $2($4=="" ? "" : "*")}' | fzf --multi --preview 'echo {1} | tr -d "*" | xargs -r paru -Si' | tr -d "*" | xargs -ro paru -S
+}
+function pd()
+{
+    paru -Qq | fzf --multi --preview 'paru -Qi {1}' | xargs -ro paru -Rncs
+}
