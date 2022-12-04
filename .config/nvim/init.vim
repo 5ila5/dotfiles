@@ -1,30 +1,16 @@
-call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
-  Plug 'nvim-tree/nvim-web-devicons' 
-  Plug 'nvim-tree/nvim-tree.lua'
-  Plug 'dracula/vim'
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-  Plug 'preservim/nerdcommenter'
-  Plug 'mhinz/vim-startify'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-call plug#end()
-
-set tabstop=4                
-set softtabstop=4   
-set ignorecase
-set number
-set spell
+"call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+"  Plug 'nvim-tree/nvim-web-devicons' 
+"  Plug 'nvim-tree/nvim-tree.lua'
+"  Plug 'dracula/vim'
+"  Plug 'SirVer/ultisnips'
+"  Plug 'honza/vim-snippets'
+"  Plug 'preservim/nerdcommenter'
+"  Plug 'mhinz/vim-startify'
+"  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"call plug#end()
 
 
-:lua require("nvim-tree").setup()
-
- "color schemes
- if (has("termguicolors"))
- set termguicolors
- endif
- syntax enable
- "colorscheme evening
-colorscheme dracula " open new split panes to right and below
+lua require('basic')
 set splitright
 set splitbelow
 
@@ -45,7 +31,7 @@ vnoremap <A-k> :m '<-2<CR>gv=gv " move split panes to left/bottom/top/right
  nnoremap <C-l> <C-w>l
  
 
-nnoremap g :NvimTreeToggle
+"nnoremap <A-g> :NvimTreeToggle<cr>
 
 " Press i to enter insert mode, and ii to exit insert mode.
 :inoremap ii <Esc>
@@ -55,11 +41,6 @@ nnoremap g :NvimTreeToggle
 :vnoremap kj <Esc>
 
 
-" open file in a text by placing text and gf
-nnoremap gf :vert winc f<cr> " copies filepath to clipboard by pressing yf
-:nnoremap <silent> yf :let @+=expand('%:p')<CR>
-" copies pwd to clipboard: command yd
-:nnoremap <silent> yd :let @+=expand('%:p:h')<CR>" Vim jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
