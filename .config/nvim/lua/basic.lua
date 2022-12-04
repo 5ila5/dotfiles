@@ -13,9 +13,12 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'preservim/nerdcommenter'
   Plug 'mhinz/vim-startify'
   Plug('neoclide/coc.nvim', {branch = 'release'})
+  Plug 'williamboman/mason.nvim'
+  Plug 'rcarriga/nvim-notify'
+	Plug 'neovim/nvim-lspconfig'
 vim.call('plug#end')
 
-
+require("mason").setup()
  require("nvim-tree").setup()
 require("keymaps")
  if vim.fn.has("termguicolors") == 1 then
@@ -26,3 +29,6 @@ require("keymaps")
     colorscheme dracula 
 		syntax enable
 ]]
+
+
+require'lspconfig'.sumneko_lua.setup {}

@@ -16,12 +16,14 @@ local keys = {
 								{'<A-g>',':NvimTreeToggle<cr>'},
 								{ 'yf', ":let @+=expand('%:p')<CR>", {silent=true}}, -- copies filepath to clipboardng 
 								{ 'yd', ":let @+=expand('%:p:h')<CR>", {silent=true}}, -- copies dirpath to clipboardng
-								{'gf', ':vert winc f<cr>'} -- opens file below cursor 
-				}
+								{'gf', ':vert winc f<cr>'}, -- opens file below cursor 
+								{'<C-s>', ':w<cr>'},
+								{'<C-A-s>', ':wq<cr>'},
+								{'<C-w>', ':q<cr>'},
+								{'<C-w><C-w>', ':qa<cr>' },
+								{'<C-w><C-w><C-w>', ':qa!<cr>'},
+			}
 }
-
-
--- ~/.config/nvim/lua/basic.lua
 
 for k, v in pairs(keys) do
 				for n, a in pairs(v) do

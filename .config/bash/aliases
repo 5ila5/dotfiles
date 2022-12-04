@@ -24,6 +24,12 @@ alias mkdir="mkdir -pv"
 alias code='code --disable-gpu'
 alias sudo='doas'
 
+#Translate
+alias transende="trans :de -s en"
+alias transesde="trans :de -s es"
+alias transdeen="trans :en -s de"
+alias transdees="trans :es -s de"
+
 #typos
 alias vf='cd'
 alias cod='code'
@@ -128,3 +134,4 @@ alias svim='sudo vim'
 # Wireguard
 alias startWG='doas systemctl start wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
 alias stopWG='doas systemctl stop wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
+
