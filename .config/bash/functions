@@ -38,6 +38,18 @@ function sw() {
 
 }
 
+
+function c() {
+				newPath=$(exa -a --color always | fzf --multi --ansi --preview "exa -lhag {1}" )
+				echo "newPath:$newPath"
+				if [ ! -z "$newPath" ]
+				then
+								echo "not empty"
+								cd "$newPath"
+								c
+				fi	
+}
+
 function pi()
 {
     paru -Sl | awk '{print $2($4=="" ? "" : "*")}' | fzf --multi --preview 'echo {1} | tr -d "*" | xargs -r paru -Si' | tr -d "*" | xargs -ro paru -S

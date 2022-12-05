@@ -68,7 +68,6 @@ alias findContent='grep -rnw '.' -e'
 alias foldersize='du -ah --max-depth 1'
 alias thissize='du -ah --max-depth 0'
 alias cls='clear'
-alias c='clear'
 alias valia='nvim ~/.config/bash/aliases && source ~/.config/bash/aliases'
 
 #ssh
