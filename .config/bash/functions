@@ -40,11 +40,9 @@ function sw() {
 
 
 function c() {
-				newPath=$(exa -a --color always | fzf --multi --ansi --preview "exa -lhag {1}" )
-				echo "newPath:$newPath"
+				newPath=$(exa -lha --color always | fzf --multi --ansi --preview "exa -lha {+7}" | awk '{print $7}' )
 				if [ ! -z "$newPath" ]
 				then
-								echo "not empty"
 								cd "$newPath"
 								c
 				fi	
