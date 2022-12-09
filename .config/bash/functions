@@ -40,7 +40,7 @@ function sw() {
 
 
 function c() {
-				newPath=$(exa -lha --color always | fzf --multi --ansi --preview "exa -lha {+7}" | awk '{print $7}' )
+				newPath=$(exa -lhaa --color always | fzf --multi --ansi --preview "exa -lha {+7}" | awk '{print $7}' )
 				if [ ! -z "$newPath" ]
 				then
 								cd "$newPath"
