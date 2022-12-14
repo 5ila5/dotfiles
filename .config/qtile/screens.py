@@ -118,7 +118,8 @@ def init_layouts()->list:
         # layout.RatioTile(),
         # layout.Tile(),
         # layout.TreeTab(),
-        layout.VerticalTile(),
+        layout.VerticalTile(border_normal='#000000',),# border_focus='#009926', border_focus_stack=['#009926', '#009926']),
+
         # layout.Zoomy(),
     ]
     return layouts
