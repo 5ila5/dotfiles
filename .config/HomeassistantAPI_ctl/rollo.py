@@ -5,7 +5,7 @@ from apiAuth import headers
 import sys, getopt
 
 base_url = 'http://eis.lan.home:8123/api/'
-entity_id_tuer = 'cover.shellyswitch1'
+entity_id_tuer = 'cover.tuer_turfenster'
 entity_id_fenster = 'cover.fenster'
 
 
