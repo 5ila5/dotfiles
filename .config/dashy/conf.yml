@@ -161,6 +161,12 @@ sections:
       - title: RBG/ISP
         url: https://support.rbg.informatik.tu-darmstadt.de/service
         id: 3_1178_rbgisp
+      - title: Openlearnware
+        icon: >-
+          https://openlearnware.hrz.tu-darmstadt.de/assets/img/logo/olw-appicon-144x144.png
+        url: >-
+          https://openlearnware.hrz.tu-darmstadt.de/collection/mathematik-i-fur-informatik-und-wirtschaftsinformatik-43
+        id: 4_1178_openlearnware
 appConfig:
   theme: default
   language: de
