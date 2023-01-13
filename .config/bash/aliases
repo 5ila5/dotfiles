@@ -1,13 +1,12 @@
 #!/bin/bash
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+source $SCRIPT_DIR/aliases-remoteable nvim exa doas
 
 #no category
-alias run='compgen -c | dmenu -i | bash'
-alias s='doas'
-alias smake='sudo make'
+
 
 #x-Server/qtile 
 alias qtilelogs='cat ~/.local/share/qtile/qtile.log'
-alias sx'=startx'
 alias testqtile='export DISPLAY=:0 && Xephyr -br -ac -noreset -screen 800x600 :1 & export DISPLAY=:1&& qtile start -c ~/.config/qtile/WIP/config.py &'
 
 #wayland (depricated)
@@ -17,12 +16,8 @@ alias fixbackground='nitrogen --restore'
 alias testqtilewayland='qtile start -b wayland -c ~/.config/qtile/configWIP.py'
 
 #default commands with better output/replacement
-alias cp="cp -iv"
-alias mv="mv -iv"
-alias rm="rm -v"
-alias mkdir="mkdir -pv"
 alias code='code --disable-gpu'
-alias sudo='doas'
+
 
 #Translate
 alias transende="trans :de -s en"
@@ -31,11 +26,6 @@ alias transdeen="trans :en -s de"
 alias transdees="trans :es -s de"
 
 #typos
-alias vf='cd'
-alias cod='code'
-alias srouch='source'
-alias sourch='source'
-alias lö=ls
 
 #Brightnesctrl (depricated)
 alias mbirght='brightness0'
@@ -46,56 +36,24 @@ alias brightness0="brightness DP-0"
 alias brightness1='brightness DVI-D-0'
 
 #network debuging
-alias pingtest='ping heise.de'
-alias testInternet='watch --interval .5 "ping -w 1 -c 1 heise.de | grep \"64 Bytes\" && ping -w 1 -c 1 192.168.168.254 | grep \"64 Bytes\" && ping -w 1 -c 1 192.168.169.254 | grep \"64 Bytes\" && ping eis.lan.home -c 1 -w 1 | grep \"64 Bytes\" "'
-alias getIp='curl -s http://checkip.dyndns.org/ | sed "s/[a-zA-Z<>/ :]//g"'
+
 
 #libre office
 alias writer='libreoffice --writer'
 alias calc='libreoffice --calc'
 
 #alias rg='grep'
-alias find='fd'
-alias config='/usr/bin/git --git-dir=/home/silas/.cfg/ --work-tree=/home/silas'
 
 #file navigation (file/dir info)
-alias x='/home/silas/.local/script/util/unarchive.sh'
-alias treesize='ncdu --exclude /proc'
-alias folderSize='du -sh'
-alias disksizes='df -h'
-alias search="grep -rnw . -e"
-alias findContent='grep -rnw '.' -e'
-alias foldersize='du -ah --max-depth 1'
-alias thissize='du -ah --max-depth 0'
-alias cls='clear'
 alias valia='nvim ~/.config/bash/aliases && source ~/.config/bash/aliases'
 
 #ssh
-alias sshServer='ssh root@eis.lan.home'
-alias eis='ssh root@eis.lan.home'
+alias sshServer='myssh root@eis.lan.home'
+alias eis='sshServer'
 alias sshTu='ssh -Y sk76lufi@clientssh5.rbg.informatik.tu-darmstadt.de'
 
 # pacman/AUR
-alias pacmanLog='cat /var/log/pacman.log'
-alias sps='sp -S'
-alias spyu='sp -Syu'
-alias spfind='paru -Ql '
-alias spq='paru -Q'
-alias spqs='paru -Qs'
-alias spss='paru -Ss'
-alias yay='paru'
-alias y='yay'
-alias ys='yay -S'
-alias yss='yay -Ss'
-alias yr='yay -Rcns'
-alias py='paru -Sy'
-alias updateAll='paru -Syu'
-alias spr='paru -Rcns'
-alias spsyu='paru -Syu'
-alias pu='paru -Syu'
-alias sp='paru'
-alias p='paru'
-alias shutdownUpdate='paru -Syu && shutdown now'
+
 
 # wacom tablett
 alias padMapScrenn0='xsetwacom set 14 MapToOutput HEAD-0'
@@ -103,34 +61,12 @@ alias padMapScrenn1='xsetwacom set 14 MapToOutput HEAD-1'
 alias padMapScrenn2='xsetwacom set 14 MapToOutput HEAD-2'
 
 #cd/mkdir
-alias ..='cd ..'
-alias ...='cd ../..'
-alias cd..='cd ..'
 
 #ls/exa
-alias ls='exa'
-alias sl='doas exa -lhag'
-alias l='ls -lhag'
 
 # git
-alias g='git'
-alias gc='git commit'
-alias gcm='git commit -m'
-alias gp='git push'
-alias gpu='git pull'
-alias gpum='git pull --no-rebase --no-ff'
-alias gpufop='git pull public master --no-rebase --no-ff'
-alias ga='git add'
-alias gr='git remote'
 
 # vim
-alias vim="nvim"
-alias n="nvim"
-alias v='vim'
-alias sv='s vim'
-alias svim='sudo vim'
 
 # Wireguard
-alias startWG='doas systemctl start wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
-alias stopWG='doas systemctl stop wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
 
