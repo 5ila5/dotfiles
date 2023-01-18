@@ -9,6 +9,7 @@ import typing
 import datetime
 import timer
 from pc_type import laptop
+from mywidgets.playerctl.playerctl import Playerctl
 
 core_name = get_core.get_core_name()
 
@@ -25,7 +26,7 @@ colors = [["#282c34", "#282c34"],
           ["#a9a1e1", "#a9a1e1"]]
 
 
-playerctl= widget.Playerctl()
+playerctl= Playerctl()
 #widget.Bluetooth(),
 cpu= widget.CPU()
 #sep=widget.Sep()
