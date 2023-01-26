@@ -51,6 +51,7 @@ alias valia='nvim ~/.config/bash/aliases && source ~/.config/bash/aliases'
 alias sshServer='myssh root@eis.lan.home'
 alias eis='sshServer'
 alias sshTu='ssh -Y sk76lufi@clientssh5.rbg.informatik.tu-darmstadt.de'
+alias sshTuArm='ssh -Y sk76lufi@clientssh-arm.rbg.informatik.tu-darmstadt.de'
 
 # pacman/AUR
 
