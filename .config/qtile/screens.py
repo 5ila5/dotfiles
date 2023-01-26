@@ -53,6 +53,13 @@ rollotextwidget = widget.TextBox("rollo"),
 dateCountTo = datetime.datetime.now()#datetime(2022, 10, 17, 21, 29, 13, 621094)
 dateCountTo = dateCountTo + datetime.timedelta(minutes=1)
 
+
+try:
+    from api_keys import openweather_api_key, weather_location
+    weather = widget.OpenWeather(app_key=openweather_api_key,location=weather_location, language="de", format='{location_city}: {icon} {main_temp} °{units_temperature} {weather_details}')
+except ImportError:
+    weather = widget.TextBox("no API KEY")#widget.OpenWeather(location="Seeheim, DE")
+#weather = widget.OpenWeather(location="Seeheim, DE")
     
 timerwidget = widget.GenPollText(
     update_interval=1.0,
@@ -240,6 +247,7 @@ def topBarLaptop()-> bar.Bar:
         playerctl,
         widget.LaunchBar(progs=[("/home/silas/Nextcloud/uni/stundenplan.png","mupdf /home/silas/Nextcloud/uni/stundenplan.png","stundenplan")]),
         vol,
+        weather,
         ],
         30
     )
