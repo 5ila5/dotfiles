@@ -56,7 +56,11 @@ dateCountTo = dateCountTo + datetime.timedelta(minutes=1)
 
 try:
     from api_keys import openweather_api_key, weather_location
-    weather = widget.OpenWeather(app_key=openweather_api_key,location=weather_location, language="de", format='{location_city}: {icon} {main_temp} °{units_temperature} {weather_details}')
+    weather = widget.OpenWeather(
+        app_key=openweather_api_key,
+        location=weather_location,
+        language="de",
+        format='{location_city}: {icon} {main_temp} °{units_temperature} ({main_temp_min}°{units_temperature} — {main_temp_max}°{units_temperature})  {weather_details}')
 except ImportError:
     weather = widget.TextBox("no API KEY")#widget.OpenWeather(location="Seeheim, DE")
 #weather = widget.OpenWeather(location="Seeheim, DE")
@@ -222,6 +226,7 @@ def init_widget_list(idx) -> list:
         #rollo_text_widget,
         #widget.TextBox(str(idx)),
         rollo,
+        weather,
     ])
     return to_return
 
