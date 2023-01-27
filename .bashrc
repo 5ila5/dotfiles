@@ -41,6 +41,9 @@ export WLR_NO_HARDWARE_CURSORS=1
 
 . "$HOME/.cargo/env"
 PATH="$PATH:/opt/resolve/bin"
+PATH="$PATH$(\find ~/.local/script/ -type d -printf ':%p')"
+
+
 
 bind "TAB:menu-complete"
 bind '"\e[Z": menu-complete-backward'
