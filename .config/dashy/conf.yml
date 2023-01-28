@@ -167,6 +167,9 @@ sections:
         url: >-
           https://openlearnware.hrz.tu-darmstadt.de/collection/mathematik-i-fur-informatik-und-wirtschaftsinformatik-43
         id: 4_1178_openlearnware
+      - title: LatexDraw
+        url: https://detexify.kirelabs.org/classify.html
+        id: 5_1178_latexdraw
 appConfig:
   theme: default
   language: de
