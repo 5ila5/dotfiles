@@ -17,6 +17,9 @@ fi
 if [ -f ~/.config/bash/functions ]; then
 . ~/.config/bash/functions
 fi
+if [ -f ~/.config/nnn/bash_vars.sh ]; then
+. ~/.config/nnn/bash_vars.sh
+fi
 #export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
 export JAVA_HOME='/usr/lib/jvm/default-runtime'
 export ANDROID_SDK_ROOT='/home/silas/Android/Sdk'
