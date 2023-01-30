@@ -71,3 +71,4 @@ alias padMapScrenn2='xsetwacom set 14 MapToOutput HEAD-2'
 
 # Wireguard
 
+alias +x='chmod +x'

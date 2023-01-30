@@ -49,7 +49,7 @@ n ()
 
     # The backslash allows one to alias n to nnn if desired without making an
     # infinitely recursive alias
-    \nnn "$@"
+    \nnn "$@" -d -e -H -r
 
     if [ -f "$NNN_TMPFILE" ]; then
             . "$NNN_TMPFILE"
@@ -135,12 +135,25 @@ __ehc() {
 
 
 function c() {
-				newPath=$(exa -lhaa --color always | fzf --multi --ansi --preview "exa -lha {7..}" | awk '{ s = ""; for (i = 7; i <= NF; i++) s = s $i " "; print s }' )
-				if [ ! -z "$newPath" ]
-				then
-								cd "$newPath"
-								c
-				fi	
+				#newPath=$(exa -lhaa --color always | fzf --multi --ansi --preview "exa -lha {7..}" | awk '{ s = ""; for (i = 7; i <= NF; i++) s = s $i " "; print s }' )
+				#if [ ! -z "$newPath" ]
+				#then
+				#				cd "$newPath"
+				#				c
+				#fi
+				echo ""
+
+}
+
+fd() {
+  git="/usr/bin/git --git-dir=/home/silas/.cfg/ --work-tree=/home/silas"
+  git="git"
+  preview="$git diff $@ --color=always -- {-1}";
+  previewStaged="$git diff $@ --color=always --staged -- {-1}";
+	diffCommand="$git diff $@ --name-only"; 
+	diffCommandStaged="$diffCommand --staged";
+	echo $diffCommand $diffCommandStaged;
+	$diffCommand | fzf -m --ansi --preview "$preview" -m --bind "ctrl-a:execute-silent($git add {})+reload($diffCommand),ctrl-s:reload($diffCommandStaged)+change-preview($previewStaged)+unbind(ctrl-a)";
 }
 
 function pi()
