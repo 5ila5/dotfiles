@@ -16,6 +16,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'williamboman/mason.nvim'
   Plug 'rcarriga/nvim-notify'
 	Plug 'neovim/nvim-lspconfig'
+  Plug 'waycrate/swhkd-vim'
 vim.call('plug#end')
 
 require("mason").setup()

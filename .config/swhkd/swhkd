@@ -1,16 +1,19 @@
 mod4 + v
-        clipmenu -p
+    clipmenu -p
 
-mod4 + ctrl + {s, n} 
+#mod4 + ctrl + s + h
+#	systemctl hibernate
+
+super + ctrl + S + N 
 	shutdown now
 
-mod4 + ctrl + {r, n}
+mod4 + ctrl + r + n
 	reboot
 
-mod4 + alt + {s, n}
+mod4 + alt + s + n
 	shutdown now
 
-mod4 + alt + {r, n}
+mod4 + alt + r + n
 	reboot
 
 mod4 + b
@@ -20,14 +23,69 @@ mod4 + l
 	libreoffice
 
 button9
-	terminator
-	#xdotool key 'Control+Tab'
-	#ydotool key 29:1 15:1 15:0 29:0
+	xdotool key 'Control+Tab'
 
 button8
-	terminator
-	#ydotool key 42:1 29:1 15:1 15:0 29:0 42:0
-	#xdotool key 'Control+Shift+Tab'
+	xdotool key 'Control+Shift+Tab'
 
-g
-	terminator
+button20
+	#alacritty --hold --command echo button20
+	xdotool click 5
+
+button21
+	#alacritty --hold --command echo button21
+	xdotool key F21
+
+button22
+	#alacritty --hold --command echo button22
+	xdotool click 4
+
+button23
+	#alacritty --hold --command echo button23
+	xdotool key F23
+#f1
+XF86AudioMute 
+	amixer -q sset Master toggle 
+
+#f2
+XF86AudioLowerVolume 
+	amixer -q sset Master 10%-
+
+#f3
+XF86AudioRaiseVolume 
+	amixer -q sset Master 10%+
+
+#f4
+XF86AudioPrev 
+	playerctl previous
+
+#f5
+XF86AudioPlay 
+	playerctl play-pause
+
+#f6
+XF86AudioNext 
+	playerctl next
+
+#f7
+XF86MonBrightnessDown 
+	brillo -q -u 150000 -U 5
+
+#f8
+XF86MonBrightnessUp 
+	brillo -q -u 150000 -A 3 
+
+#f9
+Super_L 
+
+#f10
+XF86RFKill 
+
+#f11
+Print 
+
+#f12
+XF86AudioMedia 
+
+mod4 + i 
+	betterlockscreen -l

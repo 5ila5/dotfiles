@@ -72,3 +72,5 @@ alias padMapScrenn2='xsetwacom set 14 MapToOutput HEAD-2'
 # Wireguard
 
 alias +x='chmod +x'
+alias cleanHistory="awk '!x[\$0]++' < ~/.bash_history  > ~/.bash_history_c && \mv ~/.bash_history_c ~/.bash_history"
+alias cShutdownUpdate="doas -- sh -c 'yes | paru -Scc && paru -Syu && shutdown now'"

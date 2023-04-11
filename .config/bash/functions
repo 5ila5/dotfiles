@@ -71,6 +71,7 @@ fi
 for file in $@; do
     case "$file" in
     *.zip) unzip "$file" ;;
+    *.xz) unxz "$file" ;;
     *.tar.gz) tar xzvf "$file" ;;
     *.tar.bz2) tar xjvf "$file" ;;
     *.tar.xz) tar xJvf "$file" ;;
@@ -163,4 +164,12 @@ function pi()
 function pd()
 {
     paru -Qq | fzf --multi --preview 'paru -Qi {1}' | xargs -ro paru -Rncs
+}
+
+
+function torWithExit() {
+				local new_code="$1"
+				local file_path="/home/silas/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/TorBrowser/Data/Tor/torrc"
+				sed -i 's/\(ExitNodes {\)[^}]*\(}\)/\1'"$new_code"'\2/' "$file_path"
+				torbrowser-launcher
 }

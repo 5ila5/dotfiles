@@ -220,7 +220,7 @@ def init_widget_list(idx) -> list:
         timerwidget,
         playerctl,
         #widget.LaunchBar(progs=[("thunderbird","thunderbird","halt Thunderbird"),("spotify","spotify","startet Spotify")]),
-        widget.LaunchBar(progs=[("/home/silas/Nextcloud/uni/stundenplan.png", "mupdf /home/silas/Nextcloud/uni/stundenplan.jpg","stundenplan")]),
+            widget.LaunchBar(progs=[("/home/silas/Nextcloud/uni/stundenplan.png", "mupdf /home/silas/Nextcloud/uni/stundenplan.png","stundenplan")]),
         #core_name_widget,
         #widget.TextBox(core_name),
         #rollo_text_widget,
@@ -267,9 +267,8 @@ def topBar(idx)-> bar.Bar:
 
 
 def init_screens() -> typing.List[Screen]:
-    #screens = 
     if not laptop:
-        return [
+        screens = [
             Screen(
                 wallpaper="/usr/share/backgrounds/archlinux/split.png",
                 wallpaper_mode="fill",
@@ -290,6 +289,9 @@ def init_screens() -> typing.List[Screen]:
             ),
             
         ]
+        if core_name == "wayland":
+            screens[1], screens[2] = screens[2], screens[1]
+        return screens
     else:
         return [
             Screen(

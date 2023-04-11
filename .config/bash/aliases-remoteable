@@ -25,7 +25,7 @@ alias sourch='source'
 alias lö=ls
 
 alias pingtest='ping heise.de'
-alias testInternet='watch --interval .5 "ping -w 1 -c 1 heise.de | grep \"64 Bytes\" && ping -w 1 -c 1 192.168.168.254 | grep \"64 Bytes\" && ping -w 1 -c 1 192.168.169.254 | grep \"64 Bytes\" && ping eis.lan.home -c 1 -w 1 | grep \"64 Bytes\" "'
+alias testInternet='watch --interval .5 "ping -w 1 -c 1 heise.de | grep \"icmp_seq=1\" ; ping -w 1 -c 1 192.168.168.254 | grep \"icmp_seq=1\" ; ping -w 1 -c 1 192.168.169.254 | grep \"icmp_seq=1\" ; ping eis.lan.home -c 1 -w 1 | grep \"icmp_seq=1\" "'
 alias getIp='curl -s http://checkip.dyndns.org/ | sed "s/[a-zA-Z<>/ :]//g"'
 
 #alias rg='grep'
@@ -33,7 +33,7 @@ alias find='fd'
 alias config='/usr/bin/git --git-dir=/home/silas/.cfg/ --work-tree=/home/silas'
 
 #file navigation (file/dir info)
-alias treesize='ncdu --exclude /proc'
+alias treesize='ncdu --exclude /proc --exclude /mnt'
 alias folderSize='du -sh'
 alias disksizes='df -h'
 alias search="grep -rnw . -e"
@@ -89,6 +89,7 @@ alias gpum='git pull --no-rebase --no-ff'
 alias gpufop='git pull public master --no-rebase --no-ff'
 alias ga='git add'
 alias gr='git remote'
+alias gsp='git stash && git pull && git stash pop' 
 
 # vim
 if [[ $1 == "nvim" || $2 == "nvim" || $3 == "nvim" ]]
