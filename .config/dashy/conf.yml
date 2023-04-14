@@ -148,7 +148,7 @@ sections:
       - title: moodle Informatik
         icon: >-
           https://moodle.tu-darmstadt.de/theme/image.php/boost_campus_tu/theme/1663825739/favicon
-        url: https://moodle.informatik.tu-darmstadt.de
+        url: http://richtigesmoodle.de
         id: 0_1178_moodleinformatik
       - title: TUCAN
         icon: https://www.tucan.tu-darmstadt.de/gfx/tuda/icons/favicon.ico
@@ -170,6 +170,17 @@ sections:
       - title: LatexDraw
         url: https://detexify.kirelabs.org/classify.html
         id: 5_1178_latexdraw
+      - title: Campus Moodle
+        icon: >-
+          https://moodle.tu-darmstadt.de/theme/image.php/boost_campus_tu/theme/1663825739/favicon
+        url: http://falschesmoodle.de
+        id: 6_1178_campusmoodle
+      - title: openlearnware Mathe 2
+        icon: >-
+          https://openlearnware.hrz.tu-darmstadt.de/assets/img/logo/olw-appicon-144x144.png
+        url: >-
+          https://openlearnware.hrz.tu-darmstadt.de/collection/mathematik-ii-fur-informatik-und-wirtschaftsinformatik-3
+        id: 7_1178_openlearnwaremathe
 appConfig:
   theme: default
   language: de
