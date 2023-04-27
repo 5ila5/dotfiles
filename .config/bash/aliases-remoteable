@@ -30,8 +30,7 @@ alias getIp='curl -s http://checkip.dyndns.org/ | sed "s/[a-zA-Z<>/ :]//g"'
 
 #alias rg='grep'
 alias find='fd'
-alias config='/usr/bin/git --git-dir=~/.cfg/ --work-tree=/home/silas'
-
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 #file navigation (file/dir info)
 if command -v ncdu > /dev/null 
 then
