@@ -2,10 +2,10 @@
 
 #no category
 alias run='compgen -c | dmenu -i | bash'
-if [[ $1 == "doas" || $2 == "doas" || $3 == "doas" ]]
+if command -v doas > /dev/null;
 then
-alias s='doas'
-alias sudo='doas'
+				alias s='doas'
+				alias sudo='doas'
 fi
 alias smake='sudo make'
 
@@ -33,7 +33,9 @@ alias find='fd'
 alias config='/usr/bin/git --git-dir=/home/silas/.cfg/ --work-tree=/home/silas'
 
 #file navigation (file/dir info)
+if command -v ncdu > /dev/null then
 alias treesize='ncdu --exclude /proc --exclude /mnt'
+fi
 alias folderSize='du -sh'
 alias disksizes='df -h'
 alias search="grep -rnw . -e"
@@ -47,8 +49,10 @@ alias cls='clear'
 
 # pacman/AUR
 alias pacmanLog='cat /var/log/pacman.log'
+
 alias sps='sp -S'
 alias spyu='sp -Syu'
+if command -v paru > /dev/null then
 alias spfind='paru -Ql '
 alias spq='paru -Q'
 alias spqs='paru -Qs'
@@ -65,14 +69,14 @@ alias pu='paru -Syu'
 alias sp='paru'
 alias p='paru'
 alias shutdownUpdate='paru -Syu && shutdown now'
-
+fi
 #cd/mkdir
 alias ..='cd ..'
 alias ...='cd ../..'
 alias cd..='cd ..'
 
 #ls/exa
-if [[ $1 == "exa" || $2 == "exa" || $3 == "exa" ]]
+if command -v exa >/dev/null
 then
 				alias ls='exa'
 fi
@@ -92,7 +96,7 @@ alias gr='git remote'
 alias gsp='git stash && git pull && git stash pop' 
 
 # vim
-if [[ $1 == "nvim" || $2 == "nvim" || $3 == "nvim" ]]
+if command -v nvim > /dev/null
 then
 alias vim="nvim"
 alias v='vim'
