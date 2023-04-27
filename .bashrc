@@ -8,9 +8,9 @@
 if [ -f /usr/share/blesh/ble.sh ]; then
 [[ $- == *i* ]] &&
   source "/usr/share/blesh/ble.sh" --rcfile "$HOME/.blerc"
-elif [ -f ~/.local/share/blesh/ble.sh ]; then
+elif [ -f $HOME/.local/share/blesh/ble.sh ]; then
 [[ $- == *i* ]] &&
-  source "~/.local/share/blesh/ble.sh" --rcfile "$HOME/.blerc"
+  source "$HOME/.local/share/blesh/ble.sh" --rcfile "$HOME/.blerc"
 fi
 
 alias ls='ls --color=auto'
