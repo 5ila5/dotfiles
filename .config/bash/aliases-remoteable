@@ -30,10 +30,11 @@ alias getIp='curl -s http://checkip.dyndns.org/ | sed "s/[a-zA-Z<>/ :]//g"'
 
 #alias rg='grep'
 alias find='fd'
-alias config='/usr/bin/git --git-dir=/home/silas/.cfg/ --work-tree=/home/silas'
+alias config='/usr/bin/git --git-dir=~/.cfg/ --work-tree=/home/silas'
 
 #file navigation (file/dir info)
-if command -v ncdu > /dev/null then
+if command -v ncdu > /dev/null 
+then
 alias treesize='ncdu --exclude /proc --exclude /mnt'
 fi
 alias folderSize='du -sh'
@@ -52,7 +53,8 @@ alias pacmanLog='cat /var/log/pacman.log'
 
 alias sps='sp -S'
 alias spyu='sp -Syu'
-if command -v paru > /dev/null then
+if command -v paru > /dev/null 
+then
 alias spfind='paru -Ql '
 alias spq='paru -Q'
 alias spqs='paru -Qs'
