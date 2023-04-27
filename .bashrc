@@ -5,9 +5,12 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+if [ -f ~/usr/share/blesh/ble.sh ]; then
 [[ $- == *i* ]] &&
   source "/usr/share/blesh/ble.sh" --rcfile "$HOME/.blerc"
-
+elif [ -f ~/.local/share/belsh/ble.sh ]; then
+  source "~/.local/share/blesh/ble.sh" --rcfile "$HOME/.blerc"
+fi
 
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
