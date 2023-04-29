@@ -33,7 +33,7 @@ promptinit
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 
-
+bindkey "^k" clear-screen
 bindkey "^J" autosuggest-execute
 bindkey "^F" autosuggest-accept
 bindkey "^[[1;5C" forward-word
@@ -93,12 +93,21 @@ export PYTHONTRACEMALLOC=1
 export LIBVA_DRIVER_NAME=vdpau
 export VDPAU_DRIVER=nvidia
 
+if command -v thefuck > /dev/null; then 
 eval "$(thefuck --alias)"
+fi
 # acitvades auto correction for cd
 #shopt -s cdspell
 #shopt -s dirspell
 
-neofetch 
+if command -v neofetch > /dev/null; then 
+neofetch
+fi
 #starship
-eval "$(starship init zsh)" 
+if command -v starship > /dev/null; then
+				eval "$(starship init zsh)" 
+fi
+
+if [[ -f "/usr/share/fzf/key-bindings.zsh" ]]; then 
 source "/usr/share/fzf/key-bindings.zsh"
+fi
