@@ -3,8 +3,10 @@
 #source ./aliases
 #source ./functions
 
-source "$ZDOTDIR/zsh-aliases"
-source "$ZDOTDIR/zsh-functions"
+
+for file in $ZDOTDIR/zsh-aliases* $ZDOTDIR/zsh-functions*; do
+    source "$file"
+done
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
