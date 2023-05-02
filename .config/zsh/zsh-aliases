@@ -149,12 +149,12 @@ alias cd..='cd ..'
 #ls/exa
 if command -v exa >/dev/null
 then
-				alias ls='exa'
+				alias ls='exa -g'
 else 
 				alias ls="ls --color=auto"
 fi
-alias sl='sudo ls -lhag'
-alias l='ls -lhag'
+alias sl='sudo ls -lha'
+alias l='ls -lha'
 
 # git
 alias g='git'
