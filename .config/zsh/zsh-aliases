@@ -150,6 +150,8 @@ alias cd..='cd ..'
 if command -v exa >/dev/null
 then
 				alias ls='exa'
+else 
+				alias ls="ls --color=auto"
 fi
 alias sl='sudo ls -lhag'
 alias l='ls -lhag'
