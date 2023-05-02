@@ -45,5 +45,14 @@ success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set
 
 # Disable the package module, hiding it from the prompt completely
 [package]
-disabled = true
+disabled = false
 
+
+[cmd_duration]
+show_milliseconds = true
+
+
+[directory]
+truncation_length = 0
+truncation_symbol = '…/'
+truncate_to_repo = false
