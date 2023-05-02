@@ -44,6 +44,7 @@ bindkey "^[[1;5D" backward-word
 bindkey "^H" backward-word
 bindkey "^L" forward-word
 bindkey "^[[3;5~" kill-word
+bindkey "^[d" kill-word
 bindkey "\e[3~" delete-char
 bindkey "^^?" backward-kill-word 
 
