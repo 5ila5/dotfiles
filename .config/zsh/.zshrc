@@ -22,6 +22,7 @@ setopt NO_CASE_GLOB
 setopt INTERACTIVE_COMMENTS 
 setopt HIST_REDUCE_BLANKS 
 setopt SHARE_HISTORY
+setopt menu_complete
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
@@ -29,6 +30,13 @@ bindkey -v
 
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate _files
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'l:|=* r:|=*'
+
+# partiial completion
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# case insesitive completion
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
 zstyle :compinstall filename '/home/silas/.zshrc'
 setopt globdots
 autoload -Uz compinit
