@@ -7,7 +7,8 @@ format = """
 $all
 """
 
-right_format = "${custom.kernal}$shell:$time$memory_usage"
+right_format = """                                          \
+${custom.kernal}$shell:$time$memory_usage"""
 
 
 [status]
@@ -15,7 +16,8 @@ disabled = false
 map_symbol = true
 format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
 
-
+[git_branch]
+symbol = " "
 [time]
 disabled = false
 
@@ -75,4 +77,31 @@ symbol_threshold = 1
 #ssh_only = false
 #format = '@[$localipv4](bold red) '
 #disabled = false
+
+
+
+[gradle]
+symbol = " "
+[kotlin]
+symbol = " "
+
+[java]
+style = 'red'
+symbol = ' '
+
+[python]
+style = "fg:76"
+symbol = " "
+
+[golang]
+symbol = "󰟓 "
+
+[rust]
+symbol = "󱘗 "
+
+[haskell]
+symbol = "󰲒 "
+
+[nodejs]
+symbol = "󰌞 "
 
