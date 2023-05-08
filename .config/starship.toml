@@ -22,6 +22,13 @@ disabled = false
 [git_metrics]
 disabled = false
 
+[git_commit]
+disabled = false
+tag_disabled=false
+only_detached=false
+tag_symbol = '🔖 '
+tag_max_candidates = 2
+
 [custom.kernal]
 when = true
 command = "uname -r"
@@ -56,3 +63,16 @@ show_milliseconds = true
 truncation_length = 0
 truncation_symbol = '…/'
 truncate_to_repo = false
+
+[jobs]
+disabled = false 
+#symbol = 'TEST 123'
+number_threshold = 2 
+symbol_threshold = 1
+
+
+#[localip]
+#ssh_only = false
+#format = '@[$localipv4](bold red) '
+#disabled = false
+
