@@ -182,3 +182,9 @@ fi
 alias startWG='doas systemctl start wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
 alias stopWG='doas systemctl stop wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
 
+
+alias aud='cd ~/Nextcloud/uni/AuD/'
+alias aupl='cd ~/Nextcloud/uni/AuPl/'
+alias mathe='cd ~/Nextcloud/uni/Mathe2/'
+alias ro='cd ~/Nextcloud/uni/RO/'
+alias fs1='cd ~/Nextcloud/uni/fs1/'
