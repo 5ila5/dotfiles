@@ -180,7 +180,9 @@ fi
 
 # Wireguard
 alias startWG='doas systemctl start wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
+alias startWGlocal='doas systemctl start wg-quick@wg0-local-only && sleep 1 && ping eis.lan.home -c 1 | grep 64 || echo "could not ping home"'
 alias stopWG='doas systemctl stop wg-quick@wg0 && sleep 1 && echo "your new IP addres is:" && getIp'
+alias stopWGlocal='doas systemctl stop wg-quick@wg0-local-only && sleep 1 && ping eis.lan.home -c 1 && echo "seems to not be disabled or you are at home" || echo "disabled succesfully"'
 
 
 alias aud='cd ~/Nextcloud/uni/AuD/'
