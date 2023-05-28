@@ -165,7 +165,7 @@ sections:
         icon: >-
           https://openlearnware.hrz.tu-darmstadt.de/assets/img/logo/olw-appicon-144x144.png
         url: >-
-          https://openlearnware.hrz.tu-darmstadt.de/collection/mathematik-i-fur-informatik-und-wirtschaftsinformatik-43
+          https://openlearnware.hrz.tu-darmstadt.de/collection/mathematik-ii-fur-informatik-und-wirtschaftsinformatik-3
         id: 4_1178_openlearnware
       - title: LatexDraw
         url: https://detexify.kirelabs.org/classify.html
@@ -175,12 +175,6 @@ sections:
           https://moodle.tu-darmstadt.de/theme/image.php/boost_campus_tu/theme/1663825739/favicon
         url: http://falschesmoodle.de
         id: 6_1178_campusmoodle
-      - title: openlearnware Mathe 2
-        icon: >-
-          https://openlearnware.hrz.tu-darmstadt.de/assets/img/logo/olw-appicon-144x144.png
-        url: >-
-          https://openlearnware.hrz.tu-darmstadt.de/collection/mathematik-ii-fur-informatik-und-wirtschaftsinformatik-3
-        id: 7_1178_openlearnwaremathe
 appConfig:
   theme: default
   language: de

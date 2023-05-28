@@ -4,3 +4,7 @@
 #sxhkd &
 #numlockx &
 nm-applet &
+
+if command -v qpwgraph >/dev/null; then
+				qpwgraph -m &
+fi
