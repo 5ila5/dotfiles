@@ -188,3 +188,5 @@ alias aupl='cd ~/Nextcloud/uni/AuPl/'
 alias mathe='cd ~/Nextcloud/uni/Mathe2/'
 alias ro='cd ~/Nextcloud/uni/RO/'
 alias fs1='cd ~/Nextcloud/uni/fs1/'
+
+alias dark='xset dpms force off'
