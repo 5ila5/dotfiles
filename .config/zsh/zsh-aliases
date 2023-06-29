@@ -72,6 +72,8 @@ alias cShutdownUpdate="doas -- sh -c 'yes | paru -Scc && paru -Syu && shutdown n
 
 #no category
 alias run='compgen -c | dmenu -i | bash'
+alias s='sudo'
+
 if command -v doas > /dev/null;
 then
 				alias s='doas'

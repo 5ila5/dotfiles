@@ -59,7 +59,9 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 bindkey "^H" backward-word
+bindkey  "^[[H" beginning-of-line
 bindkey "^L" forward-word
+bindkey  "^[[F"   end-of-line
 bindkey "^[[3;5~" kill-word
 bindkey "^[d" kill-word
 bindkey "^[[3~" delete-char
