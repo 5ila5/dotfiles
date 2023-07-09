@@ -52,3 +52,12 @@ for editor in nvim vim vi joe nano; do
     fi
 done
 
+
+export BROWSER=firefox
+
+
+# texlive
+export TEXMFHOME=$XDG_CONFIG_HOME/texmf
+export TEXMFVAR=$XDG_CONFIG_HOME/texlive/texmf-var
+export TEXMFVAR=$XDG_CONFIG_HOME/texlive/texmf-config
+

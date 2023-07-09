@@ -104,7 +104,6 @@ alias testInternet='watch --interval .5 "ping -w 1 -c 1 heise.de | grep \"icmp_s
 alias getIp='curl -s http://checkip.dyndns.org/ | sed "s/[a-zA-Z<>/ :]//g"'
 
 #alias rg='grep'
-alias find='fd'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 #file navigation (file/dir info)
 if command -v ncdu > /dev/null 
