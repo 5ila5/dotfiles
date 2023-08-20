@@ -59,9 +59,11 @@ alias sshTuArm='ssh -Y sk76lufi@clientssh-arm.rbg.informatik.tu-darmstadt.de'
 
 
 if command -v xsetwacom > /dev/null; then
-				alias padMapScrenn0='xsetwacom set 14 MapToOutput HEAD-0'
-				alias padMapScrenn1='xsetwacom set 14 MapToOutput HEAD-1'
-				alias padMapScrenn2='xsetwacom set 14 MapToOutput HEAD-2'
+				alias getPadID="xsetwacom list | grep PAD | awk -F 'id: ' '{print \$2}' | awk -F ' ' '{print \$1}'"
+				alias getStylousID="xsetwacom list | grep STYLUS | awk -F 'id: ' '{print \$2}' | awk -F ' ' '{print \$1}'"
+				alias padMapScreen0='xsetwacom set $(getPadID) MapToOutput HEAD-0 && xsetwacom set $(getStylousID) MapToOutput HEAD-0'
+				alias padMapScreen1='xsetwacom set $(getPadID) MapToOutput HEAD-1 && xsetwacom set $(getStylousID) MapToOutput HEAD-1'
+				alias padMapScreen2='xsetwacom set $(getPadID) MapToOutput HEAD-2 && xsetwacom set $(getStylousID) MapToOutput HEAD-2'
 fi
 
 

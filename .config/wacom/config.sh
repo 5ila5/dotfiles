@@ -1,10 +1,9 @@
 #!/bin/bash
 sleep 2
-padId=$(xsetwacom --list devices | rg pad |  tr -dc '0-9')
-stylusId=$(xsetwacom --list devices | rg stylus |  tr -dc '0-9')
+padId=$(xsetwacom list | grep PAD | awk -F 'id: ' '{print $2}' | awk -F ' ' '{print $1}')
+stylusId=$(xsetwacom list | grep STYLUS | awk -F 'id: ' '{print $2}' | awk -F ' ' '{print $1}')
 
-
-
+echo "found padId=$padId and stylusID=$stylusId"
 
 xsetwacom set $padId Button 1 5 
 xsetwacom set $padId Button 2 21
