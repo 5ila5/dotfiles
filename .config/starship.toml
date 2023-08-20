@@ -46,7 +46,7 @@ disabled = false
 
 [memory_usage]
 disabled = false
-format = "ram: $ram_pct swp: swap_pct"
+format = "ram: $ram_pct swp: $swap_pct"
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character] # The name of the module we are configuring is "character"
