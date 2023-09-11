@@ -173,7 +173,8 @@ alias gpufop='git pull public master --no-rebase --no-ff'
 alias ga='git add'
 alias gr='git remote'
 alias gsp='git stash && git pull && git stash pop' 
-
+alias gch='git checkout'
+alias gchb='git checkout -b'
 # vim
 if command -v nvim > /dev/null
 then
