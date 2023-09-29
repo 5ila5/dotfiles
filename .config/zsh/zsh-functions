@@ -103,6 +103,7 @@ for file in $@; do
     *.tgz) tar xzvf "$file" ;;
     *.Z) uncompress "$file" ;;
     *.7z) 7z x "$file" ;;
+    *.tzst) unzstd "$file" ;;
     *) printf "File: %s: Unsupported format\n" "$file" ;;
     esac
 done

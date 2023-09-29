@@ -35,9 +35,9 @@ export XKB_DEFAULT_LAYOUT=de
 #export CLUTTER_BACKEND=wayland
 #export GBM_BACKEND=nvidia-drm
 #export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export MOZ_ENABLE_WAYLAND=1
+#export MOZ_ENABLE_WAYLAND=1
 export WLR_NO_HARDWARE_CURSORS=1
-
+export MOZ_USE_XINPUT2=1
 
 export PYTHONTRACEMALLOC=1
 export LIBVA_DRIVER_NAME=vdpau
