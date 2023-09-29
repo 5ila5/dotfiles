@@ -53,6 +53,8 @@ def init_keys() -> typing.List[Key]:
         Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
         Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
         Key(["mod1"], "F4", lazy.window.kill(), desc="Kill focused window"),
+        Key(["mod1"], "m", lazy.window.toggle_minimize(), desc="toggle minimize"),
+
 
         Key([mod, "control"], "r", lazy.restart() if get_core_name() != "wayland" else lazy.reload_config() , desc="Restart Qtile"),
         Key([mod, "control"], "c", lazy.reload_config(), desc="reload Config"),

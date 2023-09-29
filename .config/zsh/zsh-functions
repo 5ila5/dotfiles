@@ -37,6 +37,10 @@ function md() {
 	mkdir -pv $1 && cd $1
 }
 
+function old() {
+    mv $1 $1.old
+}
+
 function myssh() {
 	scp ~/.config/bash/aliases-remoteable $1:/tmp/.bashrc_temp
 	scp ~/.config/bash/functions $1:/tmp/.bashfunctions_tmp
