@@ -5,6 +5,7 @@ wl-paste -t text --watch clipman store &
 #clipmanager &
 #sxhkd &
 #numlockx &
+ydotoold &
 
 #export WLR_NO_HARDWARE_CURSORS=1
 export XKB_DEFAULT_LAYOUT=de
@@ -21,4 +22,4 @@ export MOZ_ENABLE_WAYLAND=1
 export WLR_NO_HARDWARE_CURSORS=1
 export XDG_SESSION_TYPE=wayland
 
-sleep 3 
+# sleep 3 

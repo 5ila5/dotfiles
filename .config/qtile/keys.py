@@ -3,11 +3,14 @@ from libqtile.lazy import lazy
 from get_core import get_core_name
 import os
 import typing
+import logging
 currentDir =  os.path.dirname(os.path.realpath(__file__))+ "/"
 with open(currentDir+"modKey.conf","r") as f:
     mod = f.read().replace("\n","")
 
 terminal = "alacritty"
+
+LOGGER = logging.getLogger(__name__)
 
 def init_keys() -> typing.List[Key]:
 
@@ -74,7 +77,7 @@ def init_keys() -> typing.List[Key]:
 def assigne_group_keys(keys : typing.List[Key],  groups: typing.List[Group]) -> typing.List[Key]:
     for i in groups:
         if i.name == "key":
-            keys.append(Key([mod], "k", lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name))),
+            keys.append(Key([mod], "i", lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name))),
             continue
         
         keys.extend([

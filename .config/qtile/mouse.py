@@ -26,11 +26,9 @@ def init_mouse() ->list:
 def add_wayland_specific_mouse(mouse:list) -> list:
     mouse.extend([
         Click([], "Button8", lazy.spawn("ydotool key 42:1 29:1 15:1 15:0 29:0 42:0")),
-        #Click([], "Button9", lazy.spawn("ydotool key 29:1 15:1 15:0 29:0")),
+        Click([], "Button9", lazy.spawn("ydotool key 29:1 15:1 15:0 29:0")),
     ])
     return mouse
 def add_X11_specific_mouse(mouse:list) -> list:
-    mouse.extend([
-        Click([], "Button9", lazy.spawn("terminator")),
-    ])
+    mouse.extend([])
     return mouse
