@@ -59,7 +59,6 @@ reload("screens")
 
 terminal = "terminator"
 
-
 # My imports
 import autostart 
 from keys import init_keys, assigne_group_keys, wayland_specific_keys, X11_specific_keys

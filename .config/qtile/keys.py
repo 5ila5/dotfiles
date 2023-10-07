@@ -101,6 +101,14 @@ def wayland_specific_keys(keys : typing.List[Key]) -> typing.List[Key]:
     keys.extend([    
         Key([mod], "b", lazy.spawn("firefox"), desc="spawn firefox"),
         Key([mod], "v", lazy.spawn("clipman pick -t wofi"), desc="clipboard Menu"),
+        Key([], "XF86AudioMute", lazy.spawn("amixer -q sset Master toggle ")),
+        Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -q sset Master 10%-")),
+        Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -q sset Master 10%+")),
+        Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
+        Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
+        Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
+        Key([], "XF86MonBrightnessDown", lazy.spawn("brillo -q -u 150000 -U 5")),
+        Key([], "XF86MonBrightnessUp", lazy.spawn("brillo -q -u 150000 -A 3 ")),
     ])
     return keys
 
