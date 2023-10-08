@@ -6,7 +6,10 @@ wl-paste -t text --watch clipman store &
 #sxhkd &
 # numlockx &
 ydotoold &
-
+udiskie --tray &
+numlockx &
+nextcloud --background &
+# flameshot &
 
 
 

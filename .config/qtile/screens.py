@@ -194,7 +194,7 @@ def init_widget_list(idx) -> list:
         ),
     ]
     if core_name == "wayland":
-        to_return.extend([])
+        to_return.extend([widget.StatusNotifier()])
     else:
         pass
         '''to_return.extend([
@@ -214,7 +214,6 @@ def init_widget_list(idx) -> list:
     if idx==2:
         to_return.extend([systray]) 
     to_return.extend([
-        widget.StatusNotifier(),
         #systray,
         vol,
         timerwidget,
@@ -247,7 +246,7 @@ def topBarLaptop()-> bar.Bar:
             ),
         widget.Battery(),
         widget.BatteryIcon(),
-        systray,
+        systray if core_name != "wayland" else widget.StatusNotifier(),
         timerwidget,
         playerctl,
         widget.LaunchBar(progs=[("/home/silas/Nextcloud/uni/stundenplan.png","mupdf /home/silas/Nextcloud/uni/stundenplan.png","stundenplan")]),

@@ -71,7 +71,6 @@ from mouse import init_mouse, add_wayland_specific_mouse, add_X11_specific_mouse
 def startup():
     autostart.autostart()
 
-qtile.core.set_keymap(layout="de")
 keys = init_keys()
 groups = init_groups()
 keys = assigne_group_keys(keys, groups)
@@ -82,6 +81,7 @@ mouse = init_mouse()
 screens = init_screens()
 #logger.error(str(screens))
 if get_core_name() == "wayland":
+    qtile.core.set_keymap(layout="de")
     keys = wayland_specific_keys(keys)
     mouse = add_wayland_specific_mouse(mouse)
 else:

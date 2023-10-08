@@ -4,7 +4,7 @@ WAYLAND_ENV_VARS = {
     #"QT_AUTO_SCREEN_SCALE_FACTOR" : "1",
     "QT_QPA_PLATFORM" : "wayland",
     #"QT_WAYLAND_DISABLE_WINDOWDECORATION" : "1",
-    #"GDK_BACKEND" : "wayland",
+    "GDK_BACKEND" : "wayland",
     #"XDG_CURRENT_DESKTOP" : "sway",
     "SDL_VIDEODRIVER" : "wayland",
     "CLUTTER_BACKEND" : "wayland",
@@ -17,4 +17,6 @@ WAYLAND_ENV_VARS = {
     "_JAVA_AWT_WM_NONREPARENTING" : "1",
     "XDG_CURRENT_DESKTOP" : "sway",
     "XDG_SESSION_DESKTOP" : "sway",
+    "XCURSOR_PATH" : "/home/silas/.local/share/icons",    
+
 }
