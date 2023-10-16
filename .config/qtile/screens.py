@@ -230,6 +230,7 @@ def init_widget_list(idx) -> list:
     return to_return
 
 def topBarLaptop()-> bar.Bar:
+    backlight_sens = "2" if core_name != "wayland" else "0.7"
     return bar.Bar(
         [  
         widget.Spacer(10),
@@ -240,8 +241,8 @@ def topBarLaptop()-> bar.Bar:
             backlight_name="intel_backlight",
             mouse_callbacks=
             {
-                "Button4": lazy.spawn("brillo -q -u 150000 -A 2"),
-                "Button5": lazy.spawn("brillo -q -u 150000 -U 2"),
+                "Button4": lazy.spawn("brillo -q -u 150000 -A " + backlight_sens),
+                "Button5": lazy.spawn("brillo -q -u 150000 -U " + backlight_sens),
             }
             ),
         widget.Battery(),
