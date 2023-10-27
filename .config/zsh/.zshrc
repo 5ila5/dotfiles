@@ -1,5 +1,10 @@
 #!/bin/zsh
 
+autoload -Uz compinit
+compinit
+autoload bashcompinit
+bashcompinit 
+
 #source ./aliases
 #source ./functions
 
@@ -36,11 +41,12 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 
 # case insesitive completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' remote-access yes
 
 zstyle :compinstall filename '/home/silas/.zshrc'
 setopt globdots
-autoload -Uz compinit
-compinit
+
+source $ZDOTDIR/python-argcomplete 
 
 # End of lines added by compinstall
 #

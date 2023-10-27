@@ -87,5 +87,5 @@ Print
 #f12
 XF86AudioMedia 
 
-mod4 + i 
+mod4 + alt + l
 	betterlockscreen -l
