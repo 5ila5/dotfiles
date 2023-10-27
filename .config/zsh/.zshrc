@@ -72,7 +72,7 @@ if [ -f ~/.config/nnn/bash_vars.sh ]; then
 fi
 
 . "$HOME/.cargo/env"
-PATH="$PATH:/opt/resolve/bin"
+PATH="$PATH:/opt/resolve/bin:/usr/share/scala3/bin"
 PATH="$PATH$(\find ~/.local/script/ -type d -printf ':%p')"
 
 
