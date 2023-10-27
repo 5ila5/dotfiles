@@ -71,6 +71,8 @@ def init_keys() -> typing.List[Key]:
         Key([mod, "shift"], "r", lazy.spawncmd(),
             desc="Spawn a command using a prompt widget"),
         Key([mod], "x", lazy.simulate_keypress([],"a"), desc="testing stuff"),
+        Key([mod], "m", lazy.window.toggle_fullscreen(), desc="toogle flusscrean"),
+        Key([mod], "n", lazy.hide_show_bar(), desc="Hides the bar"),
     ]
 
 
