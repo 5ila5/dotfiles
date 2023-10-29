@@ -13,15 +13,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
-
-
-
-
-
-
-
     xrdb -merge $sysresources
-
 fi
 
 if [ -f $sysmodmap ]; then
@@ -29,15 +21,7 @@ if [ -f $sysmodmap ]; then
 fi
 
 if [ -f "$userresources" ]; then
-
-
-
-
-
-
-
     xrdb -merge "$userresources"
-
 fi
 
 if [ -f "$usermodmap" ]; then
@@ -56,6 +40,12 @@ fi
 if [ -f ~/.config/alsa/asound.state ] ; then	
 	alsactl restore --file .config/alsa/asound.state
 fi
+
+
+if [ "$SHELL" = "zsh" ]; then
+    [ -f "$HOME/.zshenv" ] && . "$HOME/.zshenv"
+fi
+
 
 export XDG_SESSION_TYPE=X11
 xrandr --output DP-0 --primary& #--left-of DVI-D-0 &
