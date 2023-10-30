@@ -77,12 +77,6 @@ if [ -f ~/.config/nnn/bash_vars.sh ]; then
 . ~/.config/nnn/bash_vars.sh
 fi
 
-. "$HOME/.cargo/env"
-PATH="$PATH:/opt/resolve/bin:/usr/share/scala3/bin"
-PATH="$PATH$(\find ~/.local/script/ -type d -printf ':%p')"
-
-
-
 #bind "TAB:menu-complete"
 #bind '"\e[Z": menu-complete-backward'
 #bind "set menu-complete-display-prefix on"

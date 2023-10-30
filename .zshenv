@@ -43,6 +43,9 @@ export PYTHONTRACEMALLOC=1
 export LIBVA_DRIVER_NAME=vdpau
 export VDPAU_DRIVER=nvidia
 
+. "$HOME/.cargo/env"
+PATH="$PATH:/opt/resolve/bin:/usr/share/scala3/bin"
+PATH="$PATH$(\find ~/.local/script/ -type d -printf ':%p')"
 
 # set default editor based if installed and prioritised
 for editor in nvim vim vi joe nano; do

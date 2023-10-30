@@ -1,4 +1,7 @@
 #!/bin/sh
+
+swayidle -w timeout 120 'wlopm --off "*"' resume 'wlopm --on "*"' &
+
 kanshi &
 setxkbmap de &
 wl-paste -t text --watch clipman store &

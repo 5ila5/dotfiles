@@ -41,12 +41,6 @@ if [ -f ~/.config/alsa/asound.state ] ; then
 	alsactl restore --file .config/alsa/asound.state
 fi
 
-
-if [ "$SHELL" = "zsh" ]; then
-    [ -f "$HOME/.zshenv" ] && . "$HOME/.zshenv"
-fi
-
-
 export XDG_SESSION_TYPE=X11
 xrandr --output DP-0 --primary& #--left-of DVI-D-0 &
 #nvidia-settings --assign CurrentMetaMode="HDMI-0: nvidia-auto-select +0+300 {ForceCompositionPipeline=On},DP-0: nvidia-auto-select +1920+300 {ForceCompositionPipeline=On}, DVI-D-0: nvidia-auto-select +3840+0 {ForceCompositionPipeline=On,Rotation=left}"&
