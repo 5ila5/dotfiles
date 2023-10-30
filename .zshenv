@@ -25,7 +25,6 @@ export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export STACK_ROOT="$XDG_DATA_HOME"/stack
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
-export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 
 
