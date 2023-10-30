@@ -10,6 +10,26 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_MUSIC_DIR=${XDG_MUSIC_DIR:="$HOME/doc/music"}
 export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
 
+
+
+# CLeanup Home
+
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export GOPATH="$XDG_DATA_HOME"/go
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export STACK_ROOT="$XDG_DATA_HOME"/stack
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
+export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
+
+
+
 # JAVA/ANDROID:
 
 #export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
@@ -43,7 +63,7 @@ export PYTHONTRACEMALLOC=1
 export LIBVA_DRIVER_NAME=vdpau
 export VDPAU_DRIVER=nvidia
 
-. "$HOME/.cargo/env"
+. "$CARGO_HOME/env"
 PATH="$PATH:/opt/resolve/bin:/usr/share/scala3/bin"
 PATH="$PATH$(\find ~/.local/script/ -type d -printf ':%p')"
 
