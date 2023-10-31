@@ -10,7 +10,7 @@ def init_groups() -> list[Group]:
     ])
     groups.extend([Group(i) for i in"1234"])
     if not laptop:
-        groups.extend([Group("5",spawn=["spotify" if not laptop else ""])])
+        groups.extend([Group("5",spawn=["youtube-music" if not laptop else ""])])
     
     return groups
 
