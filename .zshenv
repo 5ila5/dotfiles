@@ -25,16 +25,24 @@ export PYTHONSTARTUP="${XDG_CONFIG_HOME}/python/pythonrc"
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export STACK_ROOT="$XDG_DATA_HOME"/stack
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
-export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
-
-
+export WINEPREFIX="$XDG_DATA_HOME"/wine
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+export KODI_DATA="$XDG_DATA_HOME"/kodi
+export MPLAYER_HOME="$XDG_CONFIG_HOME"/mplayer
+export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
+export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
+alias nvidia-settings="nvidia-settings --config='$XDG_CONFIG_HOME'/nvidia/settings"
+export NVM_DIR="$XDG_DATA_HOME"/nvm
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 
 # JAVA/ANDROID:
 
 #export JAVA_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules java.se.ee'
 export JAVA_HOME='/usr/lib/jvm/default-runtime'
-export ANDROID_SDK_ROOT='/home/silas/Android/Sdk'
-export ANDROID_HOME='/home/silas/Android/Sdk'
+export ANDROID_HOME="$XDG_DATA_HOME"/android
+export ANDROID_SDK_ROOT="$ANDROID_HOME/Sdk"
 
 
 

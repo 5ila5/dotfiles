@@ -2,6 +2,7 @@
 
 # Icons to Use:
 export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
+ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 
 
 

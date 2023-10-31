@@ -3,8 +3,9 @@
 autoload -Uz compinit
 compinit
 autoload bashcompinit
-bashcompinit 
+bashcompinit
 
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 #source ./aliases
 #source ./functions
 
