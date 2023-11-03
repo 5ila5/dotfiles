@@ -2,7 +2,12 @@ import rolloctl
 from libqtile import qtile
 from brightnessctl import Brightnessctl 
 from libqtile.config import Screen
-from libqtile import bar, layout, widget
+from libqtile import bar, layout
+try:
+    from qtile_extras import widget
+except ImportError:
+    from libqtile import widget
+
 from libqtile.lazy import lazy
 import get_core
 import typing

@@ -111,7 +111,8 @@ def wayland_specific_keys(keys : typing.List[Key]) -> typing.List[Key]:
         Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
         Key([], "XF86MonBrightnessDown", lazy.spawn("brillo -q -u 150000 -U 5")),
         Key([], "XF86MonBrightnessUp", lazy.spawn("brillo -q -u 150000 -A 3 ")),
-        Key(["mod1", mod], "n", lazy.spawn("shutdnow now"), desc="shutdown now")
+        Key(["mod1", mod], "n", lazy.spawn("shutdnow now"), desc="shutdown now"),
+        *[Key(['mod1', 'control'], f"F{n}", lazy.core.change_vt(n), desc=f"Switch to virtual terminal #{n}") for n in range(1, 7)],
     ])
     return keys
 
