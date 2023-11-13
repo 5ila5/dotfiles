@@ -3,10 +3,17 @@ from libqtile import qtile
 from brightnessctl import Brightnessctl 
 from libqtile.config import Screen
 from libqtile import bar, layout
+from libqtile.log_utils import logger
 try:
     from qtile_extras import widget
-except ImportError:
+    # from qtile_extras.widget import PulseVolume
+    # from generic_progress_bar_widget import GenericProgressBar
+    from qtile_extras.widget.mixins import ExtendedPopupMixin, ProgressBarMixin, TooltipMixin
+    qtile_extra = True
+except ImportError as e:
     from libqtile import widget
+    qtile_extra = False
+    logger.warning("could not import all or some qtiles_extras functunallity falling back to default widgets", e)
 
 from libqtile.lazy import lazy
 import get_core
@@ -57,15 +64,62 @@ rollotextwidget = widget.TextBox("rollo"),
 
 dateCountTo = datetime.datetime.now()#datetime(2022, 10, 17, 21, 29, 13, 621094)
 dateCountTo = dateCountTo + datetime.timedelta(minutes=1)
+#pVol = widget.PulseVolume()
 
 
+if qtile_extra:
+    class OpenWeatherTooltip(widget.OpenWeather, TooltipMixin):
+        defaults = [(
+                "tooltip_format",
+                "",
+                "Display tooltip format format",
+            )]
+        
+        def __init__(self, **config):
+            widget.OpenWeather.__init__(self, **config)
+            TooltipMixin.__init__(self, **config)
+            self.add_defaults(TooltipMixin.defaults)
+            self.add_defaults(OpenWeatherTooltip.defaults)
+            self.tooltip_text = ""
+
+        def parse(self, response):
+            original_format = self.format
+            self.format = self.tooltip_format
+            self.tooltip_text = super().parse(response)
+            self.format = original_format
+            return super().parse(response)
+       
+
+    class BacklightBar(widget.Backlight, ProgressBarMixin):
+        def __init__(self, **config):
+            widget.Backlight.__init__(self, **config)
+            ProgressBarMixin.__init__(self, **config)
+            self.add_defaults(widget.Backlight.defaults)
+            self.add_defaults(ProgressBarMixin.defaults)
+
+        def _get_info(self):
+           val = super()._get_info()
+           self.bar_draw(bar_value=val)
+           return val 
+            
 try:
     from api_keys import openweather_api_key, weather_location
     weather = widget.OpenWeather(
         app_key=openweather_api_key,
         location=weather_location,
         language="de",
-        format='{location_city}: {icon} {main_temp} °{units_temperature} ({main_temp_min}°{units_temperature} — {main_temp_max}°{units_temperature})  {weather_details}')
+        format='{location_city}: {icon} {main_temp} °{units_temperature} ({main_temp_min}°{units_temperature} — {main_temp_max}°{units_temperature})  {weather_details}'
+    )
+    if qtile_extra:
+        weather = OpenWeatherTooltip(
+            app_key=openweather_api_key,
+            location=weather_location,
+            language="de",
+            format='{icon} {main_temp} °{units_temperature}',
+            tooltip_format='{location_city}: {icon} {main_temp} °{units_temperature} ({main_temp_min}°{units_temperature} — {main_temp_max}°{units_temperature})  {weather_details}'
+        )
+
+
 except ImportError:
     weather = widget.TextBox("no API KEY")#widget.OpenWeather(location="Seeheim, DE")
 #weather = widget.OpenWeather(location="Seeheim, DE")
@@ -78,7 +132,6 @@ timerwidget = widget.GenPollText(
         "Button1": timer.start_pause,
         "Button2": timer.select_next,
         "Button3": timer.cancel,
-        
         "Button4": timer.timer_scroll_up,
         "Button5": timer.timer_scroll_down,
     }
@@ -152,6 +205,7 @@ def init_widget_defaults() -> dict:
 def bottomBar():
     return bar.Bar(
         [
+            # weather,
             widget.CurrentLayout(),
             widget.GroupBox(disable_drag=True),
             widget.Prompt(),
@@ -168,11 +222,30 @@ def bottomBar():
         24,
     )
 systray = widget.Systray()
-brighnestlc = [Brightnessctl(id) for id in range(1,4)]
+brighnestlc = [] # [Brightnessctl(id) for id in range(1,4)]
 
 def init_widget_list(idx) -> list:
-    to_return = [            
+
+    
+    to_return = [
+        # pVol,
         widget.Spacer(10),
+        # GenericProgressBar(
+        #     update_interval=30,
+        #     name="brightnessctlTEST123",
+        #     bar_text_func=brighnestlc[idx].get_brighness_text,
+        #     error_func=brighnestlc[idx].get_changed,
+        #     value_func=brighnestlc[idx].get_brightness_text_val,
+        #     mouse_callbacks={
+        #         "Button1": brighnestlc[idx].click,
+        #         "Button2": brighnestlc[idx].cancel,
+        #         "Button3": brighnestlc[idx].cancel,
+        #         "Button4": brighnestlc[idx].scroll_up,
+        #         "Button5": brighnestlc[idx].scroll_down,
+        #     },
+        #     bar_text_max_string = "Helligkeit: 100% ?",
+        # ),       
+        # widget.Mpris2(),
         #mySep,
         cpu,
         #sep,
@@ -185,7 +258,30 @@ def init_widget_list(idx) -> list:
         memmory,
         checkUpdates,
         clipboard,
-        widget.GenPollText(
+
+        #brightness_widget,
+    ]
+    
+    if qtile_extra:
+        pass
+        # to_return.append(GenericProgressBar(
+        # # widget.GenPollText(
+        #     update_interval=30,
+        #     name="brightnessctl"+str(brighnestlc[idx].display_id),
+        #     bar_text_func=brighnestlc[idx].get_brighness_text,
+        #     error_func=brighnestlc[idx].get_changed,
+        #     value_func=brighnestlc[idx].get_brightness_text_val,
+        #     mouse_callbacks={
+        #         "Button1": brighnestlc[idx].click,
+        #         "Button2": brighnestlc[idx].cancel,
+        #         "Button3": brighnestlc[idx].cancel,
+        #         "Button4": brighnestlc[idx].scroll_up,
+        #         "Button5": brighnestlc[idx].scroll_down,
+        #     },
+        #     bar_text_max_string = "Helligkeit: 100% ?",
+        # ))
+    else:
+        to_return.append(widget.GenPollText(
             update_interval=30,
             name="brightnessctl"+str(brighnestlc[idx].display_id),
             func=brighnestlc[idx].get_brighness_text,
@@ -196,8 +292,9 @@ def init_widget_list(idx) -> list:
                 "Button4": brighnestlc[idx].scroll_up,
                 "Button5": brighnestlc[idx].scroll_down,
             },
-        ),
-    ]
+            bar_text_max_string = "Helligkeit: 100% ?",
+        ))
+    
     if core_name == "wayland":
         to_return.extend([widget.StatusNotifier()])
     else:
@@ -220,6 +317,7 @@ def init_widget_list(idx) -> list:
         to_return.extend([systray]) 
     to_return.extend([
         #systray,
+        weather,
         vol,
         timerwidget,
         playerctl,
