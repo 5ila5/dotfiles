@@ -21,8 +21,10 @@ alias code='code --disable-gpu'
 #Translate
 alias transende="trans :de -s en"
 alias transesde="trans :de -s es"
+alias transfrde="trans :de -s fr"
 alias transdeen="trans :en -s de"
 alias transdees="trans :es -s de"
+alias transdefr="trans :fr -s de"
 
 #typos
 
