@@ -183,7 +183,7 @@ fd() {
 
 function pi()
 {
-    paru -Sl --color "" | awk '{print $2($4=="" ? "" : "*")}' | fzf --multi --preview 'echo {1} | tr -d "*" | xargs -r paru -Si' | tr -d "*" | xargs -ro paru -S
+    paru -Sl --color "never" | awk '{print $2($4=="" ? "" : "*")}' | fzf --multi --preview 'echo {1} | tr -d "*" | xargs -r paru -Si' | tr -d "*" | xargs -ro paru -S
 }
 function pd()
 {
