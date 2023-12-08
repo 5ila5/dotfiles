@@ -81,7 +81,7 @@ mouse = init_mouse()
 screens = init_screens()
 #logger.error(str(screens))
 if get_core_name() == "wayland":
-    qtile.core.set_keymap(layout="de")
+    qtile.core.set_keymap(layout="de", options="caps:escape,shift:both_capslock_cancel" )
     keys = wayland_specific_keys(keys)
     mouse = add_wayland_specific_mouse(mouse)
 else:
