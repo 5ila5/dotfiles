@@ -194,6 +194,13 @@ alias stopWG='doas systemctl stop wg-quick@wg0 && sleep 1 && echo "your new IP a
 alias stopWGlocal='doas systemctl stop wg-quick@wg0-local-only && sleep 1 && ping eis.lan.home -c 1 && echo "seems to not be disabled or you are at home" || echo "disabled succesfully"'
 
 
+# Personal aliases
+
+# waste collection
+
+alias wasteTest='source_folder=./custom_components/waste_collection_schedule/waste_collection_schedule/source; doc_folder=./doc; ics_folder=$doc_folder/ics/yaml/; testfile=./custom_components/waste_collection_schedule/waste_collection_schedule/test/test_sources.py; selected_file=$(ls -1 $source_folder $ics_folder | fzf); args="-lit"; [[ $# -ge 1 ]] && args=$1; if [[ "$selected_file" == *.py ]]; then echo $source_folder/$selected_file && selected_file=$(echo $selected_file | sed 's/\.py//') && echo $doc_folder/$selected_file.md && print -z $testfile -s $selected_file $args; elif [[ "$selected_file" == *.yaml ]]; then echo $ics_folder/$selected_file && selected_file=$(echo $selected_file | sed 's/\.yaml//') && echo $doc_folder/$selected_file.md && print -z $testfile -y $selected_file $args; fi'
+
+# UNI Shortcuts
 alias ki='cd ~/Nextcloud/uni/eiki/'
 alias cb='cd ~/Nextcloud/uni/eicb/'
 alias se='cd ~/Nextcloud/uni/se/'

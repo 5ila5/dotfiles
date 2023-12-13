@@ -13,6 +13,11 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 
 # merge in defaults and keymaps
 
+if [ "$SHELL" = "zsh" ]; then
+    [ -f "$HOME/.zshenv" ] && . "$HOME/.zshenv"
+fi
+
+
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
 fi
