@@ -113,9 +113,12 @@ def wayland_specific_keys(keys : typing.List[Key]) -> typing.List[Key]:
         Key([], "XF86MonBrightnessUp", lazy.spawn("brillo -q -u 150000 -A 3 ")),
         Key(["mod1", mod], "n", lazy.spawn("shutdnow now"), desc="shutdown now"),
         *[Key(['mod1', 'control'], f"F{n}", lazy.core.change_vt(n), desc=f"Switch to virtual terminal #{n}") for n in range(1, 7)],
+        Key([mod, "mod1"], "l", lazy.spawn("bash -c 'swaylock --image $(ls /usr/share/backgrounds/archlinux/* -d | shuf -n 1)'")),
     ])
     return keys
 
 def X11_specific_keys(keys : typing.List[Key]) -> typing.List[Key]:
-    keys.extend([])
+    keys.extend([
+        Key([mod, "mod1"], "l", lazy.spawn("betterlockscreen -l)")),
+    ])
     return keys
