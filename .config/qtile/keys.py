@@ -79,7 +79,11 @@ def init_keys() -> typing.List[Key]:
 def assigne_group_keys(keys : typing.List[Key],  groups: typing.List[Group]) -> typing.List[Key]:
     for i in groups:
         if i.name == "key":
-            keys.append(Key([mod], "i", lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name))),
+            keys.extend([
+                Key([mod], "i", lazy.group[i.name].toscreen(), desc="Switch to group {}".format(i.name)),
+                Key([mod, "shift"], "i", lazy.window.togroup(i.name, switch_group=False),
+                    desc="Switch to & move focused window to group {}".format(i.name))
+            ])
             continue
         
         keys.extend([

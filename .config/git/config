@@ -19,5 +19,10 @@
 	checkotu = checkout
 	chekocut = checkout
 	m = checkout master
+	pushf = push --force-with-lease
 [safe]
 	directory = /opt/flutter
+[rerere]
+	enabled = true
+[maintenance]
+	repo = /home/silas/Documents/coding/python/hacs_waste_collection_schedule
