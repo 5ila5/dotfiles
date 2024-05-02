@@ -90,8 +90,11 @@ fi
 #shopt -s cdspell
 #shopt -s dirspell
 
-if command -v neofetch > /dev/null; then 
-neofetch
+
+if command -v fastfetch > /dev/null; then
+				fastfetch
+elif command -v neofetch > /dev/null; then 
+				neofetch
 fi
 #starship
 if command -v starship > /dev/null; then
