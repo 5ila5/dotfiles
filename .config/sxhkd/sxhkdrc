@@ -87,5 +87,10 @@ Print
 #f12
 XF86AudioMedia 
 
+
+#X
+XF86Launch7
+  systemctl suspend
+
 mod4 + alt + l
 	betterlockscreen -l

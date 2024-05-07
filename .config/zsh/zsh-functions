@@ -191,6 +191,11 @@ function pd()
 }
 
 
+function fkill()
+{
+    ps auxh | fzf -m --reverse --tac --bind='ctrl-r:reload(ps auxh)' --header=$'Press CTRL-R to reload\n' | awk '{print $2}' | xargs -r kill -"${1:-9}"
+}
+
 function torWithExit() {
 				local new_code="$1"
 				local file_path="/home/silas/.local/share/torbrowser/tbb/x86_64/tor-browser/Browser/TorBrowser/Data/Tor/torrc"

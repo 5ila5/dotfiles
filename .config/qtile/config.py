@@ -84,6 +84,7 @@ if get_core_name() == "wayland":
     qtile.core.set_keymap(layout="de", options="caps:escape,shift:both_capslock_cancel" )
     keys = wayland_specific_keys(keys)
     mouse = add_wayland_specific_mouse(mouse)
+    os.environ["XDG_CURRENT_DESKTOP"] = "qtile:wlroots"
 else:
     mouse = add_X11_specific_mouse(mouse)
     keys = X11_specific_keys(keys)

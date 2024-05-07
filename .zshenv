@@ -78,7 +78,9 @@ fi
 
 
 PATH="$PATH:/opt/resolve/bin:/usr/share/scala3/bin"
+PATH="$PATH:~/.local/share/flutter/bin/"
 PATH="$PATH$(\find ~/.local/script/ -type d -printf ':%p')"
+
 
 # set default editor based if installed and prioritised
 for editor in nvim vim vi joe nano; do
