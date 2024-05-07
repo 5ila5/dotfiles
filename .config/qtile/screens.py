@@ -4,26 +4,30 @@ from brightnessctl import Brightnessctl
 from libqtile.config import Screen
 from libqtile import bar, layout
 from libqtile.log_utils import logger
+
+import get_core
+core_name = get_core.get_core_name()
+qtile_extra = False
 try:
-    from qtile_extras import widget
-    # from qtile_extras.widget import PulseVolume
-    # from generic_progress_bar_widget import GenericProgressBar
-    from qtile_extras.widget.mixins import ExtendedPopupMixin, ProgressBarMixin, TooltipMixin
-    qtile_extra = True
+    if core_name == "wayland":
+        from qtile_extras import widget
+        # from qtile_extras.widget import PulseVolume
+        # from generic_progress_bar_widget import GenericProgressBar
+        from qtile_extras.widget.mixins import ExtendedPopupMixin, ProgressBarMixin, TooltipMixin
+        qtile_extra = True
+    else:
+        from libqtile import widget
 except ImportError as e:
     from libqtile import widget
-    qtile_extra = False
     logger.warning("could not import all or some qtiles_extras functunallity falling back to default widgets", e)
 
 from libqtile.lazy import lazy
-import get_core
 import typing
 import datetime
 import timer
 from pc_type import laptop
 from mywidgets.playerctl.playerctl import Playerctl
 
-core_name = get_core.get_core_name()
 
 
 colors = [["#282c34", "#282c34"],
@@ -224,9 +228,11 @@ def bottomBar():
 systray = widget.Systray()
 brighnestlc = [] # [Brightnessctl(id) for id in range(1,4)]
 
-def init_widget_list(idx) -> list:
+if not qtile_extra:
+    brighnestlc = [Brightnessctl(id) for id in range(1,4)]
 
-    
+
+def init_widget_list(idx) -> list:    
     to_return = [
         # pVol,
         widget.Spacer(10),
@@ -283,7 +289,7 @@ def init_widget_list(idx) -> list:
     else:
         to_return.append(widget.GenPollText(
             update_interval=30,
-            name="brightnessctl"+str(brighnestlc[idx].display_id),
+            name="brightnessctlc"+str(brighnestlc[idx].display_id),
             func=brighnestlc[idx].get_brighness_text,
             mouse_callbacks={
                 "Button1": brighnestlc[idx].click,
