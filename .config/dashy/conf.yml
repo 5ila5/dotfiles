@@ -84,7 +84,7 @@ sections:
     items:
       - title: HomeAssistant
         icon: si-homeassistant
-        url: http://eis.lan.home:8123
+        url: https://eis.lan.home:8123
         target: newtab
         statusCheck: true
         id: 0_858_homeassistant
