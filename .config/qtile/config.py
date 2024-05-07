@@ -67,6 +67,12 @@ from get_core import get_core_name
 from groups import init_groups
 from mouse import init_mouse, add_wayland_specific_mouse, add_X11_specific_mouse
 
+
+from libqtile.backend.wayland import InputConfig
+wl_input_rules = {
+    "type:touchpad": InputConfig(tap_button_map="lrm", middle_emulation=True, tap=True),
+}
+
 @hook.subscribe.startup_once
 def startup():
     autostart.autostart()
@@ -84,6 +90,7 @@ if get_core_name() == "wayland":
     qtile.core.set_keymap(layout="de", options="caps:escape,shift:both_capslock_cancel" )
     keys = wayland_specific_keys(keys)
     mouse = add_wayland_specific_mouse(mouse)
+
 else:
     mouse = add_X11_specific_mouse(mouse)
     keys = X11_specific_keys(keys)
