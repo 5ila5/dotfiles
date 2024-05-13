@@ -1,7 +1,9 @@
+[include]
+  path = singkeyconfig
+
 [user]
 	name = 5ila5
 	email = 5ila5@users.noreply.github.com
-	signingkey = B89F3132B6E39FB7
 [core]
 	autocrlf = input
 [filter "gitignore"]
