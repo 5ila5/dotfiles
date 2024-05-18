@@ -199,15 +199,22 @@ alias stopWGlocal='doas systemctl stop wg-quick@wg0-local-only && sleep 1 && pin
 
 # waste collection
 
-alias wasteTest='source_folder=./custom_components/waste_collection_schedule/waste_collection_schedule/source; doc_folder=./doc; ics_folder=$doc_folder/ics/yaml/; testfile=./custom_components/waste_collection_schedule/waste_collection_schedule/test/test_sources.py; selected_file=$(ls -1 $source_folder $ics_folder | fzf); args="-lit"; [[ $# -ge 1 ]] && args=$1; if [[ "$selected_file" == *.py ]]; then echo $source_folder/$selected_file && selected_file=$(echo $selected_file | sed 's/\.py//') && echo $doc_folder/$selected_file.md && print -z $testfile -s $selected_file $args; elif [[ "$selected_file" == *.yaml ]]; then echo $ics_folder/$selected_file && selected_file=$(echo $selected_file | sed 's/\.yaml//') && echo $doc_folder/$selected_file.md && print -z $testfile -y $selected_file $args; fi'
+alias wasteVars='source_folder=custom_components/waste_collection_schedule/waste_collection_schedule/source; doc_folder=doc/source; ics_folder=doc/ics/yaml/; testfile=./custom_components/waste_collection_schedule/waste_collection_schedule/test/test_sources.py;'
+
+alias wasteTest='wasteVars; selected_file=$(ls -1 $source_folder $ics_folder | fzf); args="-lit"; [[ $# -ge 1 ]] && args=$1; if [[ "$selected_file" == *.py ]]; then echo $source_folder/$selected_file && selected_file=$(echo $selected_file | sed 's/\.py//') && echo $doc_folder/$selected_file.md && print -z $testfile -s $selected_file $args; elif [[ "$selected_file" == *.yaml ]]; then echo $ics_folder/$selected_file && selected_file=$(echo $selected_file | sed 's/\.yaml//') && echo $doc_folder/$selected_file.md && print -z $testfile -y $selected_file $args; fi'
+
+alias wastePre='wasteVars; selected_file=$(ls -1 $source_folder $ics_folder | fzf); [[ $# -ge 1 ]] && args=$1; if [[ "$selected_file" == *.py ]]; then echo $source_folder/$selected_file && selected_file=$(echo $selected_file | sed 's/\.py//') && echo $doc_folder/$selected_file.md && print -z pre-commit run --files $source_folder/$selected_file.py $doc_folder/$selected_file.md; elif [[ "$selected_file" == *.yaml ]]; then echo $ics_folder/$selected_file && selected_file=$(echo $selected_file | sed 's/\.yaml//') && echo $doc_folder/$selected_file.md && print -z pre-commit run --files $doc_folder/$selected_file.md $ics_folder/$selected_file.yaml; fi'
+
 
 # UNI Shortcuts
-alias ki='cd ~/Nextcloud/uni/eiki/'
-alias cb='cd ~/Nextcloud/uni/eicb/'
-alias se='cd ~/Nextcloud/uni/se/'
-alias css='cd ~/Nextcloud/uni/css/'
-alias moses='cd ~/Nextcloud/uni/moses/'
-alias vc='cd ~/Nextcloud/uni/vc/'
+alias cnuvs='cd ~/Nextcloud/uni/cnuvs/'
+alias cn=cnuvs
+alias cb='cd ~/Nextcloud/uni/cb2/'
+alias infman='cd ~/Nextcloud/uni/infman/'
+alias inf=infman
+alias qc='cd ~/Nextcloud/uni/qc/'
+alias rl='cd ~/Nextcloud/uni/rl/'
+alias sg='cd ~/Nextcloud/uni/sg/'
 
 alias fs1='cd ~/Nextcloud/uni/fs1/'
 alias fs2='cd ~/Nextcloud/uni/fs2/'
