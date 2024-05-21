@@ -1,7 +1,7 @@
 import rolloctl
 from libqtile import qtile
 from brightnessctl import Brightnessctl 
-from libqtile.config import Screen
+from libqtile.config import Screen, Match
 from libqtile import bar, layout
 from libqtile.log_utils import logger
 
@@ -176,7 +176,30 @@ rollo = widget.GenPollText(
 )
 
 
-
+def init_floating_layout():
+    return layout.Floating(
+        float_rules=[
+            # *layout.Floating.default_float_rules,
+            Match(wm_type='menu'),
+            Match(wm_class='confirm'),
+            Match(wm_class='dialog'),
+            Match(wm_class='download'),
+            Match(wm_class='error'),
+            Match(wm_class='file_progress'),
+            Match(wm_class='notification'),
+            Match(wm_class='splash'),
+            Match(wm_class='toolbar'),
+            Match(wm_class='confirmreset'),
+            Match(wm_class='makebranch'),
+            Match(wm_class='maketag'),
+            Match(title='branchdialog'),
+            Match(title='pinentry'),
+            Match(wm_class='ssh-askpass'),
+            Match(title='Xephyr on :1.0 (ctrl+shift grabs mouse and keyboard)'),
+            Match(title='Bitwarden'),
+            Match(wm_class='nextcloud'),
+            Match(wm_class='system-config-printer'),
+    ]) 
 
 
 def init_layouts()->list:

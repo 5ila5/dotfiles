@@ -62,7 +62,7 @@ terminal = "terminator"
 # My imports
 import autostart 
 from keys import init_keys, assigne_group_keys, wayland_specific_keys, X11_specific_keys
-from screens import  init_layouts, init_widget_defaults, init_screens
+from screens import  init_layouts, init_floating_layout, init_widget_defaults, init_screens
 from get_core import get_core_name
 from groups import init_groups
 from mouse import init_mouse, add_wayland_specific_mouse, add_X11_specific_mouse
@@ -81,6 +81,7 @@ keys = init_keys()
 groups = init_groups()
 keys = assigne_group_keys(keys, groups)
 layouts = init_layouts()
+floating_layout = init_floating_layout()
 widget_defaults = init_widget_defaults()
 extension_defaults = widget_defaults.copy()
 mouse = init_mouse()
@@ -102,16 +103,7 @@ dgroups_app_rules = []  # type: List
 follow_mouse_focus = False
 bring_front_click = True 
 cursor_warp = False
-floating_layout = layout.Floating(float_rules=[
-    # Run the utility of `xprop` to see the wm class and name of an X client.
-    *layout.Floating.default_float_rules,
-    Match(wm_class='confirmreset'),  # gitk
-    Match(wm_class='makebranch'),  # gitk
-    Match(wm_class='maketag'),  # gitk
-    Match(wm_class='ssh-askpass'),  # ssh-askpass
-    Match(title='branchdialog'),  # gitk
-    Match(title='pinentry'),  # GPG key password entry
-])
+
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
