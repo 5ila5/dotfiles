@@ -27,3 +27,4 @@ def autostart():
         home = os.path.expanduser(currentDir+'autostart_laptop.sh')
     subprocess.run([home])
     
+    subprocess.run(["dbus-update-activation-environment","--systemd", "WAYLAND_DISPLAY", "XDG_CURRENT_DESKTOP"])

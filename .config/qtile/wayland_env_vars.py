@@ -15,8 +15,8 @@ WAYLAND_ENV_VARS = {
     "XDG_SESSION_TYPE" : "wayland",
 
     "_JAVA_AWT_WM_NONREPARENTING" : "1",
-    "XDG_CURRENT_DESKTOP" : "sway",
-    "XDG_SESSION_DESKTOP" : "sway",
+    "XDG_CURRENT_DESKTOP" : "qtile",
+    "XDG_SESSION_DESKTOP" : "qtile",
     "XCURSOR_PATH" : "/home/silas/.local/share/icons",    
 
 }

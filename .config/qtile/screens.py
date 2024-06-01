@@ -179,7 +179,7 @@ rollo = widget.GenPollText(
 def init_floating_layout():
     return layout.Floating(
         float_rules=[
-            # *layout.Floating.default_float_rules,
+            *layout.Floating.default_float_rules,
             Match(wm_type='menu'),
             Match(wm_class='confirm'),
             Match(wm_class='dialog'),
