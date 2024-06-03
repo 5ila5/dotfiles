@@ -199,7 +199,8 @@ def init_floating_layout():
             Match(title='Bitwarden'),
             Match(wm_class='nextcloud'),
             Match(wm_class='system-config-printer'),
-    ]) 
+            Match(title='flameshot'),
+        ])
 
 
 def init_layouts()->list:

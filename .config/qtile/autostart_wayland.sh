@@ -13,7 +13,7 @@ udiskie --tray &
 numlockx &
 nextcloud --background &
 # flameshot &
-
+XDG_CURRENT_DESKTOP="sway dbus-run-session qtile" flameshot
 
 
 # sleep 3 
