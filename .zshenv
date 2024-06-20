@@ -99,3 +99,7 @@ export TEXMFHOME=$XDG_CONFIG_HOME/texmf
 export TEXMFVAR=$XDG_CONFIG_HOME/texlive/texmf-var
 export TEXMFVAR=$XDG_CONFIG_HOME/texlive/texmf-config
 
+
+# ssh-agent for the ssh-agent.service user serverice
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+

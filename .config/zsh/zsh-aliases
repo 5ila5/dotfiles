@@ -212,7 +212,7 @@ alias cn=cnuvs
 alias cb='cd ~/Nextcloud/uni/cb2/'
 alias infman='cd ~/Nextcloud/uni/infman/'
 alias inf=infman
-alias qc='cd ~/Nextcloud/uni/qc/'
+alias qc='cd ~/Nextcloud/uni/QC/'
 alias rl='cd ~/Nextcloud/uni/rl/'
 alias sg='cd ~/Nextcloud/uni/sg/'
 
@@ -220,3 +220,8 @@ alias fs1='cd ~/Nextcloud/uni/fs1/'
 alias fs2='cd ~/Nextcloud/uni/fs2/'
 
 alias dark='xset dpms force off'
+
+
+# COLOR STUFF 
+alias grep='\grep --color=auto'
+alias ip='\ip --color=auto'
