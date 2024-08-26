@@ -140,6 +140,28 @@ function sw() {
 #bind '"\C-r": "\C-x1\e^\er"'
 #bind -x '"\C-x1": __fzf_history';
 
+
+uploadfile() {
+  if [ -z "$1" ]; then
+    echo "Usage: uploadfile <file>"
+    return 1
+  fi
+
+  if [ ! -f "$1" ]; then
+    echo "File not found: $1"
+    return 1
+  fi
+
+  response=$(curl -F "file=@$1" https://0x0.st)
+  if [ $? -eq 0 ]; then
+    echo "File uploaded successfully: $response"
+  else
+    echo "Failed to upload file"
+  fi
+}
+
+
+
 __fzf_history () {
 				__ehc $(history | fzf --tac --tiebreak=index | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
 }
