@@ -54,7 +54,7 @@ clipmanager &
 sxhkd &
 picom &
 udiskie --tray &
-numlockx &
+# numlockx &
 nextcloud --background &
 flameshot & 
 #nitrogen --restore &
