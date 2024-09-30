@@ -94,6 +94,8 @@ fi
 for file in $@; do
     case "$file" in
     *.zip) unzip "$file" ;;
+    *.xapk) unzip "$file" ;;
+    *.apk) unzip "$file" ;;
     *.xz) unxz "$file" ;;
     *.tar.gz) tar xzvf "$file" ;;
     *.tar.bz2) tar xjvf "$file" ;;
