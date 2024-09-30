@@ -22,6 +22,8 @@
 	chekocut = checkout
 	m = checkout master
 	pushf = push --force-with-lease
+	swtich = switch
+	swithc = switch
 [safe]
 	directory = /opt/flutter
 [rerere]
