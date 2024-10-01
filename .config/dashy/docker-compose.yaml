@@ -15,7 +15,7 @@ services:
       traefik.http.routers.dashy.entrypoints: web
       #traefik.http.routers.dashy.rule: Host( `localhost` )
       traefik.http.routers.dashy.rule: Host( `dashy.localhost` )||(Host( `localhost` ) && PathPrefix( `/dashy` )) 
-      traefik.http.services.dashy.loadbalancer.server.port: 80
+      traefik.http.services.dashy.loadbalancer.server.port: 8080
       traefik.http.middlewares.dashy-stripprefix.stripprefix.prefixes: /dashy
       traefik.http.routers.dashy.middlewares: dashy-stripprefix@docker
 
@@ -31,13 +31,13 @@ services:
 
     # Pass in your config file below, by specifying the path on your host machine
     volumes:
-      - ./conf.yml:/app/public/conf.yml
+      - ./conf.yml:/app/user-data/conf.yml
       - ./systemMonitor.yml:/app/public/systemMonitor.yml
       # - /path/to/item-icons:/app/public/item-icons
 
     # Set port that web service will be served on. Keep container port as 80
-    #iports:
-    #  - 4000:80
+    ports:
+      - 4000:8080
 
     # Set any environmental variables
     environment:
