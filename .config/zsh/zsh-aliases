@@ -178,6 +178,7 @@ alias gr='git remote'
 alias gsp='git stash && git pull && git stash pop' 
 alias gch='git checkout'
 alias gchb='git checkout -b'
+alias gb='git branch'
 # vim
 if command -v nvim > /dev/null
 then

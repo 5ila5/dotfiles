@@ -24,6 +24,7 @@
 	pushf = push --force-with-lease
 	swtich = switch
 	swithc = switch
+	b = branch
 [safe]
 	directory = /opt/flutter
 [rerere]
