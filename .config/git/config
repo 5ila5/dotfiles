@@ -20,11 +20,13 @@
 	checkuot = checkout
 	checkotu = checkout
 	chekocut = checkout
-	m = checkout master
-	pushf = push --force-with-lease
+	m = "!f() { if git rev-parse --verify master >/dev/null 2>&1; then git switch master; elif git rev-parse --verify main >/dev/null 2>&1; then git switch main; else echo \"Neither master nor main branch exists\"; fi; }; f"
+  pushf = push --force-with-lease
+  pf = push --force-with-lease
 	swtich = switch
 	swithc = switch
 	b = branch
+	swicth = switch
 [safe]
 	directory = /opt/flutter
 [rerere]
