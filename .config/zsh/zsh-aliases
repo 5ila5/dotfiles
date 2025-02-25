@@ -74,7 +74,9 @@ fi
 
 #alias +x='chmod +x'
 #alias cleanHistory="awk '!x[\$0]++' < ~/.bash_history  > ~/.bash_history_c && \mv ~/.bash_history_c ~/.bash_history"
-alias cShutdownUpdate="doas -- sh -c 'yes | paru -Scc && paru -Syu && shutdown now'"
+
+alias sysupdate="paru -Pw; read -q \"REPLY?continue [y/n]\" && paru -Syu --batchinstall --combinedupgrade && flatpak update --assumeyes"
+alias shutdownUpdate="sysupdate && shutdown now"
 #!/bin/bash
 
 #no category
@@ -147,7 +149,6 @@ alias spsyu='paru -Syu'
 alias pu='paru -Syu'
 alias sp='paru'
 alias p='paru'
-alias shutdownUpdate='paru -Syu && shutdown now'
 fi
 #cd/mkdir
 alias ..='cd ..'
