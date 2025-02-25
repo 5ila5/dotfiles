@@ -8,7 +8,7 @@ services:
       - "80:80"
       - "443:443"
       # (Optional) Expose Dashboard
-      - "8080:8080"  # Don't do this in production!
+      #- "8080:8080"  # Don't do this in production!
     volumes:
       - ./log:/var/log/traefik/
       - /etc/traefik:/etc/traefik
