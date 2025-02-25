@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import os
 import datetime
-
+import shutil
 
 def main():
     curr_folder= os.path.dirname(os.path.realpath(__file__))+"/"
@@ -20,7 +20,7 @@ def main():
         mod_date = datetime.datetime.fromtimestamp(os.path.getmtime(curr_folder+file))
         diffrence = datetime.datetime.now() - mod_date
         if diffrence.days > 7:
-            os.rename(curr_folder+file,curr_folder+"old/"+file)
+            shutil.move(curr_folder+file,curr_folder+"old/"+file)
 
 if __name__ == "__main__":
     main()
