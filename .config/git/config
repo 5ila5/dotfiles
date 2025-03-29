@@ -27,6 +27,7 @@
 	swithc = switch
 	b = branch
 	swicth = switch
+	commti = commit
 [safe]
 	directory = /opt/flutter
 [rerere]
