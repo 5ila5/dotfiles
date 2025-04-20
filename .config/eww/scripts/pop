@@ -1,0 +1,93 @@
+#!/bin/bash
+
+calendar() {
+    LOCK_FILE="$HOME/.cache/eww-calendar_$1.lock"
+    EWW_BIN="eww"
+    
+    run() {
+        ${EWW_BIN} open calendar_"$1"
+    }
+    
+    # Open widgets
+    if [[ ! -f "$LOCK_FILE" ]]; then
+        ${EWW_BIN} close system music_win audio_ctl
+        touch "$LOCK_FILE"
+        run "$1" && echo "ok good!"
+    else
+        ${EWW_BIN} close calendar_"$1"
+        rm "$LOCK_FILE" && echo "closed"
+    fi
+}
+
+
+system() {
+    LOCK_FILE_MEM="$HOME/.cache/eww-system_$1.lock"
+    EWW_BIN="eww"
+    
+    run() {
+        ${EWW_BIN} open system_"$1"
+    }
+    
+    # Open widgets
+    if [[ ! -f "$LOCK_FILE_MEM" ]]; then
+        ${EWW_BIN} close calendar music_win audio_ctl
+        touch "$LOCK_FILE_MEM"
+        run "$1" && echo "ok good!"
+    else
+        ${EWW_BIN} close system_"$1"
+        rm "$LOCK_FILE_MEM" && echo "closed"
+    fi
+}
+
+
+music() {
+    LOCK_FILE_SONG="$HOME/.cache/eww-song_$1.lock"
+    EWW_BIN="eww"
+    
+    run() {
+        ${EWW_BIN} open music_win_"$1"
+    }
+    
+    # Open widgets
+    if [[ ! -f "$LOCK_FILE_SONG" ]]; then
+        ${EWW_BIN} close system calendar
+        touch "$LOCK_FILE_SONG"
+        run "$1" && echo "ok good!"
+    else
+        ${EWW_BIN} close music_win_"$1"
+        rm "$LOCK_FILE_SONG" && echo "closed"
+    fi
+}
+
+
+
+audio() {
+    LOCK_FILE_AUDIO="$HOME/.cache/eww-audio_$1.lock"
+    EWW_BIN="eww"
+    
+    run() {
+        ${EWW_BIN} open audio_ctl_"$1"
+    }
+    
+    # Open widgets
+    if [[ ! -f "$LOCK_FILE_AUDIO" ]]; then
+        ${EWW_BIN} close system calendar music
+        touch "$LOCK_FILE_AUDIO"
+        run "$1" && echo "ok good!"
+    else
+        ${EWW_BIN} close audio_ctl_"$1"
+        rm "$LOCK_FILE_AUDIO" && echo "closed"
+    fi
+}
+
+monitor=$1
+
+if [ "$2" = "calendar" ]; then
+    calendar "$monitor"
+    elif [ "$2" = "system" ]; then
+    system "$monitor"
+    elif [ "$2" = "music" ]; then
+    music "$monitor"
+    elif [ "$2" = "audio" ]; then
+    audio "$monitor"
+fi

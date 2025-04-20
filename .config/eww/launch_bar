@@ -1,0 +1,28 @@
+#!/bin/bash
+
+## Files and cmd
+EWW="eww"
+MAX_MON=3
+
+## Run eww daemon if not running already
+if [[ ! $(pidof eww) ]]; then
+  ${EWW} daemon
+  echo "starting eww daemon"
+  sleep 1
+fi
+
+## Open widgets
+run_eww() {
+  if [[ $(pidof Hyprland) ]]; then
+    monitors=$(hyprctl monitors -j | jq "length")
+  elif [[ $(pidof qtile) ]]; then
+    monitors=$(python -c "print(len($(qtile cmd-obj -o cmd -f get_screens | tr -d '\n  ')))")
+  fi
+  monitors=$((monitors < MAX_MON ? monitors : MAX_MON))
+  for i in $(seq 0 $(($monitors - 1))); do
+    ${EWW} open bar_mon_$i
+  done
+}
+
+## Launch or close widgets accordingly
+run_eww

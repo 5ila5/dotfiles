@@ -1,0 +1,32 @@
+#!/bin/sh
+MAX_MON=3
+
+workspaces() {
+
+  monitor_id="$1"
+  if [ -z "$monitor_id" ]; then
+    echo "Usage: $0 <monitor_id>"
+    exit 1
+  fi
+  active_map=$(hyprctl monitors -j | jq -c '[.[] | {(.id | tostring): .activeWorkspace.name}] | add')
+
+  # hyprctl workspaces -j | jq -c #tr -d '\n ' #| jq 'map({key: .name, value: .} ) | from_entries'
+  hyprctl workspaces -j | jq --argjson active_map "$active_map" --arg monitor_id "$monitor_id" '
+    map(. + {
+        active: ($active_map[$monitor_id | tostring] == .name),
+        active_on_other: (.name | IN($active_map[]))
+    })|sort_by(.id) ' -c
+
+}
+workspaces $1
+
+socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do
+  # echo "$line";
+  # if line starts with moveworkspace, activewindow, movewindow, workspace
+  case "$line" in
+  moveworkspace* | activewindow* | movewindow* | workspace*)
+    workspaces $1
+    ;;
+  esac
+
+done

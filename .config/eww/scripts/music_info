@@ -1,0 +1,190 @@
+#!/bin/bash
+# scripts by adi1090x
+
+## Get data
+STATUS="$(playerctl -p playerctld status)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+## Get status
+get_status() {
+    if [[ $STATUS == "Playing" ]]; then
+        echo "⏸"
+        elif [[ $STATUS == "Paused" ]]; then
+        echo "⏵"
+    else
+        echo "⏵⏹"
+    fi
+}
+
+## Get song
+get_song() {
+    song=$(playerctl -p playerctld metadata --format '{{title}}')
+    if [[ -z "$song" ]]; then
+        echo "Offline"
+    else
+        echo "$song"
+    fi
+}
+
+## Get artist
+get_artist() {
+    artist=$(playerctl -p playerctld metadata --format '{{artist}}')
+    if [[ -z "$artist" ]]; then
+        echo ""
+    else
+        echo "$artist"
+    fi
+}
+
+## Get time
+get_time() {
+    position=$(playerctl -p playerctld position 2>/dev/null || echo 0)
+    length=$(playerctl -p playerctld metadata mpris:length 2>/dev/null || echo 1)
+    
+    # Handle mpris:length in microseconds
+    if [[ $length -gt 1000000 ]]; then
+        length=$(echo "$length / 1000000" | bc -l)
+    fi
+    
+    # Calculate percentage
+    percentage=$(echo "scale=0; ($position * 100) / $length" | bc)
+    echo $percentage
+}
+get_ctime() {
+    
+    # Get position in seconds
+    position=$(playerctl -p playerctld position 2>/dev/null || echo 0)
+    
+    # Convert to MM:SS format
+    minutes=$(printf "%d" "$(echo "$position/60" | bc)")
+    seconds=$(printf "%02d" "$(echo "$position%60" | bc)")
+    
+    if [[ -z "$position" || "$position" == "0" ]]; then
+        echo "0:00"
+    else
+        echo "$minutes:$seconds"
+    fi
+}
+get_ttime() {
+    # Get length in microseconds and convert to seconds
+    length=$(playerctl -p playerctld metadata mpris:length 2>/dev/null || echo 0)
+    
+    if [[ $length -gt 1000000 ]]; then
+        length=$(echo "$length / 1000000" | bc -l)
+    fi
+    
+    # Convert to MM:SS format
+    minutes=$(printf "%d" "$(echo "$length/60" | bc)")
+    seconds=$(printf "%02d" "$(echo "$length%60" | bc)")
+    
+    if [[ -z "$length" || "$length" == "0" ]]; then
+        echo "0:00"
+    else
+        echo "$minutes:$seconds"
+    fi
+}
+
+## Get cover
+get_cover() {
+    cover_url=$(playerctl -p playerctld metadata mpris:artUrl)
+    if [[ -z "$cover_url" ]]; then
+        cover_url=$(playerctl -p playerctld metadata xesam:artUrl)
+    fi
+    
+    # Check if $cover_url is empty
+    if [[ -z "$cover_url" ]]; then
+        echo "images/music.png"
+        return
+    fi
+    
+    # Check if $SCRIPT_DIR/artwork_cache folder exists
+    if [ ! -d "$SCRIPT_DIR/artwork_cache" ]; then
+        mkdir -p "$SCRIPT_DIR/artwork_cache"
+    fi
+    
+    hash_name=$(echo "$cover_url" | md5sum | cut -d' ' -f1)
+    
+    # Check if the file with this hash and a known extension already exists
+    for ext in jpg png gif webp; do
+        cached_file="$SCRIPT_DIR/artwork_cache/$hash_name.$ext"
+        if [[ -f "$cached_file" ]]; then
+            echo "$cached_file"
+            return
+        fi
+    done
+    
+    # If not cached, download and determine type
+    temp_file="$SCRIPT_DIR/artwork_cache/$hash_name.tmp"
+    curl -s "$cover_url" -o "$temp_file"
+    
+    # Determine MIME type and appropriate extension
+    mime_type=$(file --mime-type -b "$temp_file")
+    case "$mime_type" in
+        image/jpeg) ext="jpg" ;;
+        image/png)  ext="png" ;;
+        image/gif)  ext="gif" ;;
+        image/webp) ext="webp" ;;
+        *) ext="" ;;
+    esac
+    
+    # Handle unsupported or non-image cases
+    if [[ -z "$ext" ]]; then
+        rm -f "$temp_file"
+        echo "images/music.png"
+        return
+    fi
+    
+    final_file="$SCRIPT_DIR/artwork_cache/$hash_name.$ext"
+    mv "$temp_file" "$final_file"
+    echo "$final_file"
+}
+
+go_to_percentage() {
+    percentage=$1
+    echo $1 > test.txt
+    
+    if [[ $percentage -lt 0 || $percentage -gt 100 ]]; then
+        echo "Invalid percentage. Must be between 0 and 100."
+        return
+    fi
+    
+    # Get length in seconds
+    length=$(playerctl -p playerctld metadata mpris:length 2>/dev/null || echo 1)
+    
+    # Handle mpris:length in microseconds
+    if [[ $length -gt 1000000 ]]; then
+        length=$(echo "$length / 1000000" | bc -l)
+    fi
+    
+    # Calculate new position based on percentage
+    new_position=$(echo "$length * ($percentage / 100)" | bc)
+    
+    # Set the new position
+    playerctl -p playerctld position "$new_position"
+}
+
+## Execute accordingly
+if [[ "$1" == "--song" ]]; then
+    get_song
+    elif [[ "$1" == "--artist" ]]; then
+    get_artist
+    elif [[ "$1" == "--status" ]]; then
+    get_status
+    elif [[ "$1" == "--time" ]]; then
+    get_time
+    elif [[ "$1" == "--ctime" ]]; then
+    get_ctime
+    elif [[ "$1" == "--ttime" ]]; then
+    get_ttime
+    elif [[ "$1" == "--cover" ]]; then
+    get_cover
+    elif [[ "$1" == "--toggle" ]]; then
+    playerctl -p playerctld play-pause
+    elif [[ "$1" == "--next" ]]; then
+    { playerctl -p playerctld next; get_cover; }
+    elif [[ "$1" == "--prev" ]]; then
+    { playerctl -p playerctld previous; get_cover; }
+    elif [[ "$1" == "--pos" ]]; then
+    go_to_percentage $2
+    
+fi
