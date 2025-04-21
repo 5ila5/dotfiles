@@ -147,27 +147,49 @@ scale trough {
 }
 
 .works {
-font-size: 27px;
-font-weight: normal;
-margin: 5px 0px 0px 20px;
-background-color: #0f0f17;
+    font-size: 27px; // Keep your font size
+    font-weight: normal;
+    margin: 5px 0px 0px 20px; // Keep your margin
+    background-color: #0f0f17; // Keep your background
+    padding: 0 1px; // Minimal horizontal padding for container
 }
 
 .ws_button {
-    color:#ffffff;
+    color: #ffffff;     // Default: Occupied, Inactive Monitor (White text)
+    margin: 0 2px;      // Reduced spacing between buttons
+    padding: 0 4px;     // Reduced padding inside button
+    border-top: 0px solid transparent;
+    border-bottom: 0px solid transparent;
+    border-left: 1px solid transparent; // Default transparent side borders
+    border-right: 1px solid transparent;
+    min-width: 20px;    // Reduced minimum width
+    transition: color 0.3s ease, border-color 0.3s ease; // Smooth transitions
 }
 
-.ws_button.active, .ws_button.empty.active {
-    color: rgb(254, 174, 174)
-}
-
-.ws_button.active_on_other {
-    color: #7e6a05
-}
-
+/* Empty Workspace (Inactive Monitor) */
 .ws_button.empty {
-    color:#a1bdce;
+    color: #888888; // Grey text
+}
 
+/* Active Workspace on Another Monitor */
+.ws_button.active_on_other {
+    // Apply thicker grey border ONLY to the sides
+    border-left: 4px solid #888888;
+    border-right: 4px solid #888888;
+}
+/* Text color for active_on_other depends on whether it's empty */
+.ws_button.active_on_other:not(.empty) {
+    color: #ffffff; // White text if occupied and active elsewhere
+}
+.ws_button.empty.active_on_other {
+    color: #888888; // Grey text if empty and active elsewhere
+}
+
+
+/* Active Workspace (Current Monitor) */
+.ws_button.active {
+    border-left: 4px solid #81a1c1;
+    border-right: 4px solid #81a1c1;
 }
 
 
@@ -337,7 +359,7 @@ color: #bfc9db;
 	background-position: center;
 	min-height: 100px;
     box-shadow: 5px 5px 5px 5px #06060b;
-	min-width: 170px;
+	min-width: 100px;
 	margin: 20px;
 	border-radius: 20px;
 }
