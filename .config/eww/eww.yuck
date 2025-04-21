@@ -4,7 +4,7 @@
 ;; Variables
 (defpoll clock_time :interval "5s" "date +\%H")
 (defpoll clock_minute :interval "5s" "date +\%M")
-(defpoll clock_date :interval "10h" "date '+%m.%d'")
+(defpoll clock_date :interval "10h" "date '+%d.%m'")
 (defpoll volume_percent :interval "3s" :initial "101" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
 (defpoll mic_percent :interval "3s" :initial "101" "amixer -D pulse sget Capture | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
 ; (defpoll brightness_percent :interval "5s" "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
@@ -163,19 +163,22 @@
 
 
 ;;  Music
-(defwidget music [monitor_id]
+(defwidget music [monitor_id small]
   (eventbox :onhover "${eww} update music_reveal=true"
     :onhoverlost "${eww} update music_reveal=false"
     (box :class "module-2" :orientation "h" :space-evenly "false" :vexpand "false" :hexpand "false"
       (box :class "song_cover_art" :vexpand "false" :hexpand "false" :style "background-image: url('${cover_art}');")
-      (button :class "song" :wrap "true" :onclick "./scripts/pop ${monitor_id} music" song)
+      (button :class "song" :wrap "true" :onclick "./scripts/pop ${monitor_id} music" {small? "" : song})
       (revealer :transition "slideright"
         :reveal music_reveal
         :duration "350ms"
         (box :vexpand "false" :hexpand "false" :oreintation "h"
           (button :class "song_btn_prev" :onclick "./scripts/music_info --prev" "")
           (button :class "song_btn_play" :onclick "./scripts/music_info --toggle" song_status)
-          (button :class "song_btn_next" :onclick "./scripts/music_info --next" ""))))))
+          (button :class "song_btn_next" :onclick "./scripts/music_info --next" "")))
+        )
+    )
+)
 
 
 
@@ -202,20 +205,36 @@
     (workspaces :monitor_id monitor_id)))
 
 
-(defwidget center [monitor_id]
+(defwidget center [monitor_id vertical]
   (box :orientation "h"
     :space-evenly false
-    :halign "center"
     :class "center_modules"
-    (music :monitor_id monitor_id)))
+    (music :monitor_id monitor_id :small vertical)
+        (systray)
+    ))
 
-(defwidget bar_1 [monitor_id]
+(defwidget bar_1 [monitor_id vertical]
   (box :class "bar_class"
     :orientation "h"
-    (left :monitor_id monitor_id)
-    (center :monitor_id monitor_id)
-    (right :monitor_id monitor_id)
-  ))
+    :space-evenly false
+    (box :halign "start" :hexpand true (left :monitor_id monitor_id))
+        (box :halign "center" :hexpand true (center :monitor_id monitor_id :vertical vertical))
+        (box :halign "end" :hexpand true (right :monitor_id monitor_id))
+      )
+  )
+
+
+(defwindow bar [monitor_id vertical]
+    :geometry (geometry :x "0%"
+      :y "0%"
+      :width "98%"
+      :height "30px"
+    :anchor "top center")
+    :stacking "fg"
+    :windowtype "dock"
+    :exclusive true
+    :reserve (struts :side "top" :distance "4%")
+    (bar_1 :monitor_id monitor_id :vertical vertical))
 
 (defwindow bar_mon_0
   :geometry (geometry :x "0%"
@@ -228,7 +247,7 @@
   :monitor 0
   :exclusive true
   :reserve (struts :side "top" :distance "4%")
-  (bar_1 :monitor_id 0))
+  (bar_1 :monitor_id 0 :vertical true))
 
 (defwindow bar_mon_1
     :geometry (geometry :x "0%"
@@ -241,7 +260,7 @@
     :monitor 1
     :exclusive true
     :reserve (struts :side "top" :distance "4%")
-    (bar_1 :monitor_id 1))
+    (bar_1 :monitor_id 1 :vertical false))
 
 (defwindow bar_mon_2
     :geometry (geometry :x "0%"
@@ -254,7 +273,7 @@
     :monitor 2
     :exclusive true
     :reserve (struts :side "top" :distance "4%")
-    (bar_1 :monitor_id 2))
+    (bar_1 :monitor_id 2 :vertical false))
 
 (defwidget system []
   (box :class "sys_win" :orientation "v" :space-evenly "false" :hexpand "false" :vexpand "false" :spacing 0
@@ -373,44 +392,20 @@
     ;     (scale :onscroll "mpc -q seek {}" :min 0 :active "true" :max 100 :value current_status)))))
     (box :class "music_bar" :halign "center" :vexpand "false" :hexpand "false" :space-evenly "false"
     ; (eventbox :onscroll "mpc -q seek {}"
-      (scale :min 0 :active "true" :max 100 :value current_status :onchange "./scripts/music_info --pos {}")))))
+      (scale :min 0 :active "true" :max 100 :value current_status :timeout "50ms" :onchange  "./scripts/music_info --pos {}")))))
     ; )
 
 
-;;  music Popup
-(defwindow music_win_2  :monitor 2 :stacking "fg" :focusable "false" :screen 1
+
+; Popups
+
+(defwindow music_win :stacking "fg" :focusable "false"
   :geometry (geometry :x "0" :y "7%" :width 428 :height 104 :anchor "top center")
   (music_pop))
 
-(defwindow music_win_1  :monitor 1 :stacking "fg" :focusable "false" :screen 1
-  :geometry (geometry :x "0" :y "7%" :width 428 :height 104 :anchor "top center")
-  (music_pop))
 
-    (defwindow music_win_0  :monitor 0 :stacking "fg" :focusable "false" :screen 1
-  :geometry (geometry :x "0" :y "7%" :width 428 :height 104 :anchor "top center")
-  (music_pop))
 
-; Calendar Popup
-
-(defwindow calendar_2
-    :monitor 2
-    :geometry (geometry :x "-20px"
-        :y "7%"
-        :anchor "top right"
-        :width "270px"
-    :height "60px")
-    (cal))
-
-(defwindow calendar_1
-    :monitor 1
-    :geometry (geometry :x "-20px"
-        :y "7%"
-        :anchor "top right"
-        :width "270px"
-    :height "60px")
-    (cal))
-(defwindow calendar_0
-    :monitor 0
+(defwindow calendar
     :geometry (geometry :x "-20px"
         :y "7%"
         :anchor "top right"
@@ -419,38 +414,16 @@
     (cal))
 
 
-; audio_ctl Popup
-
-
-(defwindow audio_ctl_2
-    :monitor 2
+(defwindow audio_ctl
     :geometry (geometry :x "-20px"
         :y "7%"
         :anchor "top right"
         :width "280px"
     :height "60px")
     (audio))
-(defwindow audio_ctl_1
-    :monitor 1
-    :geometry (geometry :x "-20px"
-        :y "7%"
-        :anchor "top right"
-        :width "280px"
-    :height "60px")
-    (audio))
-(defwindow audio_ctl_0
-    :monitor 0
-    :geometry (geometry :x "-20px"
-        :y "7%"
-        :anchor "top right"
-        :width "280px"
-    :height "60px")
-    (audio))
-
           
           
-(defwindow system_2
-    :monitor 2
+(defwindow system
 :geometry (geometry :x "-20px"
     :y "7%"
     :anchor "top right"
@@ -458,19 +431,3 @@
 :height "120px")
 (system))
 
-(defwindow system_1
-    :monitor 1
-    :geometry (geometry :x "-20px"
-        :y "7%"
-        :anchor "top right"
-        :width "290px"
-    :height "120px")
-    (system))
-(defwindow system_0
-    :monitor 0
-    :geometry (geometry :x "-20px"
-        :y "7%"
-        :anchor "top right"
-        :width "290px"
-    :height "120px")
-    (system))

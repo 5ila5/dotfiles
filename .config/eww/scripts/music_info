@@ -141,7 +141,6 @@ get_cover() {
 
 go_to_percentage() {
     percentage=$1
-    echo $1 > test.txt
     
     if [[ $percentage -lt 0 || $percentage -gt 100 ]]; then
         echo "Invalid percentage. Must be between 0 and 100."
@@ -156,8 +155,11 @@ go_to_percentage() {
         length=$(echo "$length / 1000000" | bc -l)
     fi
     
+    
     # Calculate new position based on percentage
-    new_position=$(echo "$length * ($percentage / 100)" | bc)
+    new_position=$(echo "$length * ($percentage / 100)" | bc -l)
+    
+    
     
     # Set the new position
     playerctl -p playerctld position "$new_position"
@@ -180,11 +182,18 @@ if [[ "$1" == "--song" ]]; then
     get_cover
     elif [[ "$1" == "--toggle" ]]; then
     playerctl -p playerctld play-pause
+    eww poll song_status
     elif [[ "$1" == "--next" ]]; then
-    { playerctl -p playerctld next; get_cover; }
+    { playerctl -p playerctld next; eww poll song_status song song_artist current_status cover_art;}
     elif [[ "$1" == "--prev" ]]; then
-    { playerctl -p playerctld previous; get_cover; }
+    { playerctl -p playerctld previous; eww poll song_status song song_artist current_status cover_art; }
     elif [[ "$1" == "--pos" ]]; then
     go_to_percentage $2
     
 fi
+
+
+
+
+
+

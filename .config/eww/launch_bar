@@ -6,22 +6,26 @@ MAX_MON=3
 
 ## Run eww daemon if not running already
 if [[ ! $(pidof eww) ]]; then
-  ${EWW} daemon
-  echo "starting eww daemon"
-  sleep 1
+    ${EWW} daemon
+    echo "starting eww daemon"
+    sleep 1
 fi
 
 ## Open widgets
 run_eww() {
-  if [[ $(pidof Hyprland) ]]; then
-    monitors=$(hyprctl monitors -j | jq "length")
-  elif [[ $(pidof qtile) ]]; then
-    monitors=$(python -c "print(len($(qtile cmd-obj -o cmd -f get_screens | tr -d '\n  ')))")
-  fi
-  monitors=$((monitors < MAX_MON ? monitors : MAX_MON))
-  for i in $(seq 0 $(($monitors - 1))); do
-    ${EWW} open bar_mon_$i
-  done
+    if [[ $(pidof Hyprland) ]]; then
+        monitor_count=$(hyprctl monitors -j | jq "length")
+        # get list of 0 or 1 depending if "transform" is true or false
+        vertical_list=$(hyprctl monitors -j | jq "map(.transform )")
+        elif [[ $(pidof qtile) ]]; then
+        monitor_count=$(python -c "print(len($(qtile cmd-obj -o cmd -f get_screens | tr -d '\n  ')))")
+        vertical_list=$(python -c "print(list(map(lambda x: int(x['height'] > x['width']), $(qtile cmd-obj -o cmd -f get_screens))))")
+    fi
+    monitor_count=$((monitor_count < MAX_MON ? monitor_count : MAX_MON))
+    for i in $(seq 0 $(($monitor_count - 1))); do
+        vertical=$(echo "$vertical_list" | jq 'map([false, true][.]) | .['"$i"']')
+        ${EWW} open bar --id "$i" --screen "$i" --arg monitor_id="$i" --arg vertical="$vertical"
+    done
 }
 
 ## Launch or close widgets accordingly

@@ -1,82 +1,99 @@
 #!/bin/bash
 
+EWW_BIN="eww"
+LOCK_FILE_AUDIO="$HOME/.cache/eww-audio.lock"
+LOCK_FILE_CALENDAR="$HOME/.cache/eww-calendar.lock"
+LOCK_FILE_MEM="$HOME/.cache/eww-system.lock"
+LOCK_FILE_SONG="$HOME/.cache/eww-song.lock"
+
+close_everything() {
+    ${EWW_BIN} close calendar system music_win audio_ctl
+    rm -f "$LOCK_FILE_AUDIO" "$LOCK_FILE_CALENDAR" "$LOCK_FILE_MEM" "$LOCK_FILE_SONG"
+}
+
 calendar() {
-    LOCK_FILE="$HOME/.cache/eww-calendar_$1.lock"
-    EWW_BIN="eww"
-    
     run() {
-        ${EWW_BIN} open calendar_"$1"
+        close_everything
+        ${EWW_BIN} open calendar --screen="$1"
+        echo "$1" > "$LOCK_FILE_CALENDAR"
     }
     
     # Open widgets
-    if [[ ! -f "$LOCK_FILE" ]]; then
-        ${EWW_BIN} close system music_win audio_ctl
-        touch "$LOCK_FILE"
+    if [[ ! -f "$LOCK_FILE_CALENDAR" ]]; then
         run "$1" && echo "ok good!"
     else
-        ${EWW_BIN} close calendar_"$1"
-        rm "$LOCK_FILE" && echo "closed"
+        ${EWW_BIN} close calendar
+        if [[ ! $(cat "$LOCK_FILE_CALENDAR") == "$1" ]]; then
+            run "$1" && echo "ok good!"
+        else
+            rm "$LOCK_FILE_CALENDAR" && echo "closed"
+        fi
     fi
 }
 
 
 system() {
-    LOCK_FILE_MEM="$HOME/.cache/eww-system_$1.lock"
-    EWW_BIN="eww"
-    
     run() {
-        ${EWW_BIN} open system_"$1"
+        close_everything
+        ${EWW_BIN} open system --screen="$1"
+        echo "$1" > "$LOCK_FILE_MEM"
     }
     
     # Open widgets
     if [[ ! -f "$LOCK_FILE_MEM" ]]; then
-        ${EWW_BIN} close calendar music_win audio_ctl
-        touch "$LOCK_FILE_MEM"
         run "$1" && echo "ok good!"
     else
-        ${EWW_BIN} close system_"$1"
-        rm "$LOCK_FILE_MEM" && echo "closed"
+        ${EWW_BIN} close system
+        if [[ ! $(cat "$LOCK_FILE_MEM") == "$1" ]]; then
+            run "$1" && echo "ok good!"
+        else
+            rm "$LOCK_FILE_MEM" && echo "closed"
+        fi
     fi
 }
 
 
 music() {
-    LOCK_FILE_SONG="$HOME/.cache/eww-song_$1.lock"
-    EWW_BIN="eww"
-    
     run() {
-        ${EWW_BIN} open music_win_"$1"
+        close_everything
+        ${EWW_BIN} open music_win --screen="$1"
+        echo "$1" > "$LOCK_FILE_SONG"
     }
     
     # Open widgets
     if [[ ! -f "$LOCK_FILE_SONG" ]]; then
-        ${EWW_BIN} close system calendar
-        touch "$LOCK_FILE_SONG"
         run "$1" && echo "ok good!"
     else
-        ${EWW_BIN} close music_win_"$1"
-        rm "$LOCK_FILE_SONG" && echo "closed"
+        ${EWW_BIN} close music_win
+        if [[ ! $(cat "$LOCK_FILE_SONG") == "$1" ]]; then
+            run "$1" && echo "ok good!"
+        else
+            rm "$LOCK_FILE_SONG" && echo "closed"
+        fi
+        
     fi
 }
 
 
 
 audio() {
-    LOCK_FILE_AUDIO="$HOME/.cache/eww-audio_$1.lock"
-    EWW_BIN="eww"
-    
     run() {
-        ${EWW_BIN} open audio_ctl_"$1"
+        close_everything
+        ${EWW_BIN} open audio_ctl --screen="$1"
+        echo "$1" > "$LOCK_FILE_AUDIO"
     }
     
     # Open widgets
     if [[ ! -f "$LOCK_FILE_AUDIO" ]]; then
-        ${EWW_BIN} close system calendar music
-        touch "$LOCK_FILE_AUDIO"
+        
         run "$1" && echo "ok good!"
     else
-        ${EWW_BIN} close audio_ctl_"$1"
-        rm "$LOCK_FILE_AUDIO" && echo "closed"
+        ${EWW_BIN} close audio_ctl
+        if [[ ! $(cat "$LOCK_FILE_AUDIO") == "$1" ]]; then
+            run "$1" && echo "ok good!"
+        else
+            rm "$LOCK_FILE_AUDIO" && echo "closed"
+        fi
     fi
 }
 
