@@ -8,6 +8,12 @@
 (defpoll volume_percent :interval "3s" :initial "101" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
 (defpoll mic_percent :interval "3s" :initial "101" "amixer -D pulse sget Capture | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
 ; (defpoll brightness_percent :interval "5s" "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
+
+(defpoll brightness_percent_0 :interval "5s" :initial "101" "./scripts/brightness 1 --get")
+(defpoll brightness_percent_1 :interval "5s" :initial "101" "./scripts/brightness 2 --get")
+(defpoll brightness_percent_2 :interval "5s" :initial "101" "./scripts/brightness 3 --get")
+
+
 (defvar brightness_percent "10")
 
 (defpoll battery :interval "15s" :initial "101" "./scripts/battery --bat")
@@ -145,7 +151,7 @@
           :min 0
         :onchange "amixer -D pulse sset Master {}%" )))))
 
-(defwidget bright []
+(defwidget bright [monitor_id]
   (eventbox :onhover "${eww} update br_reveal=true" :onhoverlost "${eww} update br_reveal=false"
     (box :class "module-2" :space-evenly "false" :orientation "h" :spacing "3"
       (label :text "🔆" :class "bright_icon" :tooltip "brightness")
@@ -153,12 +159,13 @@
         :reveal br_reveal
         :duration "350ms"
         (scale    :class "brightbar"
-          :value brightness_percent
+          :value  {(monitor_id ==0)? brightness_percent_0: (monitor_id ==1)? brightness_percent_1: brightness_percent_2}
           :orientation "h"
-          :tooltip "${brightness_percent}%"
+          :tooltip "${(monitor_id ==0)? brightness_percent_0: (monitor_id ==1)? brightness_percent_1: brightness_percent_2}%"
           :max 100
           :min 0
-        :onchange "brightnessctl set {}%" )))))
+          :timeout "1s"
+        :onchange "./scripts/brightness ${monitor_id +1} --set {}" )))))
 
 
 
@@ -187,7 +194,7 @@
     :space-evenly false
     :halign "end"
     :class "left_modules"
-    (bright)
+    (bright :monitor_id monitor_id)
     (volume :monitor_id monitor_id)
     (wifi)
     (sep)
@@ -228,7 +235,7 @@
     :geometry (geometry :x "0%"
       :y "0%"
       :width "98%"
-      :height "30px"
+      :height "10px"
     :anchor "top center")
     :stacking "fg"
     :windowtype "dock"
@@ -236,44 +243,6 @@
     :reserve (struts :side "top" :distance "4%")
     (bar_1 :monitor_id monitor_id :vertical vertical))
 
-(defwindow bar_mon_0
-  :geometry (geometry :x "0%"
-    :y "0%"
-    :width "98%"
-    :height "30px"
-  :anchor "top center")
-  :stacking "fg"
-  :windowtype "dock"
-  :monitor 0
-  :exclusive true
-  :reserve (struts :side "top" :distance "4%")
-  (bar_1 :monitor_id 0 :vertical true))
-
-(defwindow bar_mon_1
-    :geometry (geometry :x "0%"
-        :y "0%"
-        :width "98%"
-        :height "30px"
-    :anchor "top center")
-    :stacking "fg"
-    :windowtype "dock"
-    :monitor 1
-    :exclusive true
-    :reserve (struts :side "top" :distance "4%")
-    (bar_1 :monitor_id 1 :vertical false))
-
-(defwindow bar_mon_2
-    :geometry (geometry :x "0%"
-        :y "0%"
-        :width "98%"
-        :height "30px"
-    :anchor "top center")
-    :stacking "fg"
-    :windowtype "dock"
-    :monitor 2
-    :exclusive true
-    :reserve (struts :side "top" :distance "4%")
-    (bar_1 :monitor_id 2 :vertical false))
 
 (defwidget system []
   (box :class "sys_win" :orientation "v" :space-evenly "false" :hexpand "false" :vexpand "false" :spacing 0

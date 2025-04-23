@@ -1,0 +1,46 @@
+#!/bin/sh
+
+
+get_brightness() {
+    display="$1"
+    ddcutil getvcp 10 --brief --display "$display" | awk '{print $4/$5*100.0}' | bc -l
+    
+}
+
+set_brightness() {
+    display="$1"
+    eww_display=$(echo "$1 -1" | bc)
+    brightness="$2"
+    
+    if [[ "$brightness" -lt 0 || "$brightness" -gt 100 ]]; then
+        echo "Brightness value must be between 0 and 100."
+        exit 1
+    fi
+    
+    ddcutil setvcp 10 "$brightness" --display "$display"
+    eww update "brightness_percent_$eww_display"="$brightness"
+    
+    if [[ $? -ne 0 ]]; then
+        echo "Failed to set brightness."
+        exit 1
+    fi
+    
+    echo "Brightness set to $brightness% on display $display."
+}
+
+display="$1"
+
+if [[ "$2" == "--get" ]]; then
+    get_brightness "$display"
+    
+    elif [[ "$2" == "--set" ]]; then
+    if [[ -n "$3" ]]; then
+        set_brightness "$display" "$3"
+    else
+        echo "Usage: $0 DISPLAY --set [0-100]"
+    fi
+    
+    
+else
+    echo "Usage: $0 DISPLAY --get | --set [0-100]"
+fi
