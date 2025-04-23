@@ -2,48 +2,68 @@
 # scripts by adi1090x
 
 ## Get data
-STATUS="$(playerctl -p playerctld status)"
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# STATUS="$(playerctl -p playerctld status)"
+if [ -n "$XDG_CACHE_HOME" ]; then
+    SONG_ARTWORK_CACHE="$XDG_CACHE_HOME/eww_artwork_cache"
+else
+    SONG_ARTWORK_CACHE="$HOME/.cache/eww_artwork_cache"
+fi
+
+
+
+
 
 ## Get status
 get_status() {
-    if [[ $STATUS == "Playing" ]]; then
-        echo "⏸"
-        elif [[ $STATUS == "Paused" ]]; then
-        echo "⏵"
-    else
-        echo "⏵⏹"
-    fi
+    playerctl -p playerctld --follow status | while read -r STATUS; do
+        if [[ $STATUS == "Playing" ]]; then
+            echo "⏸"
+            elif [[ $STATUS == "Paused" ]]; then
+            echo "⏵"
+        else
+            echo "⏵⏹"
+        fi
+    done
 }
 
 ## Get song
 get_song() {
-    song=$(playerctl -p playerctld metadata --format '{{title}}')
-    if [[ -z "$song" ]]; then
-        echo "Offline"
-    else
-        echo "$song"
-    fi
+    echo "Offline"
+    
+    playerctl -p playerctld metadata --format '{{title}}' --follow | while read -r song; do
+        if [[ -z "$song" ]]; then
+            echo "Offline"
+        else
+            echo "$song"
+        fi
+    done
 }
 
 ## Get artist
 get_artist() {
-    artist=$(playerctl -p playerctld metadata --format '{{artist}}')
-    if [[ -z "$artist" ]]; then
-        echo ""
-    else
-        echo "$artist"
-    fi
+    
+    echo ""
+    playerctl -p playerctld metadata --format '{{artist}}' --follow | while read -r artist; do
+        if [[ -z "$artist" ]]; then
+            echo ""
+        else
+            echo "$artist"
+        fi
+    done
 }
 
 ## Get time
 get_time() {
     position=$(playerctl -p playerctld position 2>/dev/null || echo 0)
     length=$(playerctl -p playerctld metadata mpris:length 2>/dev/null || echo 1)
-    
     # Handle mpris:length in microseconds
     if [[ $length -gt 1000000 ]]; then
         length=$(echo "$length / 1000000" | bc -l)
+    fi
+    
+    # Handle position in microseconds
+    if [[ $position -gt 1000000 ]]; then
+        position=$(echo "$position / 1000000" | bc -l)
     fi
     
     # Calculate percentage
@@ -53,6 +73,12 @@ get_time() {
 get_ctime() {
     
     # Get position in seconds
+    echo "0:00"
+    position=$(playerctl -p playerctld position)
+    if [[ $position -gt 1000000 ]]; then
+        position=$(echo "$position / 1000000" | bc -l)
+    fi
+    
     position=$(playerctl -p playerctld position 2>/dev/null || echo 0)
     
     # Convert to MM:SS format
@@ -64,79 +90,87 @@ get_ctime() {
     else
         echo "$minutes:$seconds"
     fi
+    
 }
 get_ttime() {
     # Get length in microseconds and convert to seconds
-    length=$(playerctl -p playerctld metadata mpris:length 2>/dev/null || echo 0)
+    echo "0:00"
+    playerctl -p playerctld metadata mpris:length --follow | while read -r length; do
+        
+        
+        if [[ $length -gt 1000000 ]]; then
+            length=$(echo "$length / 1000000" | bc -l)
+        fi
+        
+        # Convert to MM:SS format
+        minutes=$(printf "%d" "$(echo "$length/60" | bc)")
+        seconds=$(printf "%02d" "$(echo "$length%60" | bc)")
+        
+        if [[ -z "$length" || "$length" == "0" ]]; then
+            echo "0:00"
+        else
+            echo "$minutes:$seconds"
+    fi    done
     
-    if [[ $length -gt 1000000 ]]; then
-        length=$(echo "$length / 1000000" | bc -l)
-    fi
-    
-    # Convert to MM:SS format
-    minutes=$(printf "%d" "$(echo "$length/60" | bc)")
-    seconds=$(printf "%02d" "$(echo "$length%60" | bc)")
-    
-    if [[ -z "$length" || "$length" == "0" ]]; then
-        echo "0:00"
-    else
-        echo "$minutes:$seconds"
-    fi
 }
 
 ## Get cover
 get_cover() {
-    cover_url=$(playerctl -p playerctld metadata mpris:artUrl)
-    if [[ -z "$cover_url" ]]; then
-        cover_url=$(playerctl -p playerctld metadata xesam:artUrl)
-    fi
-    
-    # Check if $cover_url is empty
-    if [[ -z "$cover_url" ]]; then
-        echo "images/music.png"
-        return
-    fi
-    
-    # Check if $SCRIPT_DIR/artwork_cache folder exists
-    if [ ! -d "$SCRIPT_DIR/artwork_cache" ]; then
-        mkdir -p "$SCRIPT_DIR/artwork_cache"
-    fi
-    
-    hash_name=$(echo "$cover_url" | md5sum | cut -d' ' -f1)
-    
-    # Check if the file with this hash and a known extension already exists
-    for ext in jpg png gif webp; do
-        cached_file="$SCRIPT_DIR/artwork_cache/$hash_name.$ext"
-        if [[ -f "$cached_file" ]]; then
-            echo "$cached_file"
+    # cover_url=$(playerctl -p playerctld metadata mpris:artUrl)
+    playerctl -p playerctld metadata --format '{{mpris:artUrl}} {{xesam:artUrl}}' --follow | while read -r cover_url xesam_artUrl; do
+        
+        
+        if [[ -z "$cover_url" ]]; then
+            cover_url=$xesam_artUrl
+        fi
+        
+        # Check if $cover_url is empty
+        if [[ -z "$cover_url" ]]; then
+            echo "images/music.png"
             return
         fi
+        
+        # Check if $SCRIPT_DIR/artwork_cache folder exists
+        if [ ! -d "$SONG_ARTWORK_CACHE" ]; then
+            mkdir -p "$SONG_ARTWORK_CACHE"
+        fi
+        
+        hash_name=$(echo "$cover_url" | md5sum | cut -d' ' -f1)
+        
+        # Check if the file with this hash and a known extension already exists
+        for ext in jpg png gif webp; do
+            cached_file="$SONG_ARTWORK_CACHE/$hash_name.$ext"
+            if [[ -f "$cached_file" ]]; then
+                echo "$cached_file"
+                return
+            fi
+        done
+        
+        # If not cached, download and determine type
+        temp_file="$SONG_ARTWORK_CACHE/$hash_name.tmp"
+        curl -s "$cover_url" -o "$temp_file"
+        
+        # Determine MIME type and appropriate extension
+        mime_type=$(file --mime-type -b "$temp_file")
+        case "$mime_type" in
+            image/jpeg) ext="jpg" ;;
+            image/png)  ext="png" ;;
+            image/gif)  ext="gif" ;;
+            image/webp) ext="webp" ;;
+            *) ext="" ;;
+        esac
+        
+        # Handle unsupported or non-image cases
+        if [[ -z "$ext" ]]; then
+            rm -f "$temp_file"
+            echo "images/music.png"
+            return
+        fi
+        
+        final_file="$SONG_ARTWORK_CACHE/$hash_name.$ext"
+        mv "$temp_file" "$final_file"
+        echo "$final_file"
     done
-    
-    # If not cached, download and determine type
-    temp_file="$SCRIPT_DIR/artwork_cache/$hash_name.tmp"
-    curl -s "$cover_url" -o "$temp_file"
-    
-    # Determine MIME type and appropriate extension
-    mime_type=$(file --mime-type -b "$temp_file")
-    case "$mime_type" in
-        image/jpeg) ext="jpg" ;;
-        image/png)  ext="png" ;;
-        image/gif)  ext="gif" ;;
-        image/webp) ext="webp" ;;
-        *) ext="" ;;
-    esac
-    
-    # Handle unsupported or non-image cases
-    if [[ -z "$ext" ]]; then
-        rm -f "$temp_file"
-        echo "images/music.png"
-        return
-    fi
-    
-    final_file="$SCRIPT_DIR/artwork_cache/$hash_name.$ext"
-    mv "$temp_file" "$final_file"
-    echo "$final_file"
 }
 
 go_to_percentage() {
@@ -182,11 +216,10 @@ if [[ "$1" == "--song" ]]; then
     get_cover
     elif [[ "$1" == "--toggle" ]]; then
     playerctl -p playerctld play-pause
-    eww poll song_status
     elif [[ "$1" == "--next" ]]; then
-    { playerctl -p playerctld next; eww poll song_status song song_artist current_status cover_art;}
+    { playerctl -p playerctld next;}
     elif [[ "$1" == "--prev" ]]; then
-    { playerctl -p playerctld previous; eww poll song_status song song_artist current_status cover_art; }
+    { playerctl -p playerctld previous; }
     elif [[ "$1" == "--pos" ]]; then
     go_to_percentage $2
     
