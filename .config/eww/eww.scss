@@ -10,6 +10,24 @@ Credit where its due: my eww config is highly based on https://github.com/saimoo
     font-size: 15px;
 }
 
+/** Systray **/
+
+menu,
+popup {
+  background-color: #0f0f17;
+  color: #bfc9db;
+}
+
+menu menuitem,
+popup menuitem {
+  padding: 3px 6px;
+}
+
+menu menuitem:hover,
+popup menuitem:hover {
+  background-color: #383857;
+}
+
 /** General **/
 .bar_class {
     background-color: #0f0f17;
