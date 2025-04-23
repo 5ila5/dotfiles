@@ -46,7 +46,7 @@ export ANDROID_SDK_ROOT="$ANDROID_HOME/Sdk"
 
 
 
-export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
+#export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
 export XKB_DEFAULT_LAYOUT=de
 
 
