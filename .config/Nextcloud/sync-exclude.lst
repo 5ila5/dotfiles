@@ -42,3 +42,4 @@ __pycache__/
 *.lock
 node_modules/
 build/
+build_cov/
