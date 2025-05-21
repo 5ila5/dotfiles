@@ -90,6 +90,12 @@ then
 fi
 alias smake='sudo make'
 
+if command -v batcat > /dev/null;
+then
+        alias bat='batcat'
+fi
+
+
 alias sx'=startx'
 
 #default commands with better output/replacement
