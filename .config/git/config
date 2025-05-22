@@ -28,6 +28,7 @@
 	b = branch
 	swicth = switch
 	commti = commit
+	ceckout = checkout
 [safe]
 	directory = /opt/flutter
 [rerere]
