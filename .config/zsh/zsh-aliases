@@ -70,8 +70,6 @@ fi
 
 
 
-
-
 #alias +x='chmod +x'
 #alias cleanHistory="awk '!x[\$0]++' < ~/.bash_history  > ~/.bash_history_c && \mv ~/.bash_history_c ~/.bash_history"
 
@@ -204,6 +202,8 @@ alias stopWGlocal='doas systemctl stop wg-quick@wg0-local-only && sleep 1 && pin
 
 
 # Personal aliases
+alias source_env='set -a && source .env && set +a'
+
 
 # waste collection
 

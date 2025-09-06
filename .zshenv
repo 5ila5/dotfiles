@@ -43,7 +43,7 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export JAVA_HOME='/usr/lib/jvm/default-runtime'
 export ANDROID_HOME="$XDG_DATA_HOME"/android
 export ANDROID_SDK_ROOT="$ANDROID_HOME/Sdk"
-
+export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools/:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
 
 
 #export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
@@ -67,6 +67,7 @@ export WLR_NO_HARDWARE_CURSORS=1
 export MOZ_USE_XINPUT2=1
 
 export ELECTRON_OZONE_PLATFORM_HINT="auto"
+#export ELECTRON_OZONE_PLATFORM_HINT="x11"
 
 export PYTHONTRACEMALLOC=1
 export LIBVA_DRIVER_NAME=vdpau
