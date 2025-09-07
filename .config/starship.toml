@@ -36,6 +36,11 @@ when = true
 command = "uname -r"
 format = "$output: "
 
+[custom.timetrace]
+command = """ timetrace status --format "{project}:{trackedTimeToday}" """
+when = """ timetrace status --output json | grep -P '\"trackedTimeCurrent\": \"(?!-)' """
+shell = "sh"
+
 [shell]
 zsh_indicator = "%_"
 fish_indicator = ''
