@@ -1,32 +1,66 @@
 #!/bin/bash
 
+# if hyprpanel command exists launch it instead
+
+if command -v hyprpanel &>/dev/null; then
+  hyprpanel &
+  exit 0
+fi
+
 ## Files and cmd
 EWW="eww"
+EWW="/home/silas/tmp/eww/target/debug/eww"
+LOG_FILE="/home/silas/.config/eww/log.log"
+SCRIPT_PATH=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 MAX_MON=3
 
 ## Run eww daemon if not running already
 if [[ ! $(pidof eww) ]]; then
-    ${EWW} daemon
-    echo "starting eww daemon"
-    sleep 1
+  ${EWW} daemon
+  echo "starting eww daemon"
+  sleep 1
 fi
 
 ## Open widgets
 run_eww() {
-    if [[ $(pidof Hyprland) ]]; then
-        monitor_count=$(hyprctl monitors -j | jq "length")
-        # get list of 0 or 1 depending if "transform" is true or false
-        vertical_list=$(hyprctl monitors -j | jq "map(.transform )")
-        elif [[ $(pidof qtile) ]]; then
-        monitor_count=$(python -c "print(len($(qtile cmd-obj -o cmd -f get_screens | tr -d '\n  ')))")
-        vertical_list=$(python -c "print(list(map(lambda x: int(x['height'] > x['width']), $(qtile cmd-obj -o cmd -f get_screens))))")
-    fi
-    monitor_count=$((monitor_count < MAX_MON ? monitor_count : MAX_MON))
-    for i in $(seq 0 $(($monitor_count - 1))); do
-        vertical=$(echo "$vertical_list" | jq 'map([false, true][.]) | .['"$i"']')
-        ${EWW} open bar --id "$i" --screen "$i" --arg monitor_id="$i" --arg vertical="$vertical"
-    done
+  eww close-all
+  # Remove all pop Lock files:
+  "$SCRIPT_PATH"/scripts/pop 1 close
+
+  if [[ $(pidof Hyprland) ]]; then
+    monitor_count=$(hyprctl monitors -j | jq "length")
+    echo "Monitor count: $monitor_count" >>"$LOG_FILE"
+    # get list of 0 or 1 depending if "transform" is true or false
+    vertical_list=$(hyprctl monitors -j | jq "map(.transform )")
+    echo "Vertical list: $vertical_list" >>"$LOG_FILE"
+  elif [[ $(pidof qtile) ]]; then
+    monitor_count=$(python -c "print(len($(qtile cmd-obj -o cmd -f get_screens | tr -d '\n  ')))")
+    vertical_list=$(python -c "print(list(map(lambda x: int(x['height'] > x['width']), $(qtile cmd-obj -o cmd -f get_screens))))")
+  fi
+  monitor_count=$((monitor_count < MAX_MON ? monitor_count : MAX_MON))
+  echo "Monitor count after limit: $monitor_count" >>"$LOG_FILE"
+  for i in $(seq 0 $(($monitor_count - 1))); do
+    vertical=$(echo "$vertical_list" | jq 'map([false, true][.]) | .['"$i"']')
+    echo "Open bar for monitor $i vertical: $vertical" >>"$LOG_FILE"
+    ${EWW} open bar --id "$i" --screen "$i" --arg monitor_id="$i" --arg vertical="$vertical"
+  done
 }
+
+date --rfc-3339 s >>"$LOG_FILE"
+echo "Start of launch_bar.sh" >>"$LOG_FILE"
 
 ## Launch or close widgets accordingly
 run_eww
+
+echo "Eww launched" >>"$LOG_FILE"
+
+if [[ $(pidof Hyprland) ]]; then
+  socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock | while read -r line; do
+    case "$line" in
+    monitoradded\>\>* | monitorremoved\>\>*)
+      echo "Monitor changed, reloading eww:\"$line\"" >>"$LOG_FILE"
+      run_eww
+      ;;
+    esac
+  done
+fi
