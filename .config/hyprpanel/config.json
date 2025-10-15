@@ -227,8 +227,16 @@
       "right": [
         "volume",
         "clock",
-        "notifications"
+        "notifications",
+        "ram",
+        "cpu",
+        "cputemp",
+        "netstat"
       ]
+    },
+    "DP-1": {
+      "extends": "*",
+      "middle": []
     }
   },
   "theme.bar.floating": false,
@@ -284,5 +292,11 @@
   "theme.bar.buttons.workspaces.active": "#f5c2e7",
   "bar.workspaces.active_indicator_kind": "active",
   "bar.workspaces.activeIndicatorKind": "active",
-  "bar.clock.format": "%a %b %d.%m  %H:%M:%S"
+  "bar.clock.format": "%a %b %d.%m  %H:%M:%S",
+  "menus.clock.time.military": true,
+  "menus.clock.weather.key": "weather_api_key.json",
+  "bar.customModules.cpuTemp.sensor": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp2_input",
+  "bar.customModules.netstat.labelType": "full",
+  "bar.customModules.netstat.rateUnit": "auto",
+  "bar.customModules.netstat.label": true
 }
