@@ -6,6 +6,22 @@ animation = "EaseOutExpo"
 color = "#4a0600"
 duration = 50
 
+[font.bold]
+family = "JetBrains Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrains Mono"
+style = "Bold Italic"
+
+[font.italic]
+family = "JetBrains Mono"
+style = "Italic"
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Regular"
+
 [colors.primary]
 background = "#1d1f21"
 bright_foreground = "#eaeaea"
