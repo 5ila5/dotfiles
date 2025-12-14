@@ -46,3 +46,11 @@ build_cov/
 .cache/
 .bloop
 target/
+*.synctex.gz
+*.synctex(busy)
+*.ist
+*.acn
+*.glg
+*.bbl
+*.blg
+
