@@ -73,7 +73,7 @@ fi
 #alias +x='chmod +x'
 #alias cleanHistory="awk '!x[\$0]++' < ~/.bash_history  > ~/.bash_history_c && \mv ~/.bash_history_c ~/.bash_history"
 
-alias sysupdate="paru -Pw; read -q \"REPLY?continue [y/n]\" && paru -Syu --batchinstall --combinedupgrade && flatpak update --assumeyes"
+alias sysupdate="$AUR_HELPER -Pw; read -q \"REPLY?continue [y/n]\" && $AUR_HELPER -Syu --batchinstall --combinedupgrade && flatpak update --assumeyes"
 alias shutdownUpdate="sysupdate && shutdown now"
 #!/bin/bash
 
@@ -142,7 +142,7 @@ alias spfind='paru -Ql '
 alias spq='paru -Q'
 alias spqs='paru -Qs'
 alias spss='paru -Ss'
-alias yay='paru'
+#alias yay='paru'
 alias ys='yay -S'
 alias yss='yay -Ss'
 alias yr='yay -Rcns'

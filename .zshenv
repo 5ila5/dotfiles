@@ -103,6 +103,17 @@ export TEXMFVAR=$XDG_CONFIG_HOME/texlive/texmf-var
 export TEXMFVAR=$XDG_CONFIG_HOME/texlive/texmf-config
 
 
+if command -v paru >/dev/null 2>&1; then
+    if ( paru --version </dev/null >/dev/null 2>&1 ) >/dev/null 2>&1; then
+        export AUR_HELPER=paru
+    else
+        export AUR_HELPER=yay
+    fi
+else
+    export AUR_HELPER=yay
+fi
+echo "AUR helper set to $AUR_HELPER"
+
 # ssh-agent for the ssh-agent.service user serverice
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
