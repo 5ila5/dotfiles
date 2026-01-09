@@ -1,32 +1,32 @@
 #!/bin/sh
 
-json="$(klog json)"
+elapsed_time() {
+  start_time="$1"
 
-start_time="$(
-  printf '%s\n' "$json" |
-    jq -r '
-    .records
-    | .[]
-    | .entries[]
-    | select(.type == "open_range")
-    | .start
-    ' | head -n1
-)"
+  start_epoch=$(date -d "$start_time" +%s 2>/dev/null)
+  now_epoch=$(date +%s)
 
-[ -z "$start_time" ] && exit 1
-today="$(date +%Y-%m-%d)"
+  # if start time is in the future, assume it was yesterday
+  if [ "$start_epoch" -gt "$now_epoch" ]; then
+    start_epoch=$(date -d "yesterday $start_time" +%s)
+  fi
 
-start_epoch="$(date -d "$today $start_time" +%s)"
-now_epoch="$(date +%s)"
+  elapsed=$((now_epoch - start_epoch))
+  hours=$((elapsed / 3600))
+  minutes=$(((elapsed % 3600) / 60))
 
-# if start time is in the future, assume it was yesterday
-if [ "$start_epoch" -gt "$now_epoch" ]; then
-  start_epoch="$(date -d "yesterday $start_time" +%s)"
-fi
+  printf '%02d:%02d' "$hours" "$minutes"
+}
 
-elapsed=$((now_epoch - start_epoch))
+klog bookmarks list | awk -F' -> ' '{print $2}' | sort -u | while read -r path; do
+  start_time=$(klog json "$path" |
+    jq -r '.records[].entries[] | select(.type=="open_range") | .start' |
+    head -n1)
 
-hours=$((elapsed / 3600))
-minutes=$(((elapsed % 3600) / 60))
+  [ -z "$start_time" ] && continue
 
-printf '%02d:%02d\n' "$hours" "$minutes"
+  elapsed=$(elapsed_time "$start_time")
+  name=$(basename "$path" ".klg")
+
+  printf '%s(%s) ' "$elapsed" "$(expr "$name" : '\(.\)')"
+done

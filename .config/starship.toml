@@ -43,9 +43,9 @@ shell = "sh"
 
 [custom.klog]
 command = """${HOME}/.local/script/klog_running_record.sh"""
-when = """ ${HOME}/.local/script/klog_running_record.sh"""
+when = """ ${HOME}/.local/script/klog_running_record.sh | grep -q '.'"""
 shell = "sh"
-format= "[\\($output\\)](blue bold)"
+format= "[⏱️ $output](blue bold)"
 
 [shell]
 zsh_indicator = "%_"
