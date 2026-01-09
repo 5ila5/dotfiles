@@ -105,3 +105,8 @@ if [[ -f "/usr/share/fzf/key-bindings.zsh" ]]; then
 source "/usr/share/fzf/key-bindings.zsh"
 fi
 
+
+if command -v klog > /dev/null; then
+  source <(klog completion -c zsh)
+fi
+
