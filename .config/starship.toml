@@ -41,6 +41,12 @@ command = """ timetrace status --format "{project}:{trackedTimeToday}" """
 when = """ timetrace status --output json | grep -P '\"trackedTimeCurrent\": \"(?!-)' """
 shell = "sh"
 
+[custom.klog]
+command = """${HOME}/.local/script/klog_running_record.sh"""
+when = """ ${HOME}/.local/script/klog_running_record.sh"""
+shell = "sh"
+format= "[\\($output\\)](blue bold)"
+
 [shell]
 zsh_indicator = "%_"
 fish_indicator = ''
