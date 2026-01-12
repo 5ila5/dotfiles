@@ -114,6 +114,8 @@ else
 fi
 echo "AUR helper set to $AUR_HELPER"
 
+export MANPPAGER=less
+
 # ssh-agent for the ssh-agent.service user serverice
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
