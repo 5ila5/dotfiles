@@ -18,3 +18,12 @@ if an Error Message pos up use this to back up conflicting files
 mkdir -p .config-backup && config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
 ```
 and rerun ```config checkout```
+
+for better status messages
+
+```sh
+echo "[status]\n\tshowUntrackedFiles = no" >> $HOME/.cfg/config
+```
+
+```
+```
