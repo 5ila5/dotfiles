@@ -7,6 +7,7 @@ LOCK_FILE_MEM="$HOME/.cache/eww-system.lock"
 LOCK_FILE_SONG="$HOME/.cache/eww-song.lock"
 
 close_everything() {
+    echo "closing everything"
     ${EWW_BIN} close calendar system music_win audio_ctl
     rm -f "$LOCK_FILE_AUDIO" "$LOCK_FILE_CALENDAR" "$LOCK_FILE_MEM" "$LOCK_FILE_SONG"
 }
@@ -15,9 +16,9 @@ calendar() {
     run() {
         close_everything
         ${EWW_BIN} open calendar --screen="$1"
-        echo "$1" > "$LOCK_FILE_CALENDAR"
+        echo "$1" >"$LOCK_FILE_CALENDAR"
     }
-    
+
     # Open widgets
     if [[ ! -f "$LOCK_FILE_CALENDAR" ]]; then
         run "$1" && echo "ok good!"
@@ -31,14 +32,13 @@ calendar() {
     fi
 }
 
-
 system() {
     run() {
         close_everything
         ${EWW_BIN} open system --screen="$1"
-        echo "$1" > "$LOCK_FILE_MEM"
+        echo "$1" >"$LOCK_FILE_MEM"
     }
-    
+
     # Open widgets
     if [[ ! -f "$LOCK_FILE_MEM" ]]; then
         run "$1" && echo "ok good!"
@@ -52,14 +52,13 @@ system() {
     fi
 }
 
-
 music() {
     run() {
         close_everything
         ${EWW_BIN} open music_win --screen="$1"
-        echo "$1" > "$LOCK_FILE_SONG"
+        echo "$1" >"$LOCK_FILE_SONG"
     }
-    
+
     # Open widgets
     if [[ ! -f "$LOCK_FILE_SONG" ]]; then
         run "$1" && echo "ok good!"
@@ -70,22 +69,20 @@ music() {
         else
             rm "$LOCK_FILE_SONG" && echo "closed"
         fi
-        
+
     fi
 }
-
-
 
 audio() {
     run() {
         close_everything
         ${EWW_BIN} open audio_ctl --screen="$1"
-        echo "$1" > "$LOCK_FILE_AUDIO"
+        echo "$1" >"$LOCK_FILE_AUDIO"
     }
-    
+
     # Open widgets
     if [[ ! -f "$LOCK_FILE_AUDIO" ]]; then
-        
+
         run "$1" && echo "ok good!"
     else
         ${EWW_BIN} close audio_ctl
@@ -99,12 +96,20 @@ audio() {
 
 monitor=$1
 
-if [ "$2" = "calendar" ]; then
+case "$2" in
+close)
+    close_everything
+    ;;
+calendar)
     calendar "$monitor"
-    elif [ "$2" = "system" ]; then
+    ;;
+system)
     system "$monitor"
-    elif [ "$2" = "music" ]; then
+    ;;
+music)
     music "$monitor"
-    elif [ "$2" = "audio" ]; then
+    ;;
+audio)
     audio "$monitor"
-fi
+    ;;
+esac
