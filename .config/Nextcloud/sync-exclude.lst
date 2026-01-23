@@ -54,4 +54,5 @@ target/
 *.bbl
 *.blg
 dist-newstyle/
+*.glo
 
