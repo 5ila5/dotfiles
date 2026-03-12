@@ -3,13 +3,15 @@ add_newline = false
 
 format = """
 ($status$cmd_duration
-)
+)$fill${custom.kernal}$shell:$time$memory_usage
 $all
 """
 
-right_format = """                                          \
-${custom.kernal}$shell:$time$memory_usage"""
+#right_format = """                                          \
+#${custom.kernal}$shell:$time$memory_usage"""
 
+[fill]
+symbol = " "
 
 [status]
 disabled = false
