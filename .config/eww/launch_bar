@@ -2,6 +2,11 @@
 
 # if hyprpanel command exists launch it instead
 
+if cmmand -v wayle &>/dev/null; then
+  wayle panel start
+  exit 0
+fi
+
 if command -v hyprpanel &>/dev/null; then
   hyprpanel &
   exit 0
