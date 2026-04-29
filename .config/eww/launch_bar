@@ -2,14 +2,20 @@
 
 # if hyprpanel command exists launch it instead
 
-if cmmand -v wayle &>/dev/null; then
+if command -v wayle &>/dev/null; then
+  echo "wayle found, launching wayle panel"
   wayle panel start
   exit 0
+else
+  echo "wayle not found, trying hyprpanel"
 fi
 
 if command -v hyprpanel &>/dev/null; then
+  echo "hyprpanel found, launching hyprpanel"
   hyprpanel &
   exit 0
+else
+  echo "hyprpanel not found, launching eww"
 fi
 
 ## Files and cmd
