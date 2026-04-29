@@ -1,0 +1,109 @@
+# Wayle configuration file
+
+[bar]
+location = "top"
+module-gap = 0.5
+
+[[bar.layout]]
+monitor = "*"
+show = true
+left = [
+  "hyprland-workspaces",
+  "keybind-mode",
+  "custom-scratchpad",
+  "window-title",
+]
+center = ["media"]
+right = [
+  # "idle-inhibit",
+  "volume",
+  "network",
+  "cpu",
+  "ram",
+  # "custom-backlight",
+  # "keyboard-input",
+  # "battery",
+  "systray",
+  "clock",
+  "power",
+]
+
+[modules.hyprland-workspaces]
+monitor-specific = false
+display-mode = "label"
+label-use-name = true
+empty-color = "bg-active"
+active-on-other-monitor-color = "fg-subtle"
+
+[modules.keybind-mode]
+auto-hide = false
+
+[modules.window-title]
+format = "{{app}}, {{ title }}"
+label-max-length = 30
+
+[modules.media]
+icon-type = "application-mapped"
+format = "{{ title }} - {{ artist }}"
+label-max-length = 40
+
+[modules.idle-inhibit]
+format = "{{ state }}"
+
+[modules.volume]
+format = "{{ percent }}%"
+left-click = "pavucontrol"
+
+[modules.network]
+label-max-length = 30
+
+[modules.cpu]
+format = "{{ percent }}% {{ temp_c }}C"
+poll-interval-ms = 2000
+
+[modules.ram]
+format = "{{ percent }}%"
+poll-interval-ms = 2000
+
+[modules.keyboard-input]
+format = "{{ alias }}"
+
+[modules.battery]
+format = "{{ percent }}%"
+
+[[modules.battery.thresholds]]
+below = 30
+icon-color = "status-warning"
+label-color = "status-warning"
+
+[[modules.battery.thresholds]]
+below = 15
+icon-color = "status-error"
+label-color = "status-error"
+
+[modules.clock]
+format = "%a %Y-%m-%d %H:%M"
+
+[modules.systray]
+item-gap = 0.5
+
+[modules.power]
+left-click = ""
+
+[[modules.custom]]
+id = "scratchpad"
+command = "printf ''"
+interval-ms = 5000
+format = "{{ output }}"
+icon-show = false
+label-show = false
+
+[[modules.custom]]
+id = "backlight"
+command = "brightnessctl -m 2>/dev/null | awk -F, '{gsub(/%/, \"\", $4); print $4 \"%\"}' || echo n/a"
+interval-ms = 2000
+format = "{{ output }}"
+icon-name = "ld-sun-symbolic"
+
+[wallpaper]
+engine-enabled = false
