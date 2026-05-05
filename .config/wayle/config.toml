@@ -9,7 +9,6 @@ monitor = "*"
 show = true
 left = [
   "hyprland-workspaces",
-  "keybind-mode",
   "custom-scratchpad",
   "window-title",
 ]
@@ -25,7 +24,41 @@ right = [
   # "battery",
   "systray",
   "clock",
+  "notifications",
   "power",
+]
+
+[[bar.layout]]
+monitor = "DP-1"  # vertical
+show = true
+left = ["hyprland-workspaces"]
+center = []
+right = [
+  "cpu",
+  "ram",
+  "volume",
+  "systray",
+  "clock",
+  "power",
+  "notifications",
+]
+
+[[bar.layout]]
+monitor = "eDP-1"  # vertical
+show = true
+left = ["hyprland-workspaces"]
+center = ["media"]
+right = [
+  "window-title",
+  "battery",
+  "bluetooth",
+  "cpu",
+  "ram",
+  "volume",
+  "systray",
+  "clock",
+  "power",
+  "notifications",
 ]
 
 [modules.hyprland-workspaces]
