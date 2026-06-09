@@ -19,6 +19,6 @@ nextcloud --background &
 wl-paste --watch cliphist store &
 
 # flameshot &
-XDG_CURRENT_DESKTOP="sway dbus-run-session qtile" flameshot &
+#XDG_CURRENT_DESKTOP="sway dbus-run-session qtile" flameshot &
 
 # sleep 3
