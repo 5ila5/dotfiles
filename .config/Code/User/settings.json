@@ -63,7 +63,9 @@
   },
   "githubPullRequests.createOnPublishBranch": "never",
   "editor.defaultFoldingRangeProvider": "charliermarsh.ruff",
-  "black-formatter.args": ["--safe"],
+  "black-formatter.args": [
+    "--safe"
+  ],
   "terminal.integrated.scrollback": 1000000,
   "terminal.integrated.persistentSessionScrollback": 1000000,
   "[yaml]": {
@@ -102,7 +104,11 @@
   "languageToolLinter.languageTool.motherTongue": "de",
   "languageToolLinter.lintOnChange": true,
   "languageToolLinter.lintOnOpen": true,
-  "languageToolLinter.plainText.languageIds": ["plaintext", "tex", "latex"],
+  "languageToolLinter.plainText.languageIds": [
+    "plaintext",
+    "tex",
+    "latex"
+  ],
   "languageToolLinter.languageTool.preferredVariants": "en-US, de-DE",
   "ltex.completionEnabled": true,
   "ltex.additionalRules.enablePickyRules": true,
@@ -117,16 +123,22 @@
   "python.analysis.autoImportCompletions": true,
   "editor.wordWrap": "on",
   "C_Cpp.formatting": "clangFormat",
-  "C_Cpp.default.compileCommands": ["build"],
+  "C_Cpp.default.compileCommands": [
+    "build"
+  ],
   "C_Cpp.default.compilerPath": "/usr/bin/clang++",
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt",
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
   },
   "C_Cpp.default.browse.limitSymbolsToIncludedHeaders": false,
   "[dart]": {
     "editor.inlayHints.enabled": "on",
   },
-  "clangd.arguments": ["--function-arg-placeholders=0"],
+  "clangd.arguments": [
+    "--function-arg-placeholders=0"
+  ],
   "python.analysis.typeCheckingMode": "standard",
   "[cpp]": {},
   "github.copilot.nextEditSuggestions.enabled": false,
@@ -164,46 +176,79 @@
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "gitlens.remotes": [
-    { "domain": "git.rwth-aachen.de", "type": "GitLab" },
-    { "domain": "gitlab.com", "type": "GitLab" },
-    { "domain": "github.com", "type": "GitHub" },
+    {
+      "domain": "git.rwth-aachen.de",
+      "type": "GitLab"
+    },
+    {
+      "domain": "gitlab.com",
+      "type": "GitLab"
+    },
+    {
+      "domain": "github.com",
+      "type": "GitHub"
+    },
   ],
   "latex-workshop.latex.recipes": [
     {
       "name": "latexmk (lualatex)",
-      "tools": ["lualatexmk"],
+      "tools": [
+        "lualatexmk"
+      ],
     },
     {
       "name": "latexmk",
-      "tools": ["latexmk"],
+      "tools": [
+        "latexmk"
+      ],
     },
     {
       "name": "latexmk (latexmkrc)",
-      "tools": ["latexmk_rconly"],
+      "tools": [
+        "latexmk_rconly"
+      ],
     },
     {
       "name": "latexmk (xelatex)",
-      "tools": ["xelatexmk"],
+      "tools": [
+        "xelatexmk"
+      ],
     },
     {
       "name": "pdflatex -> bibtex -> pdflatex * 2",
-      "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"],
+      "tools": [
+        "pdflatex",
+        "bibtex",
+        "pdflatex",
+        "pdflatex"
+      ],
     },
     {
       "name": "Compile Rnw files",
-      "tools": ["rnw2tex", "latexmk"],
+      "tools": [
+        "rnw2tex",
+        "latexmk"
+      ],
     },
     {
       "name": "Compile Jnw files",
-      "tools": ["jnw2tex", "latexmk"],
+      "tools": [
+        "jnw2tex",
+        "latexmk"
+      ],
     },
     {
       "name": "Compile Pnw files",
-      "tools": ["pnw2tex", "latexmk"],
+      "tools": [
+        "pnw2tex",
+        "latexmk"
+      ],
     },
     {
       "name": "tectonic",
-      "tools": ["tectonic"],
+      "tools": [
+        "tectonic"
+      ],
     },
   ],
   "zig.zls.enabled": "on",
