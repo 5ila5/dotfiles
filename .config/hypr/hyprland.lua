@@ -277,6 +277,8 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("pear-desktop")
 	hl.exec_cmd("$HOME/.config/desktop/autostart.sh")
 	hl.exec_cmd("$HOME/.config/desktop/autostart_wayland.sh")
+	-- start hyprland-dummpy.service so graphical-session.target is reached
+	hl.exec_cmd("systemctl --user start hyprland-dummy.service")
 end)
 
 -- function alert(msg)

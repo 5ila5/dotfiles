@@ -1,0 +1,15 @@
+[Unit]
+Description=Hyprland graphical session dummy service
+Documentation=man:systemd.special(7)
+# This forces graphical-session.target to active when this service starts
+Before=graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+# A dummy command that does nothing but succeed
+ExecStart=/bin/true
+
+[Install]
+WantedBy=graphical-session.target
