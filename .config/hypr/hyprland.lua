@@ -209,6 +209,17 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
+-- mediabuttons
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("amixer -q sset Master toggle"))
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("amixer -q sset Master 10%-"))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("amixer -q sset Master 10%+"))
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"))
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brillo -q -u 150000 -U 5"))
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brillo -q -u 150000 -A 3"))
+hl.bind("XF86Launch7", hl.dsp.exec_cmd("systemctl suspend"))
+
 -- Bind mouse side buttons to tab switching (ctrl + tab / ctrl + shift + tab)
 hl.bind("mouse:276", hl.dsp.exec_cmd("ydotool key 29:1 15:1 15:0 29:0"))
 hl.bind("mouse:275", hl.dsp.exec_cmd("ydotool key 42:1 29:1 15:1 15:0 29:0 42:0"))
