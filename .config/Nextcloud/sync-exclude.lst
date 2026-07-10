@@ -55,4 +55,5 @@ target/
 *.blg
 dist-newstyle/
 *.glo
+.pio/
 
