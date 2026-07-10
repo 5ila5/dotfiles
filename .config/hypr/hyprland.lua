@@ -118,7 +118,7 @@ hl.window_rule({ match = { class = "whatsdesk" }, workspace = "4" })
 hl.window_rule({ match = { class = "discord" }, workspace = "7" })
 hl.window_rule({ match = { class = "^([sS]ignal)$" }, workspace = "4" })
 hl.window_rule({ match = { class = "org.mozilla.Thunderbird" }, workspace = "name:g" })
-hl.window_rule({ match = { class = ".*.youtube_music" }, workspace = "11" })
+hl.window_rule({ match = { class = ".*.youtube_?-?music" }, workspace = "11" })
 hl.window_rule({
 	match = {
 		class = "thunderbird",
