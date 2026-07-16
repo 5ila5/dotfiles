@@ -157,6 +157,8 @@ fi
 #cd/mkdir
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 alias cd..='cd ..'
 
 #ls/exa
