@@ -1,0 +1,24 @@
+#!/bin/sh
+
+val=$(hyprland-dialog --title exit --text "How do you want to exit" \
+    --buttons "suspend;shutdown;exit")
+
+case $val in
+"suspend")
+    systemctl suspend
+    ;;
+"shutdown")
+    if command -v hyprshutdown >/dev/null 2>&1; then
+        hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown -P 0'
+    else
+        shutdown -P 0
+    fi
+    ;;
+"exit")
+    if command -v hyprshutdown >/dev/null 2>&1; then
+        hyprshutdown -t 'Exiting...'
+    else
+        hyprctl dispatch exit || hyprctl dispatch 'hl.dsp.exit()'
+    fi
+    ;;
+esac

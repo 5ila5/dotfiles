@@ -132,12 +132,7 @@ hl.window_rule({ match = { class = "^(steam.*)$" }, immediate = true })
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + W", hl.dsp.window.close())
-hl.bind(
-	mainMod .. " + M",
-	hl.dsp.exec_cmd(
-		'hyprland-dialog --title exit --text "How do you want to exit" --buttons "systemctl suspend;shutdown now;hyprctl dispatch exit" | bash'
-	)
-)
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprland-shutdown-dialog"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + T", hl.dsp.window.float())
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("cliphist list | bemenu | cliphist decode | wl-copy"))

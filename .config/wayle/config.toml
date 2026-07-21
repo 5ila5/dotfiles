@@ -121,7 +121,9 @@ format = "%a %Y-%m-%d %H:%M"
 item-gap = 0.5
 
 [modules.power]
-left-click = ""
+right-click = "hyprland-shutdown-dialog"
+left-click = "hyprland-shutdown-dialog"
+
 
 [[modules.custom]]
 id = "scratchpad"
