@@ -65,7 +65,7 @@ bindkey "^F" autosuggest-accept
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
-bindkey "^H" backward-word
+bindkey "^H" backward-kill-word
 bindkey  "^[[H" beginning-of-line
 bindkey "^L" forward-word
 bindkey  "^[[F"   end-of-line
