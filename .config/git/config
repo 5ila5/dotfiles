@@ -1,11 +1,11 @@
 [include]
   path = singkeyconfig
-
 [user]
 	name = 5ila5
 	email = 5ila5@users.noreply.github.com
 [core]
 	autocrlf = input
+	pager = delta
 [filter "gitignore"]
 	clean = "sed '/#gitignore$/d'"
 [commit]
@@ -35,3 +35,16 @@
 	enabled = true
 [maintenance]
 	repo = /home/silas/Documents/coding/python/hacs_waste_collection_schedule
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+	line-numbers = true
+	hyperlinks = true
+  hyperlinks-file-link-format = "file://{path}#{line}"
+	syntax-theme = Visual Studio Dark+
+[merge]
+	conflictStyle = zdiff3
+[diff]
+	colorMoved = default
