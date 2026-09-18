@@ -1,0 +1,7 @@
+#!/bin/sh
+
+for f in $1/*.diff; do
+  fn=$(basename "$f")
+  echo -e "\n\033[1;34m=== $fn ===\033[0m"
+  cat "$f"
+done | delta
