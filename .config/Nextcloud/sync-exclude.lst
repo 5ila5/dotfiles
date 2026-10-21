@@ -42,7 +42,9 @@ __pycache__/
 *.lock
 node_modules/
 build/
+_build/
 build_cov/
+_generated/
 .cache/
 .bloop
 target/
@@ -56,4 +58,4 @@ target/
 dist-newstyle/
 *.glo
 .pio/
-
+docs_html
