@@ -97,6 +97,7 @@ for file in $@; do
     *.xapk) unzip "$file" ;;
     *.apk) unzip "$file" ;;
     *.pkpass) unzip "$file" ;;
+    *.whl) unzip "$file" ;;
     *.xz) unxz "$file" ;;
     *.tar.zst) tar --zstd -xvf "$file" ;;
     *.tar.gz) tar xzvf "$file" ;;
