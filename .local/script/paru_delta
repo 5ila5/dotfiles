@@ -1,7 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
 for f in $1/*.diff; do
+  [ -e "$f" ] || continue
   fn=$(basename "$f")
   echo -e "\n\033[1;34m=== $fn ===\033[0m"
   cat "$f"
 done | delta
+
+# Show PKGBUILD if the are no diffs
+for f in $1/*.PKGBUILD; do
+  [ -e "$f" ] || continue
+  fn=$(basename "$f")
+  diff_file="$1/${fn%.PKGBUILD}.diff"
+  if [ ! -e "$diff_file" ]; then
+    echo -e "\n\033[1;34m=== $fn ===\033[0m"
+    cat "$f"
+  fi
+done | ${PAGER:-less -R}
