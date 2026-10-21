@@ -22,8 +22,6 @@ and rerun ```config checkout```
 for better status messages
 
 ```sh
-echo "[status]\n\tshowUntrackedFiles = no" >> $HOME/.cfg/config
+config config status.showUntrackedFiles "no"
 ```
 
-```
-```
