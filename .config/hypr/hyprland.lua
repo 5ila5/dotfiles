@@ -220,13 +220,10 @@ hl.bind("mouse:276", hl.dsp.exec_cmd("ydotool key 29:1 15:1 15:0 29:0"))
 hl.bind("mouse:275", hl.dsp.exec_cmd("ydotool key 42:1 29:1 15:1 15:0 29:0 42:0"))
 
 -- Discord keybind passthrough
-hl.bind("dead_circumflex", hl.dsp.send_shortcut({ mods = "", key = "dead_circumflex", window = "class:discord" }))
-hl.bind("XF86Launch6", hl.dsp.send_shortcut({ mods = "", key = "dead_circumflex", window = "class:discord" }))
-hl.bind("ALT + KP_Add", hl.dsp.pass({ window = "class:discord" }))
-hl.bind("ALT + KP_Subtract", hl.dsp.pass({ window = "class:discord" }))
-hl.bind("ALT + KP_Subtract", hl.dsp.pass({ window = "class:discord" }))
-
--- hl.bind("dead_circumflex", hl.dsp.send_shortcut({ mods = "", key = "dead_circumflex", window = "title:Event Tester" }))
+hl.bind("dead_circumflex", hl.dsp.global("discord:discord-push-to-mute"))
+hl.bind("XF86Launch6", hl.dsp.global("discord:discord-push-to-mute"))
+hl.bind("ALT + KP_Add", hl.dsp.global("discord:discord-toggle-deafen"))
+hl.bind("ALT + KP_Subtract", hl.dsp.global("discord:discord-toggle-mute"))
 
 -- Screenshot submap
 hl.bind("ALT + s", hl.dsp.submap("screenshot"))
@@ -266,7 +263,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("~/.config/eww/launch_bar")
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("whatsdesk")
-	hl.exec_cmd("discord-x11")
+	hl.exec_cmd("discord")
 	hl.exec_cmd("signal-desktop")
 	hl.exec_cmd("thunderbird")
 	hl.exec_cmd("pear-desktop")
