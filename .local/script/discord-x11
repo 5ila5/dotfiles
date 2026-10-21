@@ -1,3 +1,0 @@
-#!/bin/sh
-
-OZONE_PLATFORM=x11 ELECTRON_OZONE_PLATFORM_HINT="x11" discord --ozone-platform=x11
