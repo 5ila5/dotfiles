@@ -28,6 +28,7 @@ setopt NO_CASE_GLOB
 setopt INTERACTIVE_COMMENTS 
 setopt HIST_REDUCE_BLANKS 
 setopt SHARE_HISTORY
+setopt HIST_SAVE_NO_DUPS
 setopt menu_complete
 bindkey -v
 # End of lines configured by zsh-newuser-install
@@ -65,14 +66,14 @@ bindkey "^F" autosuggest-accept
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
-bindkey "^H" backward-kill-word
+bindkey "^H" vi-backward-kill-word
 bindkey  "^[[H" beginning-of-line
 bindkey "^L" forward-word
 bindkey  "^[[F"   end-of-line
 bindkey "^[[3;5~" kill-word
 bindkey "^[d" kill-word
 bindkey "^[[3~" delete-char
-bindkey "^^?" backward-kill-word 
+bindkey "^^?" vi-backward-kill-word
 
 if [ -f ~/.config/nnn/bash_vars.sh ]; then
 . ~/.config/nnn/bash_vars.sh
@@ -101,9 +102,12 @@ if command -v starship > /dev/null; then
 				eval "$(starship init zsh)" 
 fi
 
-if [[ -f "/usr/share/fzf/key-bindings.zsh" ]]; then 
-source "/usr/share/fzf/key-bindings.zsh"
-fi
+for fzf_key_bindings_file in /usr/share/fzf/key-bindings.zsh /usr/local/opt/fzf/shell/key-bindings.zsh /usr/share/fzf/shell/key-bindings.zsh; do
+  if [[ -f "$fzf_key_bindings_file" ]]; then
+    source "$fzf_key_bindings_file"
+    break
+  fi
+done
 
 
 if command -v klog > /dev/null; then
