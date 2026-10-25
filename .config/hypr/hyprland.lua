@@ -258,15 +258,21 @@ hl.define_submap("screenshot", function()
 	hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
+local hostname = io.popen("hostname"):read("*a") -- .upper()
+local isLaptop = string.find(string.upper(hostname), "LAPTOP") ~= nil
 -- Autostart
 hl.on("hyprland.start", function()
+	if isLaptop then
+	-- Laptop only stuff here
+	else
+		hl.exec_cmd("pear-desktop")
+	end
 	hl.exec_cmd("~/.config/eww/launch_bar")
 	hl.exec_cmd("hyprpaper")
 	-- hl.exec_cmd("whatsdesk")
 	hl.exec_cmd("discord")
 	hl.exec_cmd("signal-desktop")
 	hl.exec_cmd("thunderbird")
-	hl.exec_cmd("pear-desktop")
 	hl.exec_cmd("$HOME/.config/desktop/autostart.sh")
 	hl.exec_cmd("$HOME/.config/desktop/autostart_wayland.sh")
 	-- start hyprland-dummpy.service so graphical-session.target is reached
