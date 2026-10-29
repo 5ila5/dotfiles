@@ -73,7 +73,7 @@ hl.config({
 			natural_scroll = false,
 		},
 		tablet = {
-			transform = -1,
+			transform = 0,
 			output = "current",
 			region_position = { 0, 0 },
 			absolute_region_position = false,
