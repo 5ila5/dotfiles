@@ -77,7 +77,7 @@ hl.config({
 			output = "current",
 			region_position = { 0, 0 },
 			absolute_region_position = false,
-			region_size = { 0, 0 },
+			region_size = { 1, 1 },
 			relative_input = false,
 			left_handed = false,
 			active_area_size = { 0, 0 },
