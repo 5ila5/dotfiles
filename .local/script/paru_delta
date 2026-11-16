@@ -3,9 +3,16 @@
 for f in $1/*.diff; do
   [ -e "$f" ] || continue
   fn=$(basename "$f")
-  echo -e "\n\033[1;34m=== $fn ===\033[0m"
+  echo -e "\n#=== $fn ==="
   cat "$f"
 done | delta
+
+myPager=${PAGER:-less -R}
+
+# if pager is bat
+if [[ $myPager = "bat" ]]; then
+  myPager="bat -lPKGBUILD"
+fi
 
 # Show PKGBUILD if the are no diffs
 for f in $1/*.PKGBUILD; do
@@ -13,7 +20,7 @@ for f in $1/*.PKGBUILD; do
   fn=$(basename "$f")
   diff_file="$1/${fn%.PKGBUILD}.diff"
   if [ ! -e "$diff_file" ]; then
-    echo -e "\n\033[1;34m=== $fn ===\033[0m"
+    echo -e "\n#=== $fn ==="
     cat "$f"
   fi
-done | ${PAGER:-less -R}
+done | $myPager
