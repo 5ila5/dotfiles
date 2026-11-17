@@ -518,3 +518,13 @@ pacman -Qi | gawk '/^Name/ { x = $3 }; /^Installed Size/ { sub(/Installed Size  
 
 
 }
+
+
+# check if in ssh session
+if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
+function wl-copy() {
+  local data
+  data=$(base64 | tr -d '\n')
+  printf '\e]52;c;%s\a' "$data"
+}
+fi
