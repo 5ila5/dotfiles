@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+set -e
+
+# List of cache paths to relocate
+paths=(
+    "$HOME/.local/share/gradle/caches"
+    "$HOME/.config/YouTube Music/Cache"
+    "$HOME/.config/unity3d/cache"
+    "$HOME/.config/discord/Cache"
+    "$HOME/.config/whatsdesk/Cache"
+    "$HOME/.pub-cache"
+    "$HOME/.conda/pkgs/cache"
+    "$HOME/.config/Code/Cache"
+    "$HOME/.config/Code - OSS/CachedData"
+    "$HOME/.var/app/org.zotero.Zotero/cache"
+    "$HOME/.config/YouTube Music/Code Cache"
+    "$HOME/.config/whatsdesk/Code Cache"
+    "$HOME/.config/Code/CachedData"
+    "$HOME/.config/discordcanary/Cache"
+    "$HOME/.config/Code/CachedExtensionVSIXs"
+    "$HOME/.config/Code - OSS/Cache"
+    "$HOME/.local/share/Steam/appcache"
+    "$HOME/.config/retail7/Service Worker/CacheStorage"
+    "$HOME/.config/Code - OSS/CachedExtensionVSIXs"
+    "$HOME/.config/odysseus/data/fastembed_cache"
+    "$HOME/.config/discordcanary/Code Cache"
+    "$HOME/.config/Code/Service Worker/CacheStorage"
+    "$HOME/.local/share/Steam/depotcache"
+)
+
+mkdir -p "$HOME/.cache"
+
+for src in "${paths[@]}"; do
+    # Skip if it's already a symlink
+    if [ -L "$src" ]; then
+        echo "Skipping (already a symlink): $src"
+        continue
+    fi
+
+    # Create a unique flat name for ~/.cache (e.g., .config_Code_Cache)
+    rel_path="${src#$HOME/}"
+    dest_name=$(echo "$rel_path" | tr '/' '_' | tr ' ' '_')
+    dest="$HOME/.cache/$dest_name"
+
+    echo "Relocating: $src -> $dest"
+
+    # Ensure parent directory for the symlink exists
+    mkdir -p "$(dirname "$src")"
+
+    if [ -e "$src" ]; then
+        if [ -e "$dest" ]; then
+            # Merge contents if destination already exists
+            cp -rn "$src"/* "$dest"/ 2>/dev/null || true
+            rm -rf "$src"
+        else
+            # Move existing folder to ~/.cache
+            mv "$src" "$dest"
+        fi
+    else
+        # If folder doesn't exist yet, just create the target in ~/.cache
+        mkdir -p "$dest"
+    fi
+
+    # Create the symbolic link
+    ln -s "$dest" "$src"
+done
+
+echo "All caches successfully redirected to ~/.cache!"
