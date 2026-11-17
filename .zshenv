@@ -116,7 +116,7 @@ else
 fi
 echo "AUR helper set to $AUR_HELPER"
 
-export MANPPAGER=less
+export MANPAGER="bat -lman -p"
 export DELTA_PAGER=less
 
 # ssh-agent for the ssh-agent.service user serverice
@@ -126,5 +126,7 @@ if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
 if [ ! -f "$SSH_AUTH_SOCK" ]; then
+  if [[ -e "$XDG_RUNTIME_DIR/ssh-agent.env" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+  fi
 fi
