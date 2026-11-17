@@ -119,7 +119,7 @@ alias lazydot='lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 #file navigation (file/dir info)
 if command -v ncdu > /dev/null 
 then
-alias treesize='ncdu --exclude /proc --exclude /mnt'
+alias treesize='ncdu --exclude /proc --exclude /mnt --exclude .snapshots'
 fi
 alias folderSize='du -sh'
 alias disksizes='df -h'

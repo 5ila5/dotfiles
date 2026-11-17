@@ -46,9 +46,14 @@ export ANDROID_SDK_ROOT="$ANDROID_HOME/Sdk"
 export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools/:$ANDROID_SDK_ROOT/tools/bin:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
 
 
+export ANDROID_USER_HOME="$XDG_DATA_HOME"/android
+alias adb='HOME="$ANDROID_USER_HOME" adb'
+
 #export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
 export XKB_DEFAULT_LAYOUT=de
 
+
+export BN_USER_DIRECTORY="$XDG_DATA_HOME"/binaryninja
 
 # SOME WAYLAND STUFF:
 
